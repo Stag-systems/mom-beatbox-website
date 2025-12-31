@@ -14,7 +14,7 @@ export function WhatWeDo() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-3 mt-20">
-          {siteConfig.whatWeDo.map((item, index) => (
+          {siteConfig.whatWeDo.map((item) => (
             <div
               key={item.title}
               className="group relative overflow-hidden bg-black"
