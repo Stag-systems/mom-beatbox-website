@@ -13,7 +13,7 @@
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Exo', sans-serif;
+    font-family: 'Excon', sans-serif;
     @apply font-bold;
   }
 }
@@ -30,10 +30,55 @@
   }
 
   .animate-marquee {
-    animation: marquee 30s linear infinite;
+    animation: marquee 15s linear infinite;
   }
 
   .animate-marquee:hover {
     animation-play-state: paused;
+  }
+
+  .pattern-kids {
+    background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.6) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0.6) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: 8px 8px;
+  }
+
+  .pattern-workshops {
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.6) 1px,
+      transparent 1px
+    );
+    background-size: 6px 6px;
+  }
+
+  .pattern-concerts {
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.6) 2px,
+      transparent 2px
+    );
+    background-size: 6px 6px;
+  }
+
+  .pattern-corporate {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.5) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.5) 1px,
+        transparent 1px
+      );
+    background-size: 6px 6px;
   }
 }

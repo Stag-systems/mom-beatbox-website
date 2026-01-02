@@ -5,6 +5,7 @@ export interface CalendarEvent {
   end: Date;
   location?: string;
   description?: string;
+  categoryKey?: string;
 }
 
 export interface CachedCalendarData {
