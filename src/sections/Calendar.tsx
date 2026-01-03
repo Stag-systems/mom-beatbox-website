@@ -61,10 +61,10 @@ export function Calendar({ language }: CalendarProps) {
   };
 
   return (
-    <section id="events" className="bg-black py-24 px-4 sm:px-6 lg:px-8">
+    <section id="events" className="bg-transparent py-24 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 text-center">
-          <h2 className="mb-4 text-5xl font-black tracking-tight text-white sm:text-6xl md:text-7xl">
+          <h2 className="mb-4 text-[2.4rem] leading-[1.1] font-black tracking-tight text-white sm:text-6xl md:text-7xl">
             {getLocalizedText(siteConfig.eventsCopy.title, language)}
           </h2>
           <div className="flex flex-wrap items-center justify-center gap-3 text-sm text-gray-400">
@@ -77,7 +77,7 @@ export function Calendar({ language }: CalendarProps) {
             <button
               type="button"
               onClick={refresh}
-              className="inline-flex items-center gap-2 rounded-[6px] border border-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/80 transition hover:border-white/50 hover:text-white"
+              className="glass-button inline-flex items-center gap-2 rounded-[6px] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/80 transition hover:text-white"
               aria-label={getLocalizedText(siteConfig.eventsCopy.refreshLabel, language)}
             >
               <svg
@@ -102,13 +102,13 @@ export function Calendar({ language }: CalendarProps) {
           <button
             type="button"
             onClick={() => setActiveCategory('all')}
-            className={`flex items-center gap-2 rounded-[6px] border px-3 py-2 transition ${
+            className={`glass-button flex items-center gap-2 rounded-[6px] px-3 py-2 transition ${
               activeCategory === 'all'
-                ? 'border-white text-white'
-                : 'border-white/20 text-white/70 hover:border-white/50'
+                ? 'text-white'
+                : 'text-white/70 hover:text-white'
             }`}
           >
-            <span className="h-4 w-4 rounded-[4px] border border-white/40" aria-hidden="true" />
+            <span className="h-4 w-4 rounded-[4px] border border-white/40 border-hairline" aria-hidden="true" />
             {getLocalizedText(siteConfig.eventsCopy.filterAll, language)}
           </button>
           {categories.map((category) => (
@@ -116,14 +116,14 @@ export function Calendar({ language }: CalendarProps) {
               key={category.key}
               type="button"
               onClick={() => setActiveCategory(category.key)}
-              className={`flex items-center gap-2 rounded-[6px] border px-3 py-2 transition ${
+              className={`glass-button flex items-center gap-2 rounded-[6px] px-3 py-2 transition ${
                 activeCategory === category.key
-                  ? 'border-white text-white'
-                  : 'border-white/20 text-white/70 hover:border-white/50'
+                  ? 'text-white'
+                  : 'text-white/70 hover:text-white'
               }`}
             >
               <span
-                className={`h-4 w-4 rounded-[4px] border border-white/40 ${patternClass(
+                className={`h-4 w-4 rounded-[4px] border border-white/40 border-hairline ${patternClass(
                   category.key
                 )}`}
                 aria-hidden="true"
@@ -158,20 +158,27 @@ export function Calendar({ language }: CalendarProps) {
         )}
 
         {filteredEvents.length > 0 && (
-          <ul className="divide-y divide-gray-800 border border-gray-800">
+          <ul className="glass-panel rounded-[6px] border border-white/10 border-hairline">
             {filteredEvents.map((event) => (
               <li
                 key={event.id}
-                className="flex flex-col gap-2 p-6 sm:flex-row sm:items-center sm:justify-between"
+                className="flex flex-col gap-2 border-b border-white/10 border-hairline p-6 last:border-b-0 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div className="flex items-center gap-3">
                   <span
-                    className={`h-5 w-5 rounded-[4px] border border-white/40 ${patternClass(
+                    className={`h-5 w-5 rounded-[4px] border border-white/40 border-hairline ${patternClass(
                       event.categoryKey ?? siteConfig.calendar.defaultCategoryKey
                     )}`}
                     aria-hidden="true"
                   />
-                  <h3 className="text-lg font-bold text-white">{event.title}</h3>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">{event.title}</h3>
+                    {event.location && (
+                      <p className="text-xs uppercase tracking-wide text-white/60">
+                        {event.location}
+                      </p>
+                    )}
+                  </div>
                 </div>
                 <time className="text-sm font-semibold text-gray-300">
                   {formatDate(event.start, language)}

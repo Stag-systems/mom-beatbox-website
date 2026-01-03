@@ -10,7 +10,7 @@ export function LogoSlider({ language }: LogoSliderProps) {
   const duplicatedLogos = [...siteConfig.logos, ...siteConfig.logos];
 
   return (
-    <section id="downloads" className="bg-black py-16 px-4 overflow-hidden border-t border-gray-900">
+    <section id="downloads" className="bg-transparent py-16 px-4 overflow-hidden border-t border-white/10 border-hairline">
       <div className="mx-auto max-w-7xl">
         <p className="mb-12 text-center text-xs font-medium tracking-[0.3em] uppercase text-gray-400">
           {getLocalizedText(siteConfig.logosCopy.eyebrow, language)}
@@ -22,12 +22,12 @@ export function LogoSlider({ language }: LogoSliderProps) {
             {duplicatedLogos.map((logo, index) => (
               <div
                 key={`${logo.name}-${index}`}
-                className="flex-shrink-0 flex items-center justify-center w-32 h-16"
+                className="flex-shrink-0 flex items-center justify-center w-36 h-14"
               >
                 <img
                   src={logo.image}
                   alt={logo.name}
-                  className="max-h-full max-w-full object-contain opacity-70 hover:opacity-100 transition-opacity"
+                  className="h-10 w-auto max-w-[140px] object-contain opacity-70 transition-opacity hover:opacity-100"
                   loading="lazy"
                 />
               </div>

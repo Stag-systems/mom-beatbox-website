@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
+  <!-- Generator: Adobe Illustrator 30.0.0, SVG Export Plug-In . SVG Version: 2.1.1 Build 123)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <circle class="st0" cx="176.17" cy="23.83" r="23.83"/>
+  <circle class="st0" cx="23.83" cy="23.83" r="23.83"/>
+  <circle class="st0" cx="100.47" cy="176.17" r="23.83"/>
+  <polygon class="st0" points="0 64.49 47.66 64.49 40.19 200 3.74 200 0 64.49"/>
+  <polygon class="st0" points="152.34 64.49 200 64.49 192.52 200 156.07 200 152.34 64.49"/>
+  <polygon class="st0" points="123.83 135.51 76.17 135.51 83.64 0 120.09 0 123.83 135.51"/>
+</svg>

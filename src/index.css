@@ -6,15 +6,79 @@
   * {
     scroll-behavior: smooth;
   }
+
+  html {
+    scroll-padding-top: 80px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      scroll-behavior: auto;
+    }
+  }
   
   body {
-    @apply bg-black text-white;
+    @apply text-white;
     font-family: system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    background-color: #050608;
+    background-image:
+      radial-gradient(900px 700px at 12% 12%, rgba(140, 170, 200, 0.18), transparent 58%),
+      radial-gradient(1200px 900px at 85% 8%, rgba(120, 150, 190, 0.16), transparent 62%),
+      radial-gradient(900px 650px at 50% 22%, rgba(160, 190, 210, 0.2), transparent 58%),
+      radial-gradient(1300px 1000px at 45% 85%, rgba(110, 140, 180, 0.18), transparent 62%),
+      radial-gradient(800px 700px at 85% 75%, rgba(100, 130, 170, 0.16), transparent 60%),
+      radial-gradient(700px 600px at 8% 82%, rgba(120, 150, 190, 0.14), transparent 60%);
+  }
+
+  html {
+    overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Excon', sans-serif;
     @apply font-bold;
+  }
+}
+
+@layer components {
+  .border-hairline {
+    border-width: 0.75px;
+  }
+
+  .glass-panel {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+    border: 0.75px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(16px);
+  }
+
+  .glass-card {
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
+    border: 0.75px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 16px 40px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(14px);
+  }
+
+  .glass-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 0.75px solid rgba(255, 255, 255, 0.18);
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
   }
 }
 
@@ -35,6 +99,13 @@
 
   .animate-marquee:hover {
     animation-play-state: paused;
+  }
+
+
+  @media (max-width: 767px) {
+    .animate-marquee {
+      animation-duration: 11s;
+    }
   }
 
   .pattern-kids {

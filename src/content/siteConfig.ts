@@ -34,7 +34,7 @@ export const siteConfig = {
       en: "MOM Beatbox Crew",
       de: "MOM Beatbox Crew"
     },
-    imagePlaceholder: "/about-image.jpg",
+    imagePlaceholder: "/about.gif",
     membersLabel: { en: "Crew members", de: "Crew mitglieder" },
     members: [
       {
@@ -65,17 +65,17 @@ export const siteConfig = {
     ctaLabel: { en: "Calendar", de: "Kalender" }
   },
   logos: [
-    { name: "Client 1", image: "/placeholder.svg" },
-    { name: "Client 2", image: "/placeholder.svg" },
-    { name: "Client 3", image: "/placeholder.svg" },
-    { name: "Client 4", image: "/placeholder.svg" },
-    { name: "Client 5", image: "/placeholder.svg" },
-    { name: "Client 6", image: "/placeholder.svg" }
+    { name: "DW Logo", image: "/PARTNER/DW_Logo.jpg" },
+    { name: "Austrian Event Award", image: "/PARTNER/Illu_Austrian-Event-Award-2020-810x447.png" },
+    { name: "Monsterfreunde", image: "/PARTNER/Logo_Monsterfreunde.png" },
+    { name: "Images", image: "/PARTNER/images.png" },
+    { name: "Logo Main", image: "/PARTNER/logo-main.png" },
+    { name: "TAS Logo", image: "/PARTNER/tas_logo_rot.jpg" }
   ],
   logosCopy: {
     eyebrow: {
-      en: "Used by global powerhouse",
-      de: "Platzhalter fur globale partners"
+      en: "Friends and partner of MOM",
+      de: "Freunde und Partner von MOM"
     }
   },
   whatWeDo: [
@@ -86,7 +86,8 @@ export const siteConfig = {
         en: "Interactive and engaging beatbox performances designed for young audiences.",
         de: "Platzhalter fur interaktive Shows fur junge Zielgruppen."
       },
-      icon: "🎪"
+      icon: "🎪",
+      image: "/4-KATEGORIEN/Kidsshow.jpg"
     },
     {
       key: "workshops",
@@ -95,7 +96,8 @@ export const siteConfig = {
         en: "Hands-on beatbox workshops with rhythm patterns and performance techniques.",
         de: "Platzhalter fur Workshops und Grundlagen des Beatboxen."
       },
-      icon: "🎓"
+      icon: "🎓",
+      image: "/4-KATEGORIEN/Workshop.jpg"
     },
     {
       key: "concerts",
@@ -104,7 +106,8 @@ export const siteConfig = {
         en: "High-energy live performances from intimate venues to festival stages.",
         de: "Platzhalter fur Live-Performances und Festival-Sets."
       },
-      icon: "🎤"
+      icon: "🎤",
+      image: "/4-KATEGORIEN/Konzert.png"
     },
     {
       key: "corporate",
@@ -113,7 +116,8 @@ export const siteConfig = {
         en: "Placeholder for corporate celebrations note and format.",
         de: "Platzhalter fur Firmenfeiern und Corporate Events."
       },
-      icon: "🥂"
+      icon: "🥂",
+      image: "/4-KATEGORIEN/Firmenfeier.png"
     }
   ],
   whatWeDoCopy: {
@@ -122,25 +126,62 @@ export const siteConfig = {
       de: "Was wir machen"
     },
     title: {
-      en: "POWER AND REAL\nAUDIENCE CONNECTION\nON EVERY STAGE",
-      de: "PLATZHALTER\nFUR DIE SECTION\nWAS WIR MACHEN"
+      en: "MOM MENU",
+      de: "MOM MENU"
     },
-    ctaLabel: { en: "Book now", de: "Jetzt anfragen" }
+    ctaLabel: { en: "Book now", de: "Jetzt anfragen" },
+    nextEventLabel: { en: "Next event", de: "Nächstes Event" },
+    loadingLabel: { en: "Loading events...", de: "Events werden geladen..." },
+    noUpcomingLabel: {
+      en: "Your event could be here — reach out to book.",
+      de: "Hier könnte dein Event stehen"
+    },
+    requestLabel: { en: "Request now", de: "Jetzt anfragen" },
+    calendarLabel: { en: "To calendar", de: "Zum Kalender" }
   },
+  achievementsCopy: {
+    eyebrow: { en: "References", de: "Referenzen" },
+    title: { en: "MOM ACHIEVEMENTS", de: "MOM ERFOLGE" }
+  },
+  achievements: [
+    {
+      year: "2016",
+      city: "Brussels",
+      title: { en: "European Beatbox Champions", de: "European Beatbox Champions" }
+    },
+    {
+      year: "2021",
+      city: "Warsaw",
+      title: { en: "GBB Crew World Champions", de: "GBB Crew World Champions" }
+    },
+    {
+      year: "2023",
+      city: "Berlin",
+      title: { en: "Beatbox World Champions", de: "Beatbox World Champions" }
+    },
+    {
+      year: "2023",
+      city: "Tokyo",
+      title: { en: "GBB Finalists", de: "GBB Finalists" }
+    }
+  ],
   youtube: {
     title: { en: "Music", de: "Musik" },
     videos: [
       {
-        id: "dQw4w9WgXcQ",
-        title: { en: "Placeholder video title", de: "Platzhalter video titel" }
+        id: "3Z9opE8zByU",
+        title: { en: "M.O.M - live in Vietnam", de: "M.O.M - live in Vietnam" }
       },
       {
-        id: "dQw4w9WgXcQ",
-        title: { en: "Placeholder video title", de: "Platzhalter video titel" }
+        id: "4dZ6_iwkxK0",
+        title: { en: "MOM - Right Now", de: "MOM - Right Now" }
       },
       {
-        id: "dQw4w9WgXcQ",
-        title: { en: "Placeholder video title", de: "Platzhalter video titel" }
+        id: "zIsQGDuCmQ0",
+        title: {
+          en: "M.O.M. | GRAND BEATBOX BATTLE 2021: WORLD LEAGUE | Crew Showcase",
+          de: "M.O.M. | GRAND BEATBOX BATTLE 2021: WORLD LEAGUE | Crew Showcase"
+        }
       }
     ]
   },
@@ -168,7 +209,8 @@ export const siteConfig = {
   accessibility: {
     menuToggle: { en: "Toggle menu", de: "Menu umschalten" },
     videoThumbnail: { en: "Video thumbnail", de: "Video vorschau" },
-    youtubePlayerTitle: { en: "YouTube video player", de: "YouTube videoplayer" }
+    youtubePlayerTitle: { en: "YouTube video player", de: "YouTube videoplayer" },
+    closeModal: { en: "Close video", de: "Video schliessen" }
   },
   calendar: {
     publicIcsUrl: "https://calendar.google.com/calendar/ical/cda01c823c486eeb726bcd338a34505325596023116fc1e83714de282b711350%40group.calendar.google.com/private-38bf8979efc488d1af689817e25fd48a/basic.ics",

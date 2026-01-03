@@ -30,7 +30,9 @@ export function Header({ language, onToggleLanguage }: HeaderProps) {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/90 backdrop-blur-sm' : 'bg-transparent'
+        isScrolled
+          ? 'bg-black/50 backdrop-blur-md border-b border-white/10 border-hairline'
+          : 'bg-transparent'
       }`}
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -38,9 +40,14 @@ export function Header({ language, onToggleLanguage }: HeaderProps) {
           {/* Logo */}
           <a
             href="#hero"
-            className="text-2xl font-bold tracking-tight text-white hover:text-gray-300 transition-colors"
+            className="flex items-center text-white hover:text-gray-300 transition-colors"
           >
-            MOM
+            <img
+              src="/Logo.svg"
+              alt="MOM logo"
+              className="h-8 w-auto sm:h-9"
+              loading="eager"
+            />
           </a>
 
           {/* Navigation Links */}
@@ -61,7 +68,7 @@ export function Header({ language, onToggleLanguage }: HeaderProps) {
             <button
               type="button"
               onClick={onToggleLanguage}
-              className="flex h-8 w-8 items-center justify-center rounded-[6px] border border-white/30 text-sm text-white hover:border-white hover:bg-white/10 transition-colors"
+              className="glass-button flex h-8 w-8 items-center justify-center rounded-[6px] text-sm text-white transition-colors hover:text-white"
               aria-label={getLocalizedText(siteConfig.language.toggleLabel, language)}
               title={getLocalizedText(siteConfig.language.toggleLabel, language)}
             >
@@ -70,7 +77,7 @@ export function Header({ language, onToggleLanguage }: HeaderProps) {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden rounded-[6px] p-1 text-white hover:bg-white/10"
+              className="glass-button md:hidden rounded-[6px] p-1 text-white"
               aria-label={getLocalizedText(siteConfig.accessibility.menuToggle, language)}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
@@ -95,7 +102,7 @@ export function Header({ language, onToggleLanguage }: HeaderProps) {
           id="mobile-menu"
           className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}
         >
-          <ul className="mt-4 space-y-3 rounded-[6px] border border-white/10 bg-black/95 p-4">
+          <ul className="glass-panel mt-4 space-y-3 rounded-[6px] p-4">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <a

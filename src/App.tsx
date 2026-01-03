@@ -27,7 +27,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen overflow-x-hidden">
       <Header language={language} onToggleLanguage={toggleLanguage} />
       <Hero language={language} />
       <About language={language} />
