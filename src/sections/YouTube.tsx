@@ -51,11 +51,6 @@ export function YouTube({ language }: YouTubeProps) {
   const [activeFilter, setActiveFilter] = useState<'all' | 'musicvideos' | 'battle' | 'concert'>('all');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const autoScrollRef = useRef<number | null>(null);
-  const tripledVideos = [
-    ...siteConfig.youtube.videos,
-    ...siteConfig.youtube.videos,
-    ...siteConfig.youtube.videos
-  ];
   const filteredVideos =
     activeFilter === 'all'
       ? siteConfig.youtube.videos
