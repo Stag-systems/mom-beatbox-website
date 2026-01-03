@@ -1,7 +1,11 @@
+import { useMemo, useState } from 'react';
 import { useCalendar } from '../hooks/useCalendar';
+import { siteConfig } from '../content/siteConfig';
+import { getLocalizedText, Language } from '../lib/i18n';
 
-function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat('en-US', {
+function formatDate(date: Date, language: Language): string {
+  const locale = language === 'de' ? 'de-DE' : 'en-US';
+  return new Intl.DateTimeFormat(locale, {
     weekday: 'short',
     year: 'numeric',
     month: 'short',
@@ -9,43 +13,124 @@ function formatDate(date: Date): string {
   }).format(date);
 }
 
-function formatTime(date: Date): string {
-  return new Intl.DateTimeFormat('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true
-  }).format(date);
-}
-
-function getRelativeTime(date: Date): string {
+function getRelativeTime(date: Date, language: Language): string {
   const now = Date.now();
   const diff = date.getTime() - now;
   const minutes = Math.floor(diff / 60000);
   
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 60) {
+    return language === 'de' ? `vor ${minutes}m` : `${minutes}m ago`;
+  }
   
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
+  if (hours < 24) {
+    return language === 'de' ? `vor ${hours}h` : `${hours}h ago`;
+  }
   
   const days = Math.floor(hours / 24);
-  return `${days}d ago`;
+  return language === 'de' ? `vor ${days}d` : `${days}d ago`;
 }
 
-export function Calendar() {
-  const { events, loading, error, lastUpdated } = useCalendar();
+interface CalendarProps {
+  language: Language;
+}
+
+export function Calendar({ language }: CalendarProps) {
+  const { events, loading, error, lastUpdated, refresh } = useCalendar();
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const categories = siteConfig.eventCategories;
+
+  const filteredEvents = useMemo(() => {
+    if (activeCategory === 'all') return events;
+    return events.filter((event) => event.categoryKey === activeCategory);
+  }, [activeCategory, events]);
+
+  const patternClass = (key: string) => {
+    switch (key) {
+      case 'kids':
+        return 'pattern-kids';
+      case 'workshops':
+        return 'pattern-workshops';
+      case 'concerts':
+        return 'pattern-concerts';
+      case 'corporate':
+        return 'pattern-corporate';
+      default:
+        return 'pattern-concerts';
+    }
+  };
 
   return (
-    <section id="events" className="bg-black py-24 px-4 sm:px-6 lg:px-8">
+    <section id="events" className="bg-transparent py-24 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-16 text-center">
-          <h2 className="mb-4 text-5xl font-black tracking-tight text-white sm:text-6xl md:text-7xl">
-            EVENTS
+        <div className="mb-10 text-center">
+          <h2 className="mb-4 text-[2.4rem] leading-[1.1] font-black tracking-tight text-white uppercase sm:text-6xl md:text-7xl">
+            {getLocalizedText(siteConfig.eventsCopy.title, language)}
           </h2>
-          {lastUpdated && (
-            <p className="text-sm text-gray-400">
-              Last updated: {getRelativeTime(lastUpdated)}
-            </p>
-          )}
+          <div className="flex flex-wrap items-center justify-center gap-3 text-sm text-gray-400">
+            {lastUpdated && (
+              <span>
+                {getLocalizedText(siteConfig.eventsCopy.updatedLabel, language)}:{' '}
+                {getRelativeTime(lastUpdated, language)}
+              </span>
+            )}
+            <button
+              type="button"
+              onClick={refresh}
+              className="glass-button inline-flex items-center gap-2 rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
+              aria-label={getLocalizedText(siteConfig.eventsCopy.refreshLabel, language)}
+            >
+              <svg
+                className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M21 12a9 9 0 1 1-3-6.7" />
+                <polyline points="21 3 21 9 15 9" />
+              </svg>
+              {getLocalizedText(siteConfig.eventsCopy.refreshLabel, language)}
+            </button>
+          </div>
+        </div>
+
+        <div className="mb-12 flex flex-wrap items-center justify-center gap-4 text-xs uppercase tracking-wide text-white/70">
+          <button
+            type="button"
+            onClick={() => setActiveCategory('all')}
+            className={`glass-button flex items-center gap-2 rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black ${
+              activeCategory === 'all'
+                ? 'text-white'
+                : 'text-white/80'
+            }`}
+          >
+            <span className="h-4 w-4 rounded-[4px] border border-white/40 border-hairline" aria-hidden="true" />
+            {getLocalizedText(siteConfig.eventsCopy.filterAll, language)}
+          </button>
+          {categories.map((category) => (
+            <button
+              key={category.key}
+              type="button"
+              onClick={() => setActiveCategory(category.key)}
+              className={`glass-button flex items-center gap-2 rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black ${
+                activeCategory === category.key
+                  ? 'text-white'
+                  : 'text-white/80'
+              }`}
+            >
+              <span
+                className={`h-4 w-4 rounded-[4px] border border-white/40 border-hairline ${patternClass(
+                  category.key
+                )}`}
+                aria-hidden="true"
+              />
+              {getLocalizedText(category.label, language)}
+            </button>
+          ))}
         </div>
 
         {loading && (
@@ -55,71 +140,52 @@ export function Calendar() {
         )}
 
         {error && !loading && events.length === 0 && (
-          <div className="rounded-lg bg-gray-900 border border-yellow-600 p-6 text-center">
-            <p className="text-yellow-400">{error}</p>
-          </div>
-        )}
-
-        {!loading && events.length === 0 && !error && (
-          <div className="rounded-lg bg-gray-900 p-12 text-center">
-            <p className="text-lg text-gray-400">
-              No upcoming shows scheduled at the moment. Check back soon!
+          <div className="glass-panel rounded-[6px] p-6 text-center">
+            <p className="text-yellow-300">
+              {error === 'cached'
+                ? getLocalizedText(siteConfig.eventsCopy.cached, language)
+                : getLocalizedText(siteConfig.eventsCopy.error, language)}
             </p>
           </div>
         )}
 
-        {events.length > 0 && (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {events.map((event) => (
-              <div
-                key={event.id}
-                className="overflow-hidden bg-gray-900 border border-gray-800 transition-all hover:border-white"
-              >
-                <div className="border-l-4 border-white p-6">
-                  {/* Date */}
-                  <div className="mb-3 flex items-baseline gap-2">
-                    <time className="text-sm font-semibold text-white">
-                      {formatDate(event.start)}
-                    </time>
-                    <span className="text-sm text-gray-400">
-                      {formatTime(event.start)}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="mb-2 text-xl font-bold text-white">
-                    {event.title}
-                  </h3>
-
-                  {/* Location */}
-                  {event.location && (
-                    <div className="flex items-start gap-2 text-gray-300">
-                      <svg
-                        className="mt-0.5 h-5 w-5 flex-shrink-0"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      <span className="text-sm">{event.location}</span>
-                    </div>
-                  )}
-
-                  {/* Description */}
-                  {event.description && (
-                    <p className="mt-3 text-sm text-gray-400 line-clamp-2">
-                      {event.description}
-                    </p>
-                  )}
-                </div>
-              </div>
-            ))}
+        {!loading && filteredEvents.length === 0 && !error && (
+          <div className="glass-panel rounded-[6px] p-12 text-center">
+            <p className="text-lg text-gray-400">
+              {getLocalizedText(siteConfig.eventsCopy.empty, language)}
+            </p>
           </div>
+        )}
+
+        {filteredEvents.length > 0 && (
+          <ul className="glass-panel rounded-[6px]">
+            {filteredEvents.map((event) => (
+              <li
+                key={event.id}
+                className="flex flex-col gap-2 border-b border-white/10 border-hairline p-6 last:border-b-0 sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    className={`h-5 w-5 rounded-[4px] border border-white/40 border-hairline ${patternClass(
+                      event.categoryKey ?? siteConfig.calendar.defaultCategoryKey
+                    )}`}
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <h3 className="text-lg font-bold text-white">{event.title}</h3>
+                    {event.location && (
+                      <p className="text-xs uppercase tracking-wide text-white/60">
+                        {event.location}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <time className="text-sm font-semibold text-gray-300">
+                  {formatDate(event.start, language)}
+                </time>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </section>

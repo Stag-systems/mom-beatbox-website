@@ -6,15 +6,65 @@
   * {
     scroll-behavior: smooth;
   }
+
+  html {
+    scroll-padding-top: 80px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      scroll-behavior: auto;
+    }
+  }
   
   body {
-    @apply bg-black text-white;
+    @apply text-white;
     font-family: system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    background-color: #050608;
+    background-image:
+      radial-gradient(900px 700px at 12% 12%, rgba(140, 170, 200, 0.18), transparent 58%),
+      radial-gradient(1200px 900px at 85% 8%, rgba(120, 150, 190, 0.16), transparent 62%),
+      radial-gradient(900px 650px at 50% 22%, rgba(160, 190, 210, 0.2), transparent 58%),
+      radial-gradient(1300px 1000px at 45% 85%, rgba(110, 140, 180, 0.18), transparent 62%),
+      radial-gradient(800px 700px at 85% 75%, rgba(100, 130, 170, 0.16), transparent 60%),
+      radial-gradient(700px 600px at 8% 82%, rgba(120, 150, 190, 0.14), transparent 60%);
+  }
+
+  html {
+    overflow-x: hidden;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Exo', sans-serif;
+    font-family: 'Excon', sans-serif;
     @apply font-bold;
+  }
+}
+
+@layer components {
+  .border-hairline {
+    border-width: 0.75px;
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.05);
+    border: 0.5px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 0.5px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(10px);
+  }
+
+  .glass-button {
+    background: rgba(255, 255, 255, 0.06);
+    border: 0.5px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(8px);
   }
 }
 
@@ -30,10 +80,62 @@
   }
 
   .animate-marquee {
-    animation: marquee 30s linear infinite;
+    animation: marquee 15s linear infinite;
   }
 
   .animate-marquee:hover {
     animation-play-state: paused;
+  }
+
+
+  @media (max-width: 767px) {
+    .animate-marquee {
+      animation-duration: 11s;
+    }
+  }
+
+  .pattern-kids {
+    background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.6) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.6) 50%,
+      rgba(255, 255, 255, 0.6) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: 8px 8px;
+  }
+
+  .pattern-workshops {
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.6) 1px,
+      transparent 1px
+    );
+    background-size: 6px 6px;
+  }
+
+  .pattern-concerts {
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.6) 2px,
+      transparent 2px
+    );
+    background-size: 6px 6px;
+  }
+
+  .pattern-corporate {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.5) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.5) 1px,
+        transparent 1px
+      );
+    background-size: 6px 6px;
   }
 }

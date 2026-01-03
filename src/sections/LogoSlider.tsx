@@ -1,14 +1,19 @@
 import { siteConfig } from '../content/siteConfig';
+import { getLocalizedText, Language } from '../lib/i18n';
 
-export function LogoSlider() {
+interface LogoSliderProps {
+  language: Language;
+}
+
+export function LogoSlider({ language }: LogoSliderProps) {
   // Duplicate logos for seamless infinite scroll
   const duplicatedLogos = [...siteConfig.logos, ...siteConfig.logos];
 
   return (
-    <section id="downloads" className="bg-black py-16 px-4 overflow-hidden border-t border-gray-900">
+    <section id="downloads" className="bg-transparent py-16 px-4 overflow-hidden border-t border-white/10 border-hairline">
       <div className="mx-auto max-w-7xl">
         <p className="mb-12 text-center text-xs font-medium tracking-[0.3em] uppercase text-gray-400">
-          USED BY GLOBAL POWERHOUSE
+          {getLocalizedText(siteConfig.logosCopy.eyebrow, language)}
         </p>
 
         {/* Marquee Container */}
@@ -17,12 +22,12 @@ export function LogoSlider() {
             {duplicatedLogos.map((logo, index) => (
               <div
                 key={`${logo.name}-${index}`}
-                className="flex-shrink-0 flex items-center justify-center w-40 h-24"
+                className="flex-shrink-0 flex items-center justify-center w-36 h-14"
               >
                 <img
                   src={logo.image}
                   alt={logo.name}
-                  className="max-h-full max-w-full object-contain filter brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
+                  className="h-10 w-auto max-w-[140px] object-contain opacity-70 transition-opacity hover:opacity-100"
                   loading="lazy"
                 />
               </div>

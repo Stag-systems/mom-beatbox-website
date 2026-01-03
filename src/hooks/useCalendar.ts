@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { CalendarEvent, CachedCalendarData } from '../types/calendar';
 import { siteConfig } from '../content/siteConfig';
 
@@ -8,7 +8,16 @@ const CACHE_DURATION = 1000 * 60 * 30; // 30 minutes
 // Simple ICS parser - parses basic VEVENT properties
 function parseICS(icsText: string): CalendarEvent[] {
   const events: CalendarEvent[] = [];
-  const lines = icsText.split(/\r?\n/);
+  const rawLines = icsText.split(/\r?\n/);
+  const lines: string[] = [];
+
+  for (const line of rawLines) {
+    if ((line.startsWith(' ') || line.startsWith('\t')) && lines.length > 0) {
+      lines[lines.length - 1] += line.slice(1);
+    } else {
+      lines.push(line);
+    }
+  }
   
   let currentEvent: Partial<CalendarEvent> | null = null;
   
@@ -23,18 +32,24 @@ function parseICS(icsText: string): CalendarEvent[] {
       }
       currentEvent = null;
     } else if (currentEvent) {
-      if (line.startsWith('SUMMARY:')) {
-        currentEvent.title = line.substring(8);
-      } else if (line.startsWith('DTSTART')) {
-        const dateStr = line.split(':')[1];
-        currentEvent.start = parseICSDate(dateStr);
-      } else if (line.startsWith('DTEND')) {
-        const dateStr = line.split(':')[1];
-        currentEvent.end = parseICSDate(dateStr);
-      } else if (line.startsWith('LOCATION:')) {
-        currentEvent.location = line.substring(9);
-      } else if (line.startsWith('DESCRIPTION:')) {
-        currentEvent.description = line.substring(12);
+      const colonIndex = line.indexOf(':');
+      if (colonIndex === -1) continue;
+
+      const namePart = line.slice(0, colonIndex);
+      const valuePart = line.slice(colonIndex + 1);
+      const propertyName = namePart.split(';')[0].toUpperCase();
+      const value = unescapeICSText(valuePart);
+
+      if (propertyName === 'SUMMARY') {
+        currentEvent.title = value;
+      } else if (propertyName === 'DTSTART') {
+        currentEvent.start = parseICSDate(valuePart);
+      } else if (propertyName === 'DTEND') {
+        currentEvent.end = parseICSDate(valuePart);
+      } else if (propertyName === 'LOCATION') {
+        currentEvent.location = value;
+      } else if (propertyName === 'DESCRIPTION') {
+        currentEvent.description = value;
       }
     }
   }
@@ -59,6 +74,28 @@ function parseICSDate(dateStr: string): Date {
   }
 }
 
+function unescapeICSText(value: string): string {
+  return value
+    .replace(/\\n/gi, '\n')
+    .replace(/\\,/g, ',')
+    .replace(/\\;/g, ';')
+    .replace(/\\\\/g, '\\');
+}
+
+function resolveCategoryKey(event: CalendarEvent): string {
+  const description = (event.description ?? '').toLowerCase();
+  const directTag = description.match(/(?:^|\s)(?:type:|category:|#)(kids|workshops|concerts|corporate)\b/);
+  if (directTag) {
+    return directTag[1];
+  }
+
+  const haystack = `${event.title} ${description} ${event.location ?? ''}`.toLowerCase();
+  const match = siteConfig.eventCategories.find((category) =>
+    category.keywords.some((keyword) => haystack.includes(keyword))
+  );
+  return match?.key ?? siteConfig.calendar.defaultCategoryKey;
+}
+
 function getCachedEvents(): CachedCalendarData | null {
   try {
     const cached = localStorage.getItem(CACHE_KEY);
@@ -69,7 +106,8 @@ function getCachedEvents(): CachedCalendarData | null {
     data.events = data.events.map(event => ({
       ...event,
       start: new Date(event.start),
-      end: new Date(event.end)
+      end: new Date(event.end),
+      categoryKey: event.categoryKey ?? resolveCategoryKey(event as CalendarEvent)
     }));
     
     return data;
@@ -90,73 +128,103 @@ function setCachedEvents(events: CalendarEvent[]): void {
   }
 }
 
+async function fetchWithTimeout(url: string): Promise<string> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    if (!response.ok) {
+      throw new Error('Failed to fetch calendar');
+    }
+    return await response.text();
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+async function fetchIcsText(url: string, proxyUrl?: string): Promise<string> {
+  try {
+    return await fetchWithTimeout(url);
+  } catch (error) {
+    if (!proxyUrl) {
+      throw error;
+    }
+    const proxiedUrl = `${proxyUrl}${encodeURIComponent(url)}`;
+    return await fetchWithTimeout(proxiedUrl);
+  }
+}
+
 export function useCalendar() {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<'cached' | 'failed' | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
-  useEffect(() => {
-    async function fetchEvents() {
-      // First, try to load from cache
-      const cached = getCachedEvents();
-      if (cached) {
-        setEvents(cached.events);
-        setLastUpdated(new Date(cached.fetchedAt));
-        setLoading(false);
-        
-        // If cache is still fresh, don't fetch
-        if (Date.now() - cached.fetchedAt < CACHE_DURATION) {
-          return;
-        }
-      }
+  const fetchEvents = useCallback(async (force = false) => {
+    // First, try to load from cache
+    const cached = getCachedEvents();
+    if (cached) {
+      setEvents(cached.events);
+      setLastUpdated(new Date(cached.fetchedAt));
+      setLoading(false);
 
-      // Fetch fresh data
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
-
-        const response = await fetch(siteConfig.calendar.publicIcsUrl, {
-          signal: controller.signal
-        });
-        
-        clearTimeout(timeoutId);
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch calendar');
-        }
-
-        const icsText = await response.text();
-        const parsedEvents = parseICS(icsText);
-        
-        setEvents(parsedEvents);
-        setLastUpdated(new Date());
-        setCachedEvents(parsedEvents);
-        setError(null);
-      } catch (err) {
-        console.error('Calendar fetch error:', err);
-        
-        // If we have cached data, keep using it
-        if (cached) {
-          setError('Using cached data (offline)');
-        } else {
-          setError('Failed to load events. Please check your connection.');
-        }
-      } finally {
-        setLoading(false);
+      // If cache is still fresh, don't fetch
+      if (!force && Date.now() - cached.fetchedAt < CACHE_DURATION) {
+        return;
       }
     }
 
-    fetchEvents();
+    setLoading(true);
+
+    // Fetch fresh data
+    try {
+      const icsText = await fetchIcsText(
+        siteConfig.calendar.publicIcsUrl,
+        siteConfig.calendar.corsProxyUrl
+      );
+      const parsedEvents = parseICS(icsText);
+      const categorizedEvents = parsedEvents.map((event) => ({
+        ...event,
+        categoryKey: resolveCategoryKey(event)
+      }));
+      
+      setEvents(categorizedEvents);
+      setLastUpdated(new Date());
+      setCachedEvents(categorizedEvents);
+      setError(null);
+    } catch (err) {
+      console.error('Calendar fetch error:', err);
+      
+      // If we have cached data, keep using it
+      if (cached) {
+        setError('cached');
+      } else {
+        setError('failed');
+      }
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  // Filter to show only upcoming events
-  const upcomingEvents = events.filter(event => event.start >= new Date());
+  useEffect(() => {
+    fetchEvents();
+  }, [fetchEvents]);
+
+  // Include upcoming or currently ongoing events.
+  const now = new Date();
+  const upcomingEvents = events.filter((event) => {
+    if (event.end) {
+      return event.end >= now;
+    }
+    return event.start >= now;
+  });
 
   return {
     events: upcomingEvents,
     loading,
     error,
-    lastUpdated
+    lastUpdated,
+    refresh: () => fetchEvents(true)
   };
 }
