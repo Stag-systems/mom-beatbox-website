@@ -10,6 +10,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['hero-video.mp4', 'logos/*.png', '*.jpg'],
+      devOptions: {
+        enabled: false
+      },
       manifest: {
         name: 'MOM Beatbox Crew',
         short_name: 'MOM',

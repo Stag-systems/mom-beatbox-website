@@ -21,7 +21,7 @@ export function Hero({ language }: HeroProps) {
           <source src={siteConfig.hero.videoUrl} type="video/mp4" />
         </video>
         {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/25 to-black/35" />
       </div>
 
       {/* Content */}

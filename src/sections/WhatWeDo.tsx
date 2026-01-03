@@ -74,10 +74,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
           <p className="text-xs font-medium tracking-[0.3em] uppercase text-gray-400 mb-4">
             {getLocalizedText(siteConfig.whatWeDoCopy.eyebrow, language)}
           </p>
-          <h2
-            className="text-[2.4rem] leading-[1.1] font-black tracking-tight text-white sm:text-6xl md:text-7xl"
-            style={{ fontFamily: 'Montserrat, sans-serif' }}
-          >
+          <h2 className="text-[2.4rem] leading-[1.1] font-black tracking-tight text-white uppercase sm:text-6xl md:text-7xl">
             {titleLines.map((line, index) => (
               <span key={`${line}-${index}`}>
                 {line}
@@ -150,8 +147,12 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                     aria-hidden="true"
                   />
                   <div
-                    className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/50 to-black/85"
+                    className="absolute inset-0"
                     aria-hidden="true"
+                    style={{
+                      background:
+                        'radial-gradient(120% 120% at 0% 0%, rgba(0,0,0,0.55), transparent 60%), radial-gradient(120% 120% at 100% 100%, rgba(0,0,0,0.6), transparent 65%)'
+                    }}
                   />
                   <div className="relative">
                     <div className="glass-panel rounded-full px-5 py-2">
@@ -189,8 +190,12 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                   aria-hidden="true"
                 />
                 <div
-                  className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/50 to-black/85"
+                  className="absolute inset-0"
                   aria-hidden="true"
+                  style={{
+                    background:
+                      'radial-gradient(120% 120% at 0% 0%, rgba(0,0,0,0.55), transparent 60%), radial-gradient(120% 120% at 100% 100%, rgba(0,0,0,0.6), transparent 65%)'
+                  }}
                 />
                 <div className="relative">
                   <div className="glass-panel rounded-full px-5 py-2">
@@ -210,7 +215,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
         <div className="text-center mt-16">
           <a
             href="#contact"
-            className="inline-block rounded-[6px] border border-white border-hairline px-12 py-2.5 text-sm font-medium uppercase tracking-wider text-white/80 transition hover:text-white"
+            className="inline-block rounded-[6px] bg-white px-12 py-2.5 text-sm font-medium uppercase tracking-wider text-black transition hover:bg-white/90"
           >
             {getLocalizedText(siteConfig.whatWeDoCopy.ctaLabel, language)}
           </a>
@@ -252,7 +257,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                     </p>
                     <a
                       href={`mailto:${siteConfig.hero.bookingEmail}`}
-                      className="glass-button inline-flex items-center rounded-[6px] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white/80 transition hover:text-white"
+                      className="glass-button inline-flex items-center rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
                     >
                       {getLocalizedText(siteConfig.whatWeDoCopy.requestLabel, language)}
                     </a>
@@ -273,7 +278,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                     </time>
                     <a
                       href="#events"
-                      className="glass-button inline-flex items-center rounded-[6px] px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white/80 transition hover:text-white"
+                      className="glass-button inline-flex items-center rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
                     >
                       {getLocalizedText(siteConfig.whatWeDoCopy.calendarLabel, language)}
                     </a>

@@ -126,8 +126,8 @@ export const siteConfig = {
       de: "Was wir machen"
     },
     title: {
-      en: "MOM MENU",
-      de: "MOM MENU"
+      en: "MOMS MENU",
+      de: "MOMS MENU"
     },
     ctaLabel: { en: "Book now", de: "Jetzt anfragen" },
     nextEventLabel: { en: "Next event", de: "Nächstes Event" },
@@ -166,22 +166,26 @@ export const siteConfig = {
     }
   ],
   youtube: {
-    title: { en: "Music", de: "Musik" },
+    eyebrow: { en: "Music and videos", de: "Musik und videos" },
+    title: { en: "Sound archive", de: "Sound archive" },
     videos: [
       {
         id: "3Z9opE8zByU",
-        title: { en: "M.O.M - live in Vietnam", de: "M.O.M - live in Vietnam" }
+        title: { en: "M.O.M - live in Vietnam", de: "M.O.M - live in Vietnam" },
+        category: "concert"
       },
       {
         id: "4dZ6_iwkxK0",
-        title: { en: "MOM - Right Now", de: "MOM - Right Now" }
+        title: { en: "MOM - Right Now", de: "MOM - Right Now" },
+        category: "musicvideos"
       },
       {
         id: "zIsQGDuCmQ0",
         title: {
           en: "M.O.M. | GRAND BEATBOX BATTLE 2021: WORLD LEAGUE | Crew Showcase",
           de: "M.O.M. | GRAND BEATBOX BATTLE 2021: WORLD LEAGUE | Crew Showcase"
-        }
+        },
+        category: "battle"
       }
     ]
   },

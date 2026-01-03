@@ -14,11 +14,11 @@ export function About({ language }: AboutProps) {
   return (
     <section id="about" className="bg-transparent py-24 px-4 sm:px-6 lg:px-8 pb-5 lg:pb-6">
       <div className="mx-auto max-w-7xl">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <p className="text-xs font-medium tracking-[0.3em] uppercase text-gray-400 mb-4">
             {getLocalizedText(siteConfig.about.eyebrow, language)}
           </p>
-          <h2 className="text-[2.4rem] leading-[1.1] font-black tracking-tight text-white sm:text-6xl md:text-7xl">
+          <h2 className="text-[2.4rem] leading-[1.1] font-black tracking-tight text-white uppercase sm:text-6xl md:text-7xl">
             {titleLines.map((line, index) => (
               <span key={`${line}-${index}`}>
                 {line}
@@ -41,7 +41,7 @@ export function About({ language }: AboutProps) {
 
           {/* Text Content */}
           <div className="order-1 space-y-8 text-center lg:order-2 lg:text-left">
-            <p className="text-base leading-relaxed text-gray-300">
+            <p className="mx-auto max-w-[320px] text-sm leading-snug text-gray-300 lg:mx-0 lg:max-w-[440px]">
               {getLocalizedText(siteConfig.about.text, language)}
             </p>
             

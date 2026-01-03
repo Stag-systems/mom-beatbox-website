@@ -64,7 +64,7 @@ export function Calendar({ language }: CalendarProps) {
     <section id="events" className="bg-transparent py-24 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 text-center">
-          <h2 className="mb-4 text-[2.4rem] leading-[1.1] font-black tracking-tight text-white sm:text-6xl md:text-7xl">
+          <h2 className="mb-4 text-[2.4rem] leading-[1.1] font-black tracking-tight text-white uppercase sm:text-6xl md:text-7xl">
             {getLocalizedText(siteConfig.eventsCopy.title, language)}
           </h2>
           <div className="flex flex-wrap items-center justify-center gap-3 text-sm text-gray-400">
@@ -77,7 +77,7 @@ export function Calendar({ language }: CalendarProps) {
             <button
               type="button"
               onClick={refresh}
-              className="glass-button inline-flex items-center gap-2 rounded-[6px] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/80 transition hover:text-white"
+              className="glass-button inline-flex items-center gap-2 rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
               aria-label={getLocalizedText(siteConfig.eventsCopy.refreshLabel, language)}
             >
               <svg
@@ -102,10 +102,10 @@ export function Calendar({ language }: CalendarProps) {
           <button
             type="button"
             onClick={() => setActiveCategory('all')}
-            className={`glass-button flex items-center gap-2 rounded-[6px] px-3 py-2 transition ${
+            className={`glass-button flex items-center gap-2 rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black ${
               activeCategory === 'all'
                 ? 'text-white'
-                : 'text-white/70 hover:text-white'
+                : 'text-white/80'
             }`}
           >
             <span className="h-4 w-4 rounded-[4px] border border-white/40 border-hairline" aria-hidden="true" />
@@ -116,10 +116,10 @@ export function Calendar({ language }: CalendarProps) {
               key={category.key}
               type="button"
               onClick={() => setActiveCategory(category.key)}
-              className={`glass-button flex items-center gap-2 rounded-[6px] px-3 py-2 transition ${
+              className={`glass-button flex items-center gap-2 rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black ${
                 activeCategory === category.key
                   ? 'text-white'
-                  : 'text-white/70 hover:text-white'
+                  : 'text-white/80'
               }`}
             >
               <span
@@ -140,8 +140,8 @@ export function Calendar({ language }: CalendarProps) {
         )}
 
         {error && !loading && events.length === 0 && (
-          <div className="rounded-[6px] bg-gray-900 border border-yellow-600 p-6 text-center">
-            <p className="text-yellow-400">
+          <div className="glass-panel rounded-[6px] p-6 text-center">
+            <p className="text-yellow-300">
               {error === 'cached'
                 ? getLocalizedText(siteConfig.eventsCopy.cached, language)
                 : getLocalizedText(siteConfig.eventsCopy.error, language)}
@@ -150,7 +150,7 @@ export function Calendar({ language }: CalendarProps) {
         )}
 
         {!loading && filteredEvents.length === 0 && !error && (
-          <div className="rounded-[6px] bg-gray-900 p-12 text-center">
+          <div className="glass-panel rounded-[6px] p-12 text-center">
             <p className="text-lg text-gray-400">
               {getLocalizedText(siteConfig.eventsCopy.empty, language)}
             </p>
@@ -158,7 +158,7 @@ export function Calendar({ language }: CalendarProps) {
         )}
 
         {filteredEvents.length > 0 && (
-          <ul className="glass-panel rounded-[6px] border border-white/10 border-hairline">
+          <ul className="glass-panel rounded-[6px]">
             {filteredEvents.map((event) => (
               <li
                 key={event.id}

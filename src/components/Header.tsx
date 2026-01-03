@@ -10,6 +10,7 @@ interface HeaderProps {
 export function Header({ language, onToggleLanguage }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,19 +66,64 @@ export function Header({ language, onToggleLanguage }: HeaderProps) {
           </ul>
 
           <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={onToggleLanguage}
-              className="glass-button flex h-8 w-8 items-center justify-center rounded-[6px] text-sm text-white transition-colors hover:text-white"
-              aria-label={getLocalizedText(siteConfig.language.toggleLabel, language)}
-              title={getLocalizedText(siteConfig.language.toggleLabel, language)}
-            >
-              <span aria-hidden="true">{language === 'en' ? '🇬🇧' : '🇩🇪'}</span>
-            </button>
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setIsLangOpen((open) => !open)}
+                className="flex items-center gap-2 rounded-[6px] bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-black shadow-md transition hover:shadow-lg"
+                aria-label={getLocalizedText(siteConfig.language.toggleLabel, language)}
+                title={getLocalizedText(siteConfig.language.toggleLabel, language)}
+                aria-expanded={isLangOpen}
+                aria-haspopup="menu"
+              >
+                <span aria-hidden="true">
+                  {language === 'en' ? 'EN 🇬🇧' : 'DE 🇩🇪'}
+                </span>
+                <svg
+                  className="h-3 w-3"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden="true"
+                >
+                  <path d="M5 7l5 6 5-6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              {isLangOpen && (
+                <div
+                  className="absolute right-0 mt-2 w-24 rounded-[6px] bg-white p-1 text-xs font-semibold uppercase tracking-wider text-black shadow-lg"
+                  role="menu"
+                >
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (language !== 'en') onToggleLanguage();
+                      setIsLangOpen(false);
+                    }}
+                    className="block w-full rounded-[4px] px-2 py-1 text-left hover:bg-black/5"
+                    role="menuitem"
+                  >
+                    EN 🇬🇧
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (language !== 'de') onToggleLanguage();
+                      setIsLangOpen(false);
+                    }}
+                    className="block w-full rounded-[4px] px-2 py-1 text-left hover:bg-black/5"
+                    role="menuitem"
+                  >
+                    DE 🇩🇪
+                  </button>
+                </div>
+              )}
+            </div>
 
             {/* Mobile Menu Button */}
             <button
-              className="glass-button md:hidden rounded-[6px] p-1 text-white"
+              className="md:hidden p-1 text-white"
               aria-label={getLocalizedText(siteConfig.accessibility.menuToggle, language)}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
