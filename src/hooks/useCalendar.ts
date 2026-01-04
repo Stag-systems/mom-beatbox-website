@@ -143,16 +143,21 @@ async function fetchWithTimeout(url: string): Promise<string> {
   }
 }
 
-async function fetchIcsText(url: string, proxyUrl?: string): Promise<string> {
-  try {
-    return await fetchWithTimeout(url);
-  } catch (error) {
-    if (!proxyUrl) {
-      throw error;
+async function fetchIcsText(url: string, proxyUrl?: string | string[]): Promise<string> {
+  const proxyUrls = Array.isArray(proxyUrl) ? proxyUrl : proxyUrl ? [proxyUrl] : [];
+
+  for (const proxy of proxyUrls) {
+    try {
+      const proxiedUrl = proxy.endsWith('http://') || proxy.endsWith('https://')
+        ? `${proxy}${url}`
+        : `${proxy}${encodeURIComponent(url)}`;
+      return await fetchWithTimeout(proxiedUrl);
+    } catch {
+      // Try next proxy
     }
-    const proxiedUrl = `${proxyUrl}${encodeURIComponent(url)}`;
-    return await fetchWithTimeout(proxiedUrl);
   }
+
+  return await fetchWithTimeout(url);
 }
 
 export function useCalendar() {

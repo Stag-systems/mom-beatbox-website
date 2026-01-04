@@ -122,7 +122,7 @@ export const siteConfig = {
   ],
   whatWeDoCopy: {
     eyebrow: {
-      en: "What we do",
+      en: "What we offer",
       de: "Was wir machen"
     },
     title: {
@@ -186,6 +186,22 @@ export const siteConfig = {
           de: "M.O.M. | GRAND BEATBOX BATTLE 2021: WORLD LEAGUE | Crew Showcase"
         },
         category: "battle"
+      },
+      {
+        id: "HepOPUJy3cA",
+        title: {
+          en: "M.O.M. | Truly Original | Grand Beatbox Battle 2021",
+          de: "M.O.M. | Truly Original | Grand Beatbox Battle 2021"
+        },
+        category: "battle"
+      },
+      {
+        id: "dStOHHg2Zts",
+        title: {
+          en: "MOM - GBB20: World League Crew Wildcard for YOU",
+          de: "MOM - GBB20: World League Crew Wildcard for YOU"
+        },
+        category: "battle"
       }
     ]
   },
@@ -218,7 +234,10 @@ export const siteConfig = {
   },
   calendar: {
     publicIcsUrl: "https://calendar.google.com/calendar/ical/cda01c823c486eeb726bcd338a34505325596023116fc1e83714de282b711350%40group.calendar.google.com/private-38bf8979efc488d1af689817e25fd48a/basic.ics",
-    corsProxyUrl: "https://api.allorigins.win/raw?url=",
+    corsProxyUrl: [
+      "https://r.jina.ai/http://",
+      "https://api.allorigins.win/raw?url="
+    ],
     defaultCategoryKey: "concerts"
   },
   eventCategories: [
@@ -228,21 +247,26 @@ export const siteConfig = {
       keywords: ["kids", "children", "school", "family", "kinder", "schule"]
     },
     {
-      key: "workshops",
-      label: { en: "Workshops", de: "Workshops" },
-      keywords: ["workshop", "class", "kurs", "training", "academy", "seminar"]
-    },
-    {
       key: "concerts",
       label: { en: "Concerts", de: "Konzerte" },
       keywords: ["concert", "show", "gig", "live", "festival", "konzert"]
     },
-    {
-      key: "corporate",
-      label: { en: "Corporate party", de: "Firmenfeier" },
-      keywords: ["corporate", "company", "firm", "business", "firmenfeier", "event"]
-    }
   ],
+  contactCopy: {
+    eyebrow: { en: "Booking", de: "Booking" },
+    title: { en: "CONTACT", de: "KONTAKT" },
+    description: {
+      en: "dont hesitate to reach out for bookings or questions.",
+      de: "Schreib uns gern wegen Buchungen oder Fragen."
+    },
+    fields: {
+      name: { en: "Name", de: "Name" },
+      email: { en: "Email", de: "Email" },
+      subject: { en: "Subject", de: "Betreff" },
+      message: { en: "Message", de: "Nachricht" },
+      send: { en: "Send", de: "Senden" }
+    }
+  },
   social: {
     instagram: "https://instagram.com/mom_crew",
     youtube: "https://youtube.com/@mom_crew",

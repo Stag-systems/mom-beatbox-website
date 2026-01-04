@@ -6,11 +6,12 @@ import { LogoSlider } from './sections/LogoSlider';
 import { WhatWeDo } from './sections/WhatWeDo';
 import { YouTube } from './sections/YouTube';
 import { Calendar } from './sections/Calendar';
+import { Contact } from './sections/Contact';
+import { Footer } from './sections/Footer';
 import { Language } from './lib/i18n';
 import { siteConfig } from './content/siteConfig';
 
 const STORAGE_KEY = 'mom-language';
-
 function App() {
   const [language, setLanguage] = useState<Language>(() => {
     if (typeof window === 'undefined') return siteConfig.language.default;
@@ -35,6 +36,8 @@ function App() {
       <WhatWeDo language={language} />
       <YouTube language={language} />
       <Calendar language={language} />
+      <Contact language={language} />
+      <Footer language={language} />
     </div>
   );
 }

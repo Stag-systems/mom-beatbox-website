@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { siteConfig } from '../content/siteConfig';
-import { getLocalizedText, Language } from '../lib/i18n';
+import { getLocalizedText, Language, LocalizedString } from '../lib/i18n';
 import { useCalendar } from '../hooks/useCalendar';
 import type { CalendarEvent } from '../types/calendar';
 
@@ -12,13 +12,27 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
   const title = getLocalizedText(siteConfig.whatWeDoCopy.title, language);
   const titleLines = title.split('\n');
   const carouselRef = useRef<HTMLDivElement | null>(null);
+  const desktopCarouselRef = useRef<HTMLDivElement | null>(null);
   const isAdjusting = useRef(false);
   const { events, loading } = useCalendar();
   const [activeCategoryKey, setActiveCategoryKey] = useState<string | null>(null);
+  const displayItems: Array<{
+    key: string;
+    title: LocalizedString;
+    image?: string;
+    phantom?: boolean;
+  }> = [
+    ...siteConfig.whatWeDo,
+    {
+      key: 'your-idea',
+      title: { en: 'Your idea', de: 'Deine Idee' },
+      phantom: true
+    }
+  ];
   const tripledItems = [
-    ...siteConfig.whatWeDo,
-    ...siteConfig.whatWeDo,
-    ...siteConfig.whatWeDo
+    ...displayItems,
+    ...displayItems,
+    ...displayItems
   ];
 
   useEffect(() => {
@@ -67,14 +81,25 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
     }).format(date);
   };
 
+  const scrollDesktop = (direction: 'left' | 'right') => {
+    const carousel = desktopCarouselRef.current;
+    if (!carousel) return;
+    const card = carousel.querySelector<HTMLElement>('[data-carousel-item]');
+    const scrollAmount = card ? card.offsetWidth + 24 : carousel.clientWidth;
+    carousel.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth'
+    });
+  };
+
   return (
-    <section id="service" className="bg-transparent py-24 px-4 sm:px-6 lg:px-8">
+    <section id="service" className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-16">
-          <p className="text-xs font-medium tracking-[0.3em] uppercase text-gray-400 mb-4">
+          <p className="text-xs font-medium tracking-[0.3em] uppercase text-gray-300 mb-[6px]">
             {getLocalizedText(siteConfig.whatWeDoCopy.eyebrow, language)}
           </p>
-          <h2 className="text-[2.4rem] leading-[1.1] font-black tracking-tight text-white uppercase sm:text-6xl md:text-7xl">
+          <h2 className="text-[2.16rem] leading-[1.1] font-black tracking-[0.02em] text-white uppercase sm:text-6xl md:text-7xl">
             {titleLines.map((line, index) => (
               <span key={`${line}-${index}`}>
                 {line}
@@ -82,6 +107,11 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
               </span>
             ))}
           </h2>
+          <p className="mt-4 text-sm text-gray-300">
+            Performances, workshops, and custom collaborations.
+            <br />
+            Flexible in format, open in mindset, and experienced in working across disciplines.
+          </p>
         </div>
 
         <div className="mt-20 md:hidden">
@@ -132,84 +162,136 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
             {tripledItems.map((item, index) => (
               <div
                 key={`${item.key}-${index}`}
-                className="glass-card group relative min-w-[80%] snap-center overflow-hidden rounded-[6px]"
+                className={`group relative flex min-w-[80%] flex-col overflow-hidden rounded-[6px] snap-center ${
+                  item.phantom ? 'border border-dashed border-white/30 bg-white/5' : 'glass-card'
+                }`}
               >
-                <button
-                  type="button"
-                  onClick={() => setActiveCategoryKey(item.key)}
-                  className="relative flex min-h-[360px] w-full items-end justify-start px-5 py-5 text-left"
-                >
-                  <img
-                    src={item.image}
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover"
-                    loading="lazy"
-                    aria-hidden="true"
-                  />
-                  <div
-                    className="absolute inset-0"
-                    aria-hidden="true"
-                    style={{
-                      background:
-                        'radial-gradient(120% 120% at 0% 0%, rgba(0,0,0,0.55), transparent 60%), radial-gradient(120% 120% at 100% 100%, rgba(0,0,0,0.6), transparent 65%)'
-                    }}
-                  />
-                  <div className="relative">
-                    <div className="glass-panel rounded-full px-5 py-2">
-                      <h3
-                        className="text-sm font-semibold text-white uppercase tracking-normal"
-                        style={{ fontFamily: 'Montserrat, sans-serif' }}
-                      >
-                        {getLocalizedText(item.title, language)}
-                      </h3>
+                {item.phantom ? (
+                  <div className="flex min-h-[360px] w-full items-center justify-center px-5 py-5">
+                    <div className="flex h-24 w-24 items-center justify-center rounded-full border border-dashed border-white/40 text-xs uppercase tracking-[0.3em] text-white/70">
+                      +
                     </div>
                   </div>
-                </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setActiveCategoryKey(item.key)}
+                    className="relative flex min-h-[360px] w-full items-end justify-start px-5 py-5 text-left"
+                  >
+                    <img
+                      src={item.image}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover"
+                      loading="lazy"
+                      aria-hidden="true"
+                    />
+                    <div
+                      className="absolute inset-0"
+                      aria-hidden="true"
+                      style={{
+                        background:
+                          'radial-gradient(120% 120% at 0% 0%, rgba(0,0,0,0.55), transparent 60%), radial-gradient(120% 120% at 100% 100%, rgba(0,0,0,0.6), transparent 65%)'
+                      }}
+                    />
+                  </button>
+                )}
+                <div className="px-5 py-3 text-center">
+                  <p className="text-[10px] font-medium uppercase tracking-wider text-white">
+                    {getLocalizedText(item.title, language)}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
           </div>
         </div>
 
-        <div className="mt-20 hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-4">
-          {siteConfig.whatWeDo.map((item) => (
-            <div
-              key={item.key}
-              className="glass-card group relative overflow-hidden rounded-[6px]"
+        <div className="mt-20 relative hidden md:block">
+          <button
+            type="button"
+            onClick={() => scrollDesktop('left')}
+            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
+            aria-label="Scroll left"
+          >
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
             >
-              <button
-                type="button"
-                onClick={() => setActiveCategoryKey(item.key)}
-                className="relative flex min-h-[360px] w-full items-end justify-start px-5 py-5 text-left"
-              >
-                <img
-                  src={item.image}
-                  alt=""
-                  className="absolute inset-0 h-full w-full object-cover"
-                  loading="lazy"
-                  aria-hidden="true"
-                />
+              <path d="M12 5l-5 5 5 5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollDesktop('right')}
+            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
+            aria-label="Scroll right"
+          >
+            <svg
+              className="h-4 w-4"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
+            >
+              <path d="M8 5l5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <div
+            ref={desktopCarouselRef}
+            className="overflow-x-auto scroll-smooth px-10 no-scrollbar"
+          >
+            <div className="flex gap-6">
+              {displayItems.map((item) => (
                 <div
-                  className="absolute inset-0"
-                  aria-hidden="true"
-                  style={{
-                    background:
-                      'radial-gradient(120% 120% at 0% 0%, rgba(0,0,0,0.55), transparent 60%), radial-gradient(120% 120% at 100% 100%, rgba(0,0,0,0.6), transparent 65%)'
-                  }}
-                />
-                <div className="relative">
-                  <div className="glass-panel rounded-full px-5 py-2">
-                    <h3
-                      className="text-sm font-semibold text-white uppercase tracking-normal"
-                      style={{ fontFamily: 'Montserrat, sans-serif' }}
+                  key={item.key}
+                  data-carousel-item
+                  className={`group relative flex w-[calc((100%-4.5rem)/4)] flex-shrink-0 flex-col overflow-hidden rounded-[6px] ${
+                    item.phantom ? 'border border-dashed border-white/30 bg-white/5' : 'glass-card'
+                  }`}
+                >
+                  {item.phantom ? (
+                    <div className="flex min-h-[360px] w-full items-center justify-center px-5 py-5">
+                      <div className="flex h-24 w-24 items-center justify-center rounded-full border border-dashed border-white/40 text-xs uppercase tracking-[0.3em] text-white/70">
+                        +
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setActiveCategoryKey(item.key)}
+                      className="relative flex min-h-[360px] w-full items-end justify-start px-5 py-5 text-left"
                     >
+                      <img
+                        src={item.image}
+                        alt=""
+                        className="absolute inset-0 h-full w-full object-cover"
+                        loading="lazy"
+                        aria-hidden="true"
+                      />
+                      <div
+                        className="absolute inset-0"
+                        aria-hidden="true"
+                        style={{
+                          background:
+                            'radial-gradient(120% 120% at 0% 0%, rgba(0,0,0,0.55), transparent 60%), radial-gradient(120% 120% at 100% 100%, rgba(0,0,0,0.6), transparent 65%)'
+                        }}
+                      />
+                    </button>
+                  )}
+                  <div className="px-5 py-3 text-center">
+                    <p className="text-[10px] font-medium uppercase tracking-wider text-white">
                       {getLocalizedText(item.title, language)}
-                    </h3>
+                    </p>
                   </div>
                 </div>
-              </button>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
         <div className="text-center mt-16">
@@ -242,7 +324,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                 X
               </button>
               <div className="glass-panel rounded-[6px] border border-white/10 border-hairline p-6">
-                <p className="text-xs uppercase tracking-[0.3em] text-gray-400">
+                <p className="text-xs uppercase tracking-[0.3em] text-gray-300">
                   {getLocalizedText(siteConfig.whatWeDoCopy.nextEventLabel, language)}
                 </p>
                 {loading && (

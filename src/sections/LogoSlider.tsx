@@ -10,9 +10,9 @@ export function LogoSlider({ language }: LogoSliderProps) {
   const duplicatedLogos = [...siteConfig.logos, ...siteConfig.logos];
 
   return (
-    <section id="downloads" className="bg-transparent py-16 px-4 overflow-hidden border-t border-white/10 border-hairline">
+    <section id="downloads" className="py-16 px-4 overflow-hidden">
       <div className="mx-auto max-w-7xl">
-        <p className="mb-12 text-center text-xs font-medium tracking-[0.3em] uppercase text-gray-400">
+        <p className="mb-12 text-center text-xs font-medium tracking-[0.3em] uppercase text-gray-300">
           {getLocalizedText(siteConfig.logosCopy.eyebrow, language)}
         </p>
 
