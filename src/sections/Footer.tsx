@@ -2,7 +2,10 @@ import { siteConfig } from '../content/siteConfig';
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 border-hairline py-20 px-4 sm:px-6 lg:px-8">
+    <footer
+      id="footer"
+      className="border-t border-white/10 border-hairline py-20 px-4 sm:px-6 lg:px-8"
+    >
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-2 md:items-center">
           <div className="flex flex-col items-center gap-4 md:items-start">

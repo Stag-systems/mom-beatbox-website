@@ -76,6 +76,7 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.22);
     backdrop-filter: blur(8px);
   }
+
 }
 
 @layer utilities {
@@ -109,7 +110,6 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-
 
   @media (max-width: 767px) {
     .animate-marquee {

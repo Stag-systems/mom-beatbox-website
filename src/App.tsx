@@ -18,7 +18,6 @@ function App() {
     const stored = localStorage.getItem(STORAGE_KEY);
     return stored === 'de' ? 'de' : siteConfig.language.default;
   });
-
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, language);
   }, [language]);

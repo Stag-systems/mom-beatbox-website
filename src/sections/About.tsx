@@ -28,7 +28,6 @@ export function About({ language }: AboutProps) {
             ))}
           </h2>
         </div>
-
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Image */}
           <div className="relative order-2 -mx-10 mt-0 aspect-square overflow-visible sm:-mx-8 sm:-mt-2 lg:order-1 lg:mx-0 lg:mt-0 lg:aspect-auto lg:h-[560px]">
@@ -81,19 +80,13 @@ export function About({ language }: AboutProps) {
               <button
                 type="button"
                 onClick={() => setIsAchievementsOpen((open) => !open)}
-                className="inline-flex w-full items-center justify-start gap-2 text-left text-xs font-medium uppercase tracking-[0.3em] text-white"
+                className={`inline-flex w-full items-center justify-start text-left text-xs font-medium uppercase tracking-[0.3em] text-white ${
+                  isAchievementsOpen ? '' : 'underline underline-offset-4'
+                }`}
                 aria-expanded={isAchievementsOpen}
                 aria-controls="achievements-panel"
               >
                 Competitive achievements
-                <span
-                  className={`font-['Ranade'] text-lg leading-none transition-transform ${
-                    isAchievementsOpen ? 'rotate-90' : ''
-                  }`}
-                  aria-hidden="true"
-                >
-                  ↗
-                </span>
               </button>
               {isAchievementsOpen && (
                 <div

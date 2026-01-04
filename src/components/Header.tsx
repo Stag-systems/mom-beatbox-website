@@ -55,7 +55,7 @@ export function Header({ language, onToggleLanguage }: HeaderProps) {
     { name: getLocalizedText(siteConfig.navigation.service, language), href: '#service' },
     { name: getLocalizedText(siteConfig.navigation.music, language), href: '#music' },
     { name: getLocalizedText(siteConfig.navigation.events, language), href: '#events' },
-    { name: getLocalizedText(siteConfig.navigation.downloads, language), href: '#downloads' },
+    { name: getLocalizedText(siteConfig.navigation.downloads, language), href: '#footer' },
   ];
 
   return (
