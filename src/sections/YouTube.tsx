@@ -9,7 +9,14 @@ interface VideoPlayerProps {
 }
 
 function VideoPlayer({ videoId, language, onOpen }: VideoPlayerProps) {
-  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  const thumbnailOptions = [
+    `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+    `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+    `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
+    `https://img.youtube.com/vi/${videoId}/default.jpg`
+  ];
+  const [thumbIndex, setThumbIndex] = useState(0);
+  const thumbnailUrl = thumbnailOptions[thumbIndex] ?? thumbnailOptions[0];
 
   return (
     <button
@@ -22,6 +29,11 @@ function VideoPlayer({ videoId, language, onOpen }: VideoPlayerProps) {
         alt={getLocalizedText(siteConfig.accessibility.videoThumbnail, language)}
         className="h-full w-full object-cover transition-transform group-hover:scale-105"
         loading="lazy"
+        onError={() => {
+          if (thumbIndex < thumbnailOptions.length - 1) {
+            setThumbIndex(thumbIndex + 1);
+          }
+        }}
       />
 
       {/* Play button overlay */}
@@ -46,46 +58,14 @@ interface YouTubeProps {
 
 export function YouTube({ language }: YouTubeProps) {
   const carouselRef = useRef<HTMLDivElement | null>(null);
-  const isAdjusting = useRef(false);
+  const desktopCarouselRef = useRef<HTMLDivElement | null>(null);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState<'all' | 'musicvideos' | 'battle' | 'concert'>('all');
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const autoScrollRef = useRef<number | null>(null);
   const filteredVideos =
     activeFilter === 'all'
       ? siteConfig.youtube.videos
       : siteConfig.youtube.videos.filter((video) => video.category === activeFilter);
-  const tripledFilteredVideos = [
-    ...filteredVideos,
-    ...filteredVideos,
-    ...filteredVideos
-  ];
-
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-    const setWidth = carousel.scrollWidth / 3;
-    carousel.scrollLeft = setWidth;
-  }, []);
-
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-    if (window.innerWidth >= 768) return;
-
-    const step = () => {
-      carousel.scrollLeft += 0.18;
-      autoScrollRef.current = requestAnimationFrame(step);
-    };
-
-    autoScrollRef.current = requestAnimationFrame(step);
-    return () => {
-      if (autoScrollRef.current) {
-        cancelAnimationFrame(autoScrollRef.current);
-      }
-    };
-  }, []);
-
+  
   useEffect(() => {
     if (!activeVideoId) return;
 
@@ -101,49 +81,55 @@ export function YouTube({ language }: YouTubeProps) {
     };
   }, [activeVideoId]);
 
-  const handleScroll = () => {
-    const carousel = carouselRef.current;
-    if (!carousel || isAdjusting.current) return;
-
-    const setWidth = carousel.scrollWidth / 3;
-    const left = carousel.scrollLeft;
-    const min = setWidth * 0.25;
-    const max = setWidth * 1.75;
-
-    if (left < min) {
-      isAdjusting.current = true;
-      carousel.scrollLeft = left + setWidth;
-      requestAnimationFrame(() => {
-        isAdjusting.current = false;
-      });
-    } else if (left > max) {
-      isAdjusting.current = true;
-      carousel.scrollLeft = left - setWidth;
-      requestAnimationFrame(() => {
-        isAdjusting.current = false;
-      });
-    }
+  const scrollDesktop = (direction: 'left' | 'right') => {
+    const carousel = desktopCarouselRef.current;
+    if (!carousel) return;
+    const card = carousel.querySelector<HTMLElement>('[data-carousel-item]');
+    const scrollAmount = card ? card.offsetWidth + 24 : carousel.clientWidth;
+    carousel.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth'
+    });
   };
 
   return (
-    <section id="music" className="bg-transparent py-24 px-4 sm:px-6 lg:px-8">
+    <section id="music" className="py-20 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-12">
-          <p className="text-xs font-medium tracking-[0.3em] uppercase text-gray-400 mb-4">
+          <p className="text-xs font-medium tracking-[0.3em] uppercase text-gray-300 mb-[6px]">
             {getLocalizedText(siteConfig.youtube.eyebrow, language)}
           </p>
-          <h2 className="text-[2.4rem] leading-[1.1] font-black tracking-tight text-white uppercase sm:text-6xl md:text-7xl">
+          <h2 className="text-[2.16rem] leading-[1.1] font-black tracking-[0.02em] text-white uppercase sm:text-6xl md:text-7xl">
             {getLocalizedText(siteConfig.youtube.title, language)}
           </h2>
+          <p className="mt-4 text-sm text-gray-300">
+            Built on human voice. Best experienced live
+          </p>
         </div>
 
-        <div className="md:hidden">
+        <div className="mt-8 mb-12 flex flex-wrap items-center justify-center gap-3 text-[10px] uppercase tracking-wide text-white/70">
+          {(['all', 'musicvideos', 'battle', 'concert'] as const).map((filter) => (
+            <button
+              key={filter}
+              type="button"
+              onClick={() => setActiveFilter(filter)}
+              className={`glass-button flex items-center gap-2 rounded-[6px] px-6 py-1.5 text-[10px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black ${
+                activeFilter === filter
+                  ? 'text-white'
+                  : 'text-white/80'
+              }`}
+            >
+              {filter === 'all' ? 'ALL' : filter.toUpperCase()}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-14 md:hidden">
             <div
               ref={carouselRef}
-              onScroll={handleScroll}
-              className="flex gap-6 overflow-x-auto overflow-y-visible pb-6 pt-2 px-0 md:snap-x md:snap-mandatory"
+              className="flex gap-6 overflow-x-auto overflow-y-visible pb-6 pt-2 px-0"
             >
-            {tripledFilteredVideos.map((video, index) => (
+            {filteredVideos.map((video, index) => (
               <div
                 key={`${video.id}-${index}`}
               className="glass-card min-w-[80%] rounded-[6px] p-4 transform-gpu transition-transform duration-300"
@@ -164,69 +150,82 @@ export function YouTube({ language }: YouTubeProps) {
           </div>
         </div>
 
-        <div className="hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">
-          {filteredVideos.map((video, index) => (
-            <div key={`${video.id}-${index}`} className="glass-card rounded-[6px] p-4">
-              <VideoPlayer
-                videoId={video.id}
-                language={language}
-                onOpen={setActiveVideoId}
-              />
-              <p className="mt-3 text-sm uppercase tracking-wide text-gray-300">
-                {getLocalizedText(video.title, language)}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-8 flex items-center justify-center">
-          <div className="relative">
+        {filteredVideos.length > 3 ? (
+          <div className="mt-14 relative hidden md:block">
             <button
               type="button"
-              onClick={() => setIsFilterOpen((open) => !open)}
-              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-white/70 transition hover:text-white"
-              aria-expanded={isFilterOpen}
-              aria-haspopup="menu"
+              onClick={() => scrollDesktop('left')}
+              className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
+              aria-label="Scroll left"
             >
-              Filters
               <svg
-                className={`h-3 w-3 transition-transform ${isFilterOpen ? 'rotate-180' : ''}`}
+                className="h-4 w-4"
                 viewBox="0 0 20 20"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
                 aria-hidden="true"
               >
-                <path d="M5 7l5 6 5-6" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M12 5l-5 5 5 5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-            {isFilterOpen && (
-              <div
-                className="absolute left-1/2 mt-2 -translate-x-1/2 rounded-[6px] bg-white px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-black shadow-lg"
-                role="menu"
+            <button
+              type="button"
+              onClick={() => scrollDesktop('right')}
+              className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
+              aria-label="Scroll right"
+            >
+              <svg
+                className="h-4 w-4"
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden="true"
               >
-                <div className="flex items-center gap-3">
-                  {(['all', 'musicvideos', 'battle', 'concert'] as const).map((filter) => (
-                    <button
-                      key={filter}
-                      type="button"
-                      onClick={() => {
-                        setActiveFilter(filter);
-                        setIsFilterOpen(false);
-                      }}
-                      className={`rounded-[4px] px-2 py-1 hover:bg-black/5 ${
-                        activeFilter === filter ? 'bg-black/5' : ''
-                      }`}
-                      role="menuitem"
-                    >
-                      {filter === 'all' ? 'ALL' : filter.toUpperCase()}
-                    </button>
-                  ))}
-                </div>
+                <path d="M8 5l5 5-5 5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            <div
+              ref={desktopCarouselRef}
+              className="overflow-x-auto scroll-smooth px-10"
+            >
+              <div className="flex gap-6">
+                {filteredVideos.map((video, index) => (
+                  <div
+                    key={`${video.id}-${index}`}
+                    data-carousel-item
+                    className="glass-card w-[calc((100%-3rem)/3)] flex-shrink-0 rounded-[6px] p-4"
+                  >
+                    <VideoPlayer
+                      videoId={video.id}
+                      language={language}
+                      onOpen={setActiveVideoId}
+                    />
+                    <p className="mt-3 text-sm uppercase tracking-wide text-gray-300">
+                      {getLocalizedText(video.title, language)}
+                    </p>
+                  </div>
+                ))}
               </div>
-            )}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="mt-14 hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">
+            {filteredVideos.map((video, index) => (
+              <div key={`${video.id}-${index}`} className="glass-card rounded-[6px] p-4">
+                <VideoPlayer
+                  videoId={video.id}
+                  language={language}
+                  onOpen={setActiveVideoId}
+                />
+                <p className="mt-3 text-sm uppercase tracking-wide text-gray-300">
+                  {getLocalizedText(video.title, language)}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
 
         {activeVideoId && (
           <div

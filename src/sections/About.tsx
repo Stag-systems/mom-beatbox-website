@@ -9,16 +9,17 @@ interface AboutProps {
 export function About({ language }: AboutProps) {
   const title = getLocalizedText(siteConfig.about.title, language);
   const titleLines = title.split('\n');
-  const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
+  const [isAchievementsOpen, setIsAchievementsOpen] = useState(true);
 
   return (
-    <section id="about" className="bg-transparent py-24 px-4 sm:px-6 lg:px-8 pb-5 lg:pb-6">
+    <section id="about" className="relative py-24 px-4 sm:px-6 lg:px-8 pb-5 lg:pb-6">
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-black via-transparent to-transparent" />
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-10">
-          <p className="text-xs font-medium tracking-[0.3em] uppercase text-gray-400 mb-4">
+          <p className="text-xs font-medium tracking-[0.3em] uppercase text-gray-300 mb-[6px]">
             {getLocalizedText(siteConfig.about.eyebrow, language)}
           </p>
-          <h2 className="text-[2.4rem] leading-[1.1] font-black tracking-tight text-white uppercase sm:text-6xl md:text-7xl">
+          <h2 className="text-[2.16rem] leading-[1.1] font-black tracking-[0.02em] text-white uppercase sm:text-6xl md:text-7xl">
             {titleLines.map((line, index) => (
               <span key={`${line}-${index}`}>
                 {line}
@@ -41,22 +42,22 @@ export function About({ language }: AboutProps) {
 
           {/* Text Content */}
           <div className="order-1 space-y-8 text-center lg:order-2 lg:text-left">
-            <p className="mx-auto max-w-[320px] text-sm leading-snug text-gray-300 lg:mx-0 lg:max-w-[440px]">
+            <p className="mx-auto w-full text-sm leading-snug text-gray-300 lg:mx-0">
               {getLocalizedText(siteConfig.about.text, language)}
             </p>
             
             {/* Crew Members */}
-            <div className="glass-panel rounded-[6px] p-6 space-y-4 text-left">
+            <div className="space-y-4 text-center lg:text-left">
               <h3 className="text-xs font-medium tracking-[0.3em] uppercase text-white mb-6">
                 {getLocalizedText(siteConfig.about.membersLabel, language)}
               </h3>
-              <div className="space-y-3">
+              <div className="divide-y divide-white/60">
                 {siteConfig.about.members.map((member) => (
                   <details
                     key={member.name}
-                    className="group border-b border-white/10 border-hairline pb-3 last:border-b-0 last:pb-0"
+                    className="group py-4"
                   >
-                    <summary className="flex cursor-pointer list-none items-center justify-between text-2xl font-black text-white">
+                    <summary className="flex cursor-pointer list-none items-center justify-between font-['Excon'] text-2xl font-black text-white">
                       <span>{member.name}</span>
                       <span className="text-2xl transition-transform group-open:rotate-45">+</span>
                     </summary>
@@ -76,43 +77,59 @@ export function About({ language }: AboutProps) {
               </div>
             </div>
 
-            <div className="pt-2 text-center lg:text-left">
+            <div className="space-y-4 text-center lg:text-left">
               <button
                 type="button"
                 onClick={() => setIsAchievementsOpen((open) => !open)}
-                className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.4em] text-white/70 hover:text-white"
+                className="inline-flex w-full items-center justify-start gap-2 text-left text-xs font-medium uppercase tracking-[0.3em] text-white"
                 aria-expanded={isAchievementsOpen}
-                aria-controls="achievements-list"
+                aria-controls="achievements-panel"
               >
-                Achievements
-                <svg
-                  className={`h-3 w-3 transition-transform ${isAchievementsOpen ? 'rotate-180' : ''}`}
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
+                Competitive achievements
+                <span
+                  className={`font-['Ranade'] text-lg leading-none transition-transform ${
+                    isAchievementsOpen ? 'rotate-90' : ''
+                  }`}
                   aria-hidden="true"
                 >
-                  <path d="M5 7l5 6 5-6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                  ↗
+                </span>
               </button>
               {isAchievementsOpen && (
                 <div
-                  id="achievements-list"
-                  className="mt-4 flex flex-col gap-3 text-[11px] uppercase tracking-[0.32em] text-white/60"
+                  id="achievements-panel"
+                  className="grid gap-3 sm:grid-cols-2"
                 >
                   {siteConfig.achievements.map((achievement) => (
-                    <span key={`${achievement.city}-${achievement.year}`}>
-                      <span className="block font-bold text-white sm:inline">
+                    <div
+                      key={`${achievement.city}-${achievement.year}`}
+                      className="rounded-[6px] p-3 text-center sm:text-left"
+                    >
+                      <p className="text-xs font-semibold uppercase tracking-wide text-white">
                         {getLocalizedText(achievement.title, language)}
-                      </span>
-                      <span className="block text-white/50 sm:inline">
-                        ({achievement.city} {achievement.year})
-                      </span>
-                    </span>
+                      </p>
+                      <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/60">
+                        {achievement.city} {achievement.year}
+                      </p>
+                    </div>
                   ))}
                 </div>
               )}
+            </div>
+
+            <div className="flex flex-col items-center gap-3 lg:items-start">
+              <a
+                href="#music"
+                className="inline-flex w-[220px] items-center justify-center whitespace-nowrap rounded-[6px] border border-white/60 border-hairline bg-transparent px-12 py-2.5 text-sm font-medium uppercase tracking-wider text-white/90 transition hover:text-white"
+              >
+                Sound archive
+              </a>
+              <a
+                href="#service"
+                className="inline-flex w-[220px] items-center justify-center whitespace-nowrap rounded-[6px] bg-white px-12 py-2.5 text-sm font-medium uppercase tracking-wider text-black transition hover:bg-white/90"
+              >
+                MOMS MENU
+              </a>
             </div>
           </div>
         </div>

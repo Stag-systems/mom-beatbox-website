@@ -16,19 +16,18 @@
       scroll-behavior: auto;
     }
   }
-  
+
   body {
-    @apply text-white;
-    font-family: system-ui, -apple-system, sans-serif;
+    color: #ffffff;
+    font-family: 'Ranade', system-ui, -apple-system, sans-serif;
+    font-weight: 300;
     overflow-x: hidden;
-    background-color: #050608;
+    background-color: #060a12;
     background-image:
-      radial-gradient(900px 700px at 12% 12%, rgba(140, 170, 200, 0.18), transparent 58%),
-      radial-gradient(1200px 900px at 85% 8%, rgba(120, 150, 190, 0.16), transparent 62%),
-      radial-gradient(900px 650px at 50% 22%, rgba(160, 190, 210, 0.2), transparent 58%),
-      radial-gradient(1300px 1000px at 45% 85%, rgba(110, 140, 180, 0.18), transparent 62%),
-      radial-gradient(800px 700px at 85% 75%, rgba(100, 130, 170, 0.16), transparent 60%),
-      radial-gradient(700px 600px at 8% 82%, rgba(120, 150, 190, 0.14), transparent 60%);
+      radial-gradient(1600px 1200px at 15% 20%, rgba(35, 70, 140, 0.35), transparent 65%),
+      radial-gradient(1400px 1100px at 85% 15%, rgba(20, 45, 110, 0.4), transparent 70%),
+      radial-gradient(1400px 1100px at 50% 80%, rgba(45, 85, 150, 0.3), transparent 70%),
+      radial-gradient(1000px 900px at 85% 80%, rgba(15, 30, 90, 0.45), transparent 65%);
   }
 
   html {
@@ -38,6 +37,7 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Excon', sans-serif;
     @apply font-bold;
+    color: #ffffff;
   }
 }
 
@@ -47,25 +47,39 @@
   }
 
   .glass-panel {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.048);
     border: 0.5px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    box-shadow:
+      0 10px 28px rgba(0, 0, 0, 0.32),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(10px);
   }
 
   .glass-card {
     background: rgba(255, 255, 255, 0.04);
     border: 0.5px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.32);
+    box-shadow:
+      0 10px 28px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
   }
 
   .glass-button {
-    background: rgba(255, 255, 255, 0.06);
-    border: 0.5px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.06) 100%
+    );
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+      0 10px 26px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.22);
     backdrop-filter: blur(8px);
   }
+}
+
+@layer utilities {
+  /* light mode utilities removed */
 }
 
 @layer utilities {
@@ -87,6 +101,15 @@
     animation-play-state: paused;
   }
 
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
 
   @media (max-width: 767px) {
     .animate-marquee {
@@ -94,48 +117,4 @@
     }
   }
 
-  .pattern-kids {
-    background-image: linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.6) 25%,
-      transparent 25%,
-      transparent 50%,
-      rgba(255, 255, 255, 0.6) 50%,
-      rgba(255, 255, 255, 0.6) 75%,
-      transparent 75%,
-      transparent
-    );
-    background-size: 8px 8px;
-  }
-
-  .pattern-workshops {
-    background-image: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.6) 1px,
-      transparent 1px
-    );
-    background-size: 6px 6px;
-  }
-
-  .pattern-concerts {
-    background-image: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.6) 2px,
-      transparent 2px
-    );
-    background-size: 6px 6px;
-  }
-
-  .pattern-corporate {
-    background-image: linear-gradient(
-        rgba(255, 255, 255, 0.5) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.5) 1px,
-        transparent 1px
-      );
-    background-size: 6px 6px;
-  }
 }
