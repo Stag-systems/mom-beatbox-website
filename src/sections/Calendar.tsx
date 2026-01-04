@@ -13,30 +13,12 @@ function formatDate(date: Date, language: Language): string {
   }).format(date);
 }
 
-function getRelativeTime(date: Date, language: Language): string {
-  const now = Date.now();
-  const diff = date.getTime() - now;
-  const minutes = Math.floor(diff / 60000);
-  
-  if (minutes < 60) {
-    return language === 'de' ? `vor ${minutes}m` : `${minutes}m ago`;
-  }
-  
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) {
-    return language === 'de' ? `vor ${hours}h` : `${hours}h ago`;
-  }
-  
-  const days = Math.floor(hours / 24);
-  return language === 'de' ? `vor ${days}d` : `${days}d ago`;
-}
-
 interface CalendarProps {
   language: Language;
 }
 
 export function Calendar({ language }: CalendarProps) {
-  const { events, loading, error, lastUpdated, refresh } = useCalendar();
+  const { events, loading, error } = useCalendar();
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const categories = siteConfig.eventCategories;
 

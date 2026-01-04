@@ -1,11 +1,6 @@
 import { siteConfig } from '../content/siteConfig';
-import { getLocalizedText, Language } from '../lib/i18n';
 
-interface FooterProps {
-  language: Language;
-}
-
-export function Footer({ language }: FooterProps) {
+export function Footer() {
   return (
     <footer className="border-t border-white/10 border-hairline py-20 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">

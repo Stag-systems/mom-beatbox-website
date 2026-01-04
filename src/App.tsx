@@ -37,7 +37,7 @@ function App() {
       <YouTube language={language} />
       <Calendar language={language} />
       <Contact language={language} />
-      <Footer language={language} />
+      <Footer />
     </div>
   );
 }

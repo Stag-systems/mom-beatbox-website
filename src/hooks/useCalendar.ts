@@ -143,8 +143,8 @@ async function fetchWithTimeout(url: string): Promise<string> {
   }
 }
 
-async function fetchIcsText(url: string, proxyUrl?: string | string[]): Promise<string> {
-  const proxyUrls = Array.isArray(proxyUrl) ? proxyUrl : proxyUrl ? [proxyUrl] : [];
+async function fetchIcsText(url: string, proxyUrl?: string | readonly string[]): Promise<string> {
+  const proxyUrls = Array.isArray(proxyUrl) ? [...proxyUrl] : proxyUrl ? [proxyUrl] : [];
 
   for (const proxy of proxyUrls) {
     try {
