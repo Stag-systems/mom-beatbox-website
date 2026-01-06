@@ -3,7 +3,7 @@ export const siteConfig = {
     title: "MOM",
     tagline: "MORE THAN BEATBOX",
     bookingEmail: "contact@mombeatbox.com",
-    videoUrl: "/hero-video.mp4",
+    videoUrl: "/hero-video-v2.mp4",
     fallbackImage: "/hero-fallback.jpg"
   },
   language: {
