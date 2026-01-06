@@ -171,7 +171,8 @@ export const siteConfig = {
     {
       year: "2016",
       city: "Brussels",
-      title: { en: "European Beatbox Champions", de: "European Beatbox Champions" }
+      title: { en: "European Beatbox Champions", de: "European Beatbox Champions" },
+      videoId: ""
     }
   ],
   youtube: {
