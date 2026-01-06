@@ -14,6 +14,11 @@ export function Hero({ language }: HeroProps) {
     if (!video) return;
 
     const tryPlay = () => {
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute('muted', 'true');
+      video.setAttribute('playsinline', 'true');
+      video.setAttribute('webkit-playsinline', 'true');
       const result = video.play();
       if (result && typeof result.catch === 'function') {
         result.catch(() => {});
