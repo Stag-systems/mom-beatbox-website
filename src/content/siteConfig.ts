@@ -75,8 +75,13 @@ export const siteConfig = {
     { name: "Austrian Event Award", image: "/PARTNER/Illu_Austrian-Event-Award-2020-810x447.png" },
     { name: "Monsterfreunde", image: "/PARTNER/Logo_Monsterfreunde.png" },
     { name: "Images", image: "/PARTNER/images.png" },
+    { name: "Pflasterspektakel", image: "/PARTNER/Pflasterspektakel.png" },
+    { name: "AKM", image: "/PARTNER/AKM-NEW.png" },
+    { name: "SBX", image: "/PARTNER/SBX.png" },
+    { name: "Xtra", image: "/PARTNER/Xtra.png" },
     { name: "Logo Main", image: "/PARTNER/logo-main.png" },
-    { name: "TAS Logo", image: "/PARTNER/tas_logo_rot.jpg" }
+    { name: "TAS Logo", image: "/PARTNER/tas_logo_rot.jpg" },
+    { name: "Vokal Total", image: "/PARTNER/vokal.total_white.png" }
   ],
   logosCopy: {
     eyebrow: {

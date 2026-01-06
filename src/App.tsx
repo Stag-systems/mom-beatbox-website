@@ -35,8 +35,8 @@ function App() {
       <div className="h-screen" aria-hidden="true" />
       <div className="relative z-10 bg-[#060a12]">
         <About language={language} />
-        <LogoSlider language={language} />
         <WhatWeDo language={language} />
+        <LogoSlider language={language} />
         <YouTube language={language} />
         <Calendar language={language} />
         <Contact language={language} />

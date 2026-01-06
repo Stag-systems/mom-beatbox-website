@@ -7,8 +7,15 @@ interface ContactProps {
 
 export function Contact({ language }: ContactProps) {
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-4xl">
+    <section
+      id="contact"
+      className="relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8"
+    >
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[260px] w-[260px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/15 blur-[70px] md:h-[350px] md:w-[350px]"
+        aria-hidden="true"
+      />
+      <div className="relative mx-auto max-w-4xl">
         <div className="text-center mb-12">
           <p className="text-xs font-medium tracking-[0.3em] uppercase text-gray-300 mb-[6px]">
             {getLocalizedText(siteConfig.contactCopy.eyebrow, language)}

@@ -44,7 +44,7 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-10 flex flex-col items-center gap-4 border-t border-white/10 border-hairline pt-6 text-center text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between sm:text-left">
+        <div className="mt-10 flex flex-col items-center gap-4 pt-6 text-center text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between sm:text-left">
           <p>
             MORE THAN BEATBOX
             <br />

@@ -6,30 +6,35 @@ interface LogoSliderProps {
 }
 
 export function LogoSlider({ language }: LogoSliderProps) {
-  // Duplicate logos for seamless infinite scroll
-  const duplicatedLogos = [...siteConfig.logos, ...siteConfig.logos];
-
   return (
     <section id="downloads" className="py-16 px-4 overflow-hidden">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto w-full max-w-screen-2xl">
         <p className="mb-12 text-center text-xs font-medium tracking-[0.3em] uppercase text-gray-300">
           {getLocalizedText(siteConfig.logosCopy.eyebrow, language)}
         </p>
 
         {/* Marquee Container */}
-        <div className="relative">
-          <div className="flex animate-marquee space-x-16">
-            {duplicatedLogos.map((logo, index) => (
+        <div className="relative overflow-hidden">
+          <div className="flex w-max animate-marquee">
+            {[0, 1].map((trackIndex) => (
               <div
-                key={`${logo.name}-${index}`}
-                className="flex-shrink-0 flex items-center justify-center w-36 h-14"
+                key={`logo-track-${trackIndex}`}
+                className="flex items-center gap-16 pr-16"
+                aria-hidden={trackIndex === 1}
               >
-                <img
-                  src={logo.image}
-                  alt={logo.name}
-                  className="h-10 w-auto max-w-[140px] object-contain opacity-70 transition-opacity hover:opacity-100"
-                  loading="lazy"
-                />
+                {siteConfig.logos.map((logo) => (
+                  <div
+                    key={`${logo.name}-${trackIndex}`}
+                    className="flex h-16 w-44 flex-shrink-0 items-center justify-center"
+                  >
+                    <img
+                      src={logo.image}
+                      alt={logo.name}
+                      className="h-12 w-32 object-contain opacity-70 transition-opacity hover:opacity-100"
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
               </div>
             ))}
           </div>
