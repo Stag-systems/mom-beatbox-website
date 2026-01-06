@@ -263,20 +263,13 @@ export const siteConfig = {
     },
   ],
   contactCopy: {
-    eyebrow: { en: "Booking", de: "Booking" },
+    eyebrow: { en: "LET’S DO THIS", de: "LET’S DO THIS" },
     title: { en: "CONTACT", de: "KONTAKT" },
     description: {
-      en: "dont hesitate to reach out for bookings or questions.",
-      de: "Schreib uns gern wegen Buchungen oder Fragen."
+      en: "Any questions about booking or special requests? Don’t hesitate to reach out.",
+      de: "Fragen zum Booking oder spezielle Wünsche? Melde dich gerne."
     },
-    fields: {
-      to: { en: "To", de: "An" },
-      name: { en: "Name", de: "Name" },
-      email: { en: "Email", de: "Email" },
-      subject: { en: "Subject", de: "Betreff" },
-      message: { en: "Message", de: "Nachricht" },
-      send: { en: "Send", de: "Senden" }
-    }
+    ctaLabel: { en: "GET IN TOUCH", de: "JETZT ANFRAGEN" }
   },
   social: {
     instagram: "https://instagram.com/mom_crew",
