@@ -26,21 +26,17 @@ export function Hero({ language }: HeroProps) {
 
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
-        <h1
-          className="mb-4 text-[clamp(4.05rem,18vw,8.55rem)] leading-[0.95] font-black tracking-[0.02em] text-white sm:text-8xl md:text-9xl lg:text-[12rem]"
-          style={{
-            textShadow:
-              '-1px 0 #fff, 1px 0 #fff, 0 -1px #fff, 0 1px #fff'
-          }}
-        >
-          {siteConfig.hero.title}
-        </h1>
-        <p className="mb-12 mx-auto w-full max-w-[90vw] text-base font-medium tracking-[0.3em] uppercase sm:text-lg md:max-w-[1100px] md:text-xl">
-          {siteConfig.hero.tagline}
-        </p>
+        <h1 className="sr-only">{siteConfig.hero.title}</h1>
+        <img
+          src="/MOM-LOGOMASTER.svg"
+          alt=""
+          aria-hidden="true"
+          className="mb-4 w-[min(85vw,540px)] sm:w-[min(48vw,600px)] md:w-[min(45vw,660px)]"
+        />
+        <div className="mb-12" aria-hidden="true" />
         <a
-          href={`mailto:${siteConfig.hero.bookingEmail}`}
-          className="rounded-[6px] bg-white px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-black transition hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
+          href="#contact"
+          className="button-link mt-4 rounded-[6px] bg-white px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-black transition hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black sm:mt-0"
         >
           {getLocalizedText(siteConfig.heroCopy.ctaLabel, language)}
         </a>

@@ -113,9 +113,9 @@ export function YouTube({ language }: YouTubeProps) {
               key={filter}
               type="button"
               onClick={() => setActiveFilter(filter)}
-              className={`glass-button flex items-center gap-2 rounded-[6px] px-6 py-1.5 text-[10px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black ${
+              className={`flex items-center gap-2 rounded-[6px] border border-white/10 border-hairline px-6 py-2 text-[10px] font-medium tracking-wider uppercase text-white transition hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black ${
                 activeFilter === filter
-                  ? 'text-white'
+                  ? 'bg-white/5 text-white'
                   : 'text-white/80'
               }`}
             >

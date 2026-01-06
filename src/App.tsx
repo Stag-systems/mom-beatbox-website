@@ -18,7 +18,6 @@ function App() {
     const stored = localStorage.getItem(STORAGE_KEY);
     return stored === 'de' ? 'de' : siteConfig.language.default;
   });
-
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, language);
   }, [language]);
@@ -30,14 +29,19 @@ function App() {
   return (
     <div className="min-h-screen overflow-x-hidden">
       <Header language={language} onToggleLanguage={toggleLanguage} />
-      <Hero language={language} />
-      <About language={language} />
-      <LogoSlider language={language} />
-      <WhatWeDo language={language} />
-      <YouTube language={language} />
-      <Calendar language={language} />
-      <Contact language={language} />
-      <Footer />
+      <div className="fixed inset-0 z-0">
+        <Hero language={language} />
+      </div>
+      <div className="h-screen" aria-hidden="true" />
+      <div className="relative z-10 bg-[#060a12]">
+        <About language={language} />
+        <LogoSlider language={language} />
+        <WhatWeDo language={language} />
+        <YouTube language={language} />
+        <Calendar language={language} />
+        <Contact language={language} />
+        <Footer />
+      </div>
     </div>
   );
 }

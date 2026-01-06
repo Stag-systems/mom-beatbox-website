@@ -297,7 +297,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
         <div className="text-center mt-16">
           <a
             href="#contact"
-            className="inline-block rounded-[6px] bg-white px-12 py-2.5 text-sm font-medium uppercase tracking-wider text-black transition hover:bg-white/90"
+            className="button-link inline-block rounded-[6px] bg-white px-12 py-2.5 text-sm font-medium uppercase tracking-wider text-black transition hover:bg-white/90"
           >
             {getLocalizedText(siteConfig.whatWeDoCopy.ctaLabel, language)}
           </a>
@@ -339,7 +339,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                     </p>
                     <a
                       href={`mailto:${siteConfig.hero.bookingEmail}`}
-                      className="glass-button inline-flex items-center rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
+                      className="button-link glass-button inline-flex items-center rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
                     >
                       {getLocalizedText(siteConfig.whatWeDoCopy.requestLabel, language)}
                     </a>
@@ -360,7 +360,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                     </time>
                     <a
                       href="#events"
-                      className="glass-button inline-flex items-center rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
+                      className="button-link glass-button inline-flex items-center rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
                     >
                       {getLocalizedText(siteConfig.whatWeDoCopy.calendarLabel, language)}
                     </a>
