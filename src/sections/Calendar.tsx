@@ -41,9 +41,9 @@ export function Calendar({ language }: CalendarProps) {
           <button
             type="button"
             onClick={() => setActiveCategory('all')}
-            className={`glass-button flex items-center gap-2 rounded-[6px] px-6 py-1.5 text-[10px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black ${
+            className={`flex items-center gap-2 rounded-[6px] border border-white/10 border-hairline px-6 py-2 text-[10px] font-medium tracking-wider uppercase text-white transition hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black ${
               activeCategory === 'all'
-                ? 'text-white'
+                ? 'bg-white/5 text-white'
                 : 'text-white/80'
             }`}
           >
@@ -54,9 +54,9 @@ export function Calendar({ language }: CalendarProps) {
               key={category.key}
               type="button"
               onClick={() => setActiveCategory(category.key)}
-              className={`glass-button flex items-center gap-2 rounded-[6px] px-6 py-1.5 text-[10px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black ${
+              className={`flex items-center gap-2 rounded-[6px] border border-white/10 border-hairline px-6 py-2 text-[10px] font-medium tracking-wider uppercase text-white transition hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-2 focus:ring-offset-black ${
                 activeCategory === category.key
-                  ? 'text-white'
+                  ? 'bg-white/5 text-white'
                   : 'text-white/80'
               }`}
             >

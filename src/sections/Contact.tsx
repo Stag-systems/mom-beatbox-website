@@ -23,11 +23,26 @@ export function Contact({ language }: ContactProps) {
 
         <form
           id="contact-form"
-          action="mailto:contact@mombeatbox.com"
+          action={`mailto:${siteConfig.hero.bookingEmail}`}
           method="post"
           encType="text/plain"
           className="rounded-[6px] bg-white p-6 text-black shadow-sm md:p-10"
         >
+          <div className="space-y-2">
+            <label className="text-xs uppercase tracking-[0.2em] text-black/70" htmlFor="contact-to">
+              {getLocalizedText(siteConfig.contactCopy.fields.to, language)}
+            </label>
+            <input
+              id="contact-to"
+              name="to"
+              type="email"
+              value={siteConfig.hero.bookingEmail}
+              readOnly
+              aria-readonly="true"
+              className="w-full cursor-not-allowed rounded-[6px] border border-black/20 border-hairline bg-black/5 px-4 py-3 text-sm text-black/70 focus:outline-none"
+            />
+          </div>
+
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <label className="text-xs uppercase tracking-[0.2em] text-black/70" htmlFor="contact-name">

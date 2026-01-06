@@ -2,7 +2,7 @@ export const siteConfig = {
   hero: {
     title: "MOM",
     tagline: "MORE THAN BEATBOX",
-    bookingEmail: "booking@mom-crew.com",
+    bookingEmail: "contact@mombeatbox.com",
     videoUrl: "/hero-video.mp4",
     fallbackImage: "/hero-fallback.jpg"
   },
@@ -27,8 +27,8 @@ export const siteConfig = {
       de: "PLATZHALTER\nBEATBOX CREW"
     },
     text: {
-      en: "MOM is a dynamic beatbox crew consisting of three talented performers: George, Tim, and Elias. We bring energy, creativity, and rhythm to every performance, from intimate workshops to large-scale concerts. Our passion is sharing the art of beatboxing with audiences of all ages.",
-      de: "Platzhaltertext uber MOM, die Crew und die Energie der Shows."
+      en: "We are M.O.M, a beatbox trio from Vienna. Since 2018, we have been performing on international stages – from major festivals to exclusive private events. From the beatbox scene and street performances, to popular stages around the world. We adapt to different settings, turning each show – from festivals to children’s concerts and corporate events – into a genuine highlight. At our concerts, refined beats meet authentic humor, creating a unique atmosphere that appeals across generations. We combine danceable, genre-bending sound with direct audience interaction, resulting in show experiences that leave a lasting impression. With only three microphones, two world championship titles, and one shared goal – to get the place bouncing. M.O.M – more than beatbox",
+      de: "Wir sind M.O.M, ein Beatboxtrio aus Wien. Seit 2018 stehen wir auf internationalen Bühnen – von großen Festivals bis hin zu exklusiven privaten Events. Was in der Beatboxszene und mit Straßenmusik begann, führte uns auf renommierte Stages weltweit. Wir passen uns flexibel an unterschiedliche Settings an und so wird jede Show, egal ob Festival, Kinderkonzert oder Firmenfeier zu einem echtem Highlight. Bei unseren Konzerten treffen ausgefeilte Beats auf ausgefallenen Humor und so kreieren wir eine einzigartige Atmosphäre, die generationsübergreifend begeistert. Wir verbinden tanzbaren Sound verschiedener Genres mit direkter Publikumsinteraktion und schaffen somit Show-Erlebnisse, die nachhaltig in Erinnerung bleiben. Mit nur drei Mikrofonen, zwei Weltmeistertiteln und einem gemeinsamen Ziel - die Bude zum bouncen zu bringen! M.O.M - more than Beatbox"
     },
     imageAlt: {
       en: "MOM Beatbox Crew",
@@ -40,29 +40,35 @@ export const siteConfig = {
       {
         name: "GEORGY",
         blurb: {
-          en: "Placeholder line about Georgy and his style.",
-          de: "Platzhalterzeile uber Georgy und seinen Stil."
+          en: "Georgy, also known as the artist Geo Popoff, provides M.O.M with the golden trumpet and complex grooves.",
+          de: "Georgy oder auch als Künstler Geo Popoff sorgt bei M.O.M für die goldene Trompete und komplexe Grooves."
         },
-        instagram: "https://instagram.com/placeholder"
+        instagram: "https://instagram.com/geo.popoff",
+        website: "https://geopopoff.com",
+        youtube: ""
       },
       {
         name: "TIM",
         blurb: {
-          en: "Placeholder line about Tim and his style.",
-          de: "Platzhalterzeile uber Tim und seinen Stil."
+          en: "Tim, aka Slizzer: He who laughs last, laughs alone!",
+          de: "Tim aka Slizzer : Wer zuletzt lacht, lacht alleine!"
         },
-        instagram: "https://instagram.com/placeholder"
+        instagram: "https://instagram.com/timslizzer",
+        youtube: "https://www.youtube.com/@SLizz3r",
+        website: ""
       },
       {
         name: "ELIAS",
         blurb: {
-          en: "Placeholder line about Elias and his style.",
-          de: "Platzhalterzeile uber Elias und seinen Stil."
+          en: "Elias aka Eon brings bass, beat and quick impulses to M.O.M. Often thinks faster than he can speak.",
+          de: "Elias aka Eon bringt bei M.O.M Bass, Beat und schnelle Impulse ein. Er denkt oft schneller als er sprechen kann."
         },
-        instagram: "https://instagram.com/placeholder"
+        instagram: "https://www.instagram.com/elias.eon/",
+        youtube: "",
+        website: ""
       }
     ],
-    ctaLabel: { en: "Calendar", de: "Kalender" }
+    ctaLabel: { en: "OUR PROGRAM", de: "OUR PROGRAM" }
   },
   logos: [
     { name: "DW Logo", image: "/PARTNER/DW_Logo.jpg" },
@@ -122,14 +128,14 @@ export const siteConfig = {
   ],
   whatWeDoCopy: {
     eyebrow: {
-      en: "What we offer",
-      de: "Was wir machen"
+      en: "OUR PROGRAM",
+      de: "OUR PROGRAM"
     },
     title: {
-      en: "MOMS MENU",
-      de: "MOMS MENU"
+      en: "WHAT WE OFFER",
+      de: "WHAT WE OFFER"
     },
-    ctaLabel: { en: "Book now", de: "Jetzt anfragen" },
+    ctaLabel: { en: "BOOK US", de: "BOOK US" },
     nextEventLabel: { en: "Next event", de: "Nächstes Event" },
     loadingLabel: { en: "Loading events...", de: "Events werden geladen..." },
     noUpcomingLabel: {
@@ -260,6 +266,7 @@ export const siteConfig = {
       de: "Schreib uns gern wegen Buchungen oder Fragen."
     },
     fields: {
+      to: { en: "To", de: "An" },
       name: { en: "Name", de: "Name" },
       email: { en: "Email", de: "Email" },
       subject: { en: "Subject", de: "Betreff" },

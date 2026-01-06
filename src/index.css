@@ -23,11 +23,6 @@
     font-weight: 300;
     overflow-x: hidden;
     background-color: #060a12;
-    background-image:
-      radial-gradient(1600px 1200px at 15% 20%, rgba(35, 70, 140, 0.35), transparent 65%),
-      radial-gradient(1400px 1100px at 85% 15%, rgba(20, 45, 110, 0.4), transparent 70%),
-      radial-gradient(1400px 1100px at 50% 80%, rgba(45, 85, 150, 0.3), transparent 70%),
-      radial-gradient(1000px 900px at 85% 80%, rgba(15, 30, 90, 0.45), transparent 65%);
   }
 
   html {
@@ -117,4 +112,11 @@
     }
   }
 
+  @media (max-width: 639px) {
+    button,
+    .button-link {
+      transform: scale(0.9);
+      transform-origin: center;
+    }
+  }
 }
