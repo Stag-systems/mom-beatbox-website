@@ -108,9 +108,9 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
             ))}
           </h2>
           <p className="mt-4 text-sm text-gray-300">
-            Performances, workshops, and custom collaborations.
-            <br />
-            Flexible in format, open in mindset, and experienced in working across disciplines.
+            {language === 'de'
+              ? 'Flexibel im Format, offen in der Haltung und erfahren in der Zusammenarbeit uber Disziplinen hinweg.'
+              : 'Flexible in format, open in mindset, and experienced in working across disciplines.'}
           </p>
         </div>
 

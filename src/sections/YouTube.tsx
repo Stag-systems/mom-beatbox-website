@@ -103,7 +103,7 @@ export function YouTube({ language }: YouTubeProps) {
             {getLocalizedText(siteConfig.youtube.title, language)}
           </h2>
           <p className="mt-4 text-sm text-gray-300">
-            Built on human voice. Best experienced live
+            Built on human voice. Best experienced live!
           </p>
         </div>
 

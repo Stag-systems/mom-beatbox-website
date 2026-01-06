@@ -14,17 +14,17 @@ export const siteConfig = {
     }
   },
   navigation: {
-    about: { en: "About", de: "Uber uns" },
+    about: { en: "About", de: "ÜBER UNS" },
     service: { en: "Service", de: "Service" },
     music: { en: "Music", de: "Musik" },
     events: { en: "Events", de: "Events" },
     downloads: { en: "Downloads", de: "Downloads" }
   },
   about: {
-    eyebrow: { en: "About us", de: "Uber uns" },
+    eyebrow: { en: "About us", de: "ÜBER UNS" },
     title: {
       en: "WORLD CHAMPION\nBEATBOX CREW",
-      de: "PLATZHALTER\nBEATBOX CREW"
+      de: "WORLD CHAMPION\nBEATBOX CREW"
     },
     text: {
       en: "We are M.O.M, a beatbox trio from Vienna. Since 2018, we have been performing on international stages – from major festivals to exclusive private events. From the beatbox scene and street performances, to popular stages around the world. We adapt to different settings, turning each show – from festivals to children’s concerts and corporate events – into a genuine highlight. At our concerts, refined beats meet authentic humor, creating a unique atmosphere that appeals across generations. We combine danceable, genre-bending sound with direct audience interaction, resulting in show experiences that leave a lasting impression. With only three microphones, two world championship titles, and one shared goal – to get the place bouncing. M.O.M – more than beatbox",
@@ -68,7 +68,7 @@ export const siteConfig = {
         website: ""
       }
     ],
-    ctaLabel: { en: "OUR PROGRAM", de: "OUR PROGRAM" }
+    ctaLabel: { en: "OUR PROGRAM", de: "UNSER PROGRAMM" }
   },
   logos: [
     { name: "DW Logo", image: "/PARTNER/DW_Logo.jpg" },
@@ -129,13 +129,13 @@ export const siteConfig = {
   whatWeDoCopy: {
     eyebrow: {
       en: "OUR PROGRAM",
-      de: "OUR PROGRAM"
+      de: "UNSER PROGRAMM"
     },
     title: {
       en: "WHAT WE OFFER",
       de: "WHAT WE OFFER"
     },
-    ctaLabel: { en: "BOOK US", de: "BOOK US" },
+    ctaLabel: { en: "BOOK US", de: "Jetzt anfragen" },
     nextEventLabel: { en: "Next event", de: "Nächstes Event" },
     loadingLabel: { en: "Loading events...", de: "Events werden geladen..." },
     noUpcomingLabel: {
@@ -151,29 +151,32 @@ export const siteConfig = {
   },
   achievements: [
     {
-      year: "2016",
-      city: "Brussels",
-      title: { en: "European Beatbox Champions", de: "European Beatbox Champions" }
-    },
-    {
-      year: "2021",
-      city: "Warsaw",
-      title: { en: "GBB Crew World Champions", de: "GBB Crew World Champions" }
+      year: "2023",
+      city: "Tokyo",
+      title: { en: "GBB\nFinalists", de: "GBB\nFinalists" },
+      videoId: "G2b86_ETglw"
     },
     {
       year: "2023",
       city: "Berlin",
-      title: { en: "Beatbox World Champions", de: "Beatbox World Champions" }
+      title: { en: "Beatbox World Champions", de: "Beatbox World Champions" },
+      videoId: "al6ERfrWLaM"
     },
     {
-      year: "2023",
-      city: "Tokyo",
-      title: { en: "GBB Finalists", de: "GBB Finalists" }
+      year: "2021",
+      city: "Warsaw",
+      title: { en: "GBB Crew World Champions", de: "GBB Crew World Champions" },
+      videoId: "zIsQGDuCmQ0"
+    },
+    {
+      year: "2016",
+      city: "Brussels",
+      title: { en: "European Beatbox Champions", de: "European Beatbox Champions" }
     }
   ],
   youtube: {
     eyebrow: { en: "Music and videos", de: "Musik und videos" },
-    title: { en: "Sound archive", de: "Sound archive" },
+    title: { en: "Sound archive", de: "SOUND ARCHIV" },
     videos: [
       {
         id: "3Z9opE8zByU",
