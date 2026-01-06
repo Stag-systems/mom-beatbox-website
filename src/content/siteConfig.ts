@@ -272,8 +272,8 @@ export const siteConfig = {
     ctaLabel: { en: "GET IN TOUCH", de: "JETZT ANFRAGEN" }
   },
   social: {
-    instagram: "https://instagram.com/mom_crew",
-    youtube: "https://youtube.com/@mom_crew",
+    instagram: "https://www.instagram.com/mom.beatbox/?hl=de",
+    youtube: "https://www.youtube.com/@M.O.M_beatbox",
     facebook: "https://facebook.com/mom_crew"
   }
 } as const;
