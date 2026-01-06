@@ -22,8 +22,17 @@ export function Hero({ language }: HeroProps) {
 
     tryPlay();
     video.addEventListener('canplay', tryPlay);
+    const handleFirstInteraction = () => {
+      tryPlay();
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('click', handleFirstInteraction);
+    };
+    window.addEventListener('touchstart', handleFirstInteraction, { passive: true });
+    window.addEventListener('click', handleFirstInteraction);
     return () => {
       video.removeEventListener('canplay', tryPlay);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('click', handleFirstInteraction);
     };
   }, []);
 
@@ -37,6 +46,7 @@ export function Hero({ language }: HeroProps) {
           loop
           muted
           playsInline
+          webkit-playsinline="true"
           preload="auto"
           className="h-full w-full object-cover"
           poster={siteConfig.hero.fallbackImage}
