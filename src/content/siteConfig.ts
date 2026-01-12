@@ -15,7 +15,7 @@ export const siteConfig = {
   },
   navigation: {
     about: { en: "About", de: "ÜBER UNS" },
-    service: { en: "Service", de: "Service" },
+    service: { en: "Programs", de: "Programme" },
     music: { en: "Music", de: "Musik" },
     events: { en: "Events", de: "Events" },
     downloads: { en: "Downloads", de: "Downloads" }
@@ -91,26 +91,6 @@ export const siteConfig = {
   },
   whatWeDo: [
     {
-      key: "kids",
-      title: { en: "Kids show", de: "Kidsshow" },
-      description: {
-        en: "Interactive and engaging beatbox performances designed for young audiences.",
-        de: "Platzhalter fur interaktive Shows fur junge Zielgruppen."
-      },
-      icon: "🎪",
-      image: "/4-KATEGORIEN/Kidsshow.jpg"
-    },
-    {
-      key: "workshops",
-      title: { en: "Workshops", de: "Workshops" },
-      description: {
-        en: "Hands-on beatbox workshops with rhythm patterns and performance techniques.",
-        de: "Platzhalter fur Workshops und Grundlagen des Beatboxen."
-      },
-      icon: "🎓",
-      image: "/4-KATEGORIEN/Workshop.jpg"
-    },
-    {
       key: "concerts",
       title: { en: "Concerts", de: "Konzerte" },
       description: {
@@ -121,14 +101,34 @@ export const siteConfig = {
       image: "/4-KATEGORIEN/Konzert.png"
     },
     {
+      key: "kids",
+      title: { en: "Kids show", de: "Kinderkonzert" },
+      description: {
+        en: "Interactive and engaging beatbox performances designed for young audiences.",
+        de: "Platzhalter fur interaktive Shows fur junge Zielgruppen."
+      },
+      icon: "🎪",
+      image: "/4-KATEGORIEN/Kidsshow.jpg"
+    },
+    {
       key: "corporate",
-      title: { en: "Corporate party", de: "Firmenfeier" },
+      title: { en: "Corporate event", de: "Firmenfeier" },
       description: {
         en: "Placeholder for corporate celebrations note and format.",
         de: "Platzhalter fur Firmenfeiern und Corporate Events."
       },
       icon: "🥂",
       image: "/4-KATEGORIEN/Firmenfeier.png"
+    },
+    {
+      key: "workshops",
+      title: { en: "Workshops", de: "Workshops" },
+      description: {
+        en: "Hands-on beatbox workshops with rhythm patterns and performance techniques.",
+        de: "Platzhalter fur Workshops und Grundlagen des Beatboxen."
+      },
+      icon: "🎓",
+      image: "/4-KATEGORIEN/Workshop.jpg"
     }
   ],
   whatWeDoCopy: {
@@ -172,6 +172,15 @@ export const siteConfig = {
       city: "Warsaw",
       title: { en: "GBB Crew World Champions", de: "GBB Crew World Champions" },
       videoId: "zIsQGDuCmQ0"
+    },
+    {
+      year: "2018",
+      city: "Austria",
+      title: {
+        en: "Austrian Beatbox Champions",
+        de: "Austrian Beatbox Champions"
+      },
+      videoId: ""
     },
     {
       year: "2016",
@@ -279,6 +288,8 @@ export const siteConfig = {
   social: {
     instagram: "https://www.instagram.com/mom.beatbox/?hl=de",
     youtube: "https://www.youtube.com/@M.O.M_beatbox",
+    spotify:
+      "https://open.spotify.com/artist/4yesxrFzLKBMyKcQLc3ZKD?si=fypbVKgKRa-SD6VEOjkYqg",
     facebook: "https://facebook.com/mom_crew"
   }
 } as const;

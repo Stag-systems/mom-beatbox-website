@@ -120,6 +120,22 @@ export function Header({ language, onToggleLanguage }: HeaderProps) {
                 </svg>
               </a>
               <a
+                href={siteConfig.social.spotify}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-white transition"
+                aria-label="Spotify"
+              >
+                <svg
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M12 0C5.371 0 0 5.371 0 12s5.371 12 12 12 12-5.371 12-12S18.629 0 12 0zm5.438 17.273a.748.748 0 0 1-1.03.248c-2.824-1.726-6.382-2.117-10.575-1.163a.75.75 0 0 1-.333-1.463c4.553-1.037 8.436-.59 11.563 1.324a.75.75 0 0 1 .375 1.054zm1.473-3.285a.937.937 0 0 1-1.289.31c-3.233-1.986-8.163-2.561-11.986-1.401a.937.937 0 0 1-.543-1.793c4.373-1.327 9.803-.684 13.498 1.566a.937.937 0 0 1 .32 1.318zm.126-3.422c-3.876-2.304-10.297-2.514-13.979-1.397a1.125 1.125 0 0 1-.653-2.153c4.213-1.279 11.219-1.032 15.659 1.616a1.125 1.125 0 0 1-1.151 1.934z" />
+                </svg>
+              </a>
+              <a
                 href={siteConfig.social.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -297,6 +313,22 @@ export function Header({ language, onToggleLanguage }: HeaderProps) {
                   aria-hidden="true"
                 >
                   <path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm10 2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm-5 3.2A3.8 3.8 0 1 1 8.2 12 3.8 3.8 0 0 1 12 8.2Zm0 2A1.8 1.8 0 1 0 13.8 12 1.8 1.8 0 0 0 12 10.2Zm4.7-2.9a1 1 0 1 1-1 1 1 1 0 0 1 1-1Z" />
+                </svg>
+              </a>
+              <a
+                href={siteConfig.social.spotify}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-white transition"
+                aria-label="Spotify"
+              >
+                <svg
+                  className="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M12 0C5.371 0 0 5.371 0 12s5.371 12 12 12 12-5.371 12-12S18.629 0 12 0zm5.438 17.273a.748.748 0 0 1-1.03.248c-2.824-1.726-6.382-2.117-10.575-1.163a.75.75 0 0 1-.333-1.463c4.553-1.037 8.436-.59 11.563 1.324a.75.75 0 0 1 .375 1.054zm1.473-3.285a.937.937 0 0 1-1.289.31c-3.233-1.986-8.163-2.561-11.986-1.401a.937.937 0 0 1-.543-1.793c4.373-1.327 9.803-.684 13.498 1.566a.937.937 0 0 1 .32 1.318zm.126-3.422c-3.876-2.304-10.297-2.514-13.979-1.397a1.125 1.125 0 0 1-.653-2.153c4.213-1.279 11.219-1.032 15.659 1.616a1.125 1.125 0 0 1-1.151 1.934z" />
                 </svg>
               </a>
               <a

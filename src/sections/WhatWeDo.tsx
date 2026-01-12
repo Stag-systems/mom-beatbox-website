@@ -13,7 +13,6 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
   const titleLines = title.split('\n');
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const desktopCarouselRef = useRef<HTMLDivElement | null>(null);
-  const isAdjusting = useRef(false);
   const { events, loading } = useCalendar();
   const [activeCategoryKey, setActiveCategoryKey] = useState<string | null>(null);
   const displayItems: Array<{
@@ -29,41 +28,21 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
       phantom: true
     }
   ];
-  const tripledItems = [
-    ...displayItems,
-    ...displayItems,
-    ...displayItems
-  ];
-
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
-    const setWidth = carousel.scrollWidth / 3;
-    carousel.scrollLeft = setWidth;
-  }, []);
+    carousel.scrollLeft = 0;
+  }, [displayItems.length]);
 
-  const handleScroll = () => {
+  const getMobileScrollStep = () => {
     const carousel = carouselRef.current;
-    if (!carousel || isAdjusting.current) return;
-
-    const setWidth = carousel.scrollWidth / 3;
-    const left = carousel.scrollLeft;
-    const min = setWidth * 0.25;
-    const max = setWidth * 1.75;
-
-    if (left < min) {
-      isAdjusting.current = true;
-      carousel.scrollLeft = left + setWidth;
-      requestAnimationFrame(() => {
-        isAdjusting.current = false;
-      });
-    } else if (left > max) {
-      isAdjusting.current = true;
-      carousel.scrollLeft = left - setWidth;
-      requestAnimationFrame(() => {
-        isAdjusting.current = false;
-      });
+    if (!carousel) return 0;
+    const items = carousel.querySelectorAll<HTMLElement>('[data-carousel-item]');
+    if (items.length < 2) {
+      const first = items[0];
+      return first ? first.offsetWidth + 24 : carousel.clientWidth;
     }
+    return items[1].offsetLeft - items[0].offsetLeft;
   };
 
   const nextEvent = useMemo<CalendarEvent | null>(() => {
@@ -109,7 +88,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
           </h2>
           <p className="mt-4 text-sm text-gray-300">
             {language === 'de'
-              ? 'Flexibel im Format, offen in der Haltung und erfahren in der Zusammenarbeit uber Disziplinen hinweg.'
+              ? 'Flexibel im Format, offen in der Haltung und erfahren in der Zusammenarbeit.'
               : 'Flexible in format, open in mindset, and experienced in working across disciplines.'}
           </p>
         </div>
@@ -119,7 +98,10 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
             <button
               type="button"
               onClick={() =>
-                carouselRef.current?.scrollBy({ left: -280, behavior: 'smooth' })
+                carouselRef.current?.scrollBy({
+                  left: -getMobileScrollStep(),
+                  behavior: 'smooth'
+                })
               }
               className="absolute left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-white/80"
               aria-label="Scroll left"
@@ -138,7 +120,10 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
             <button
               type="button"
               onClick={() =>
-                carouselRef.current?.scrollBy({ left: 280, behavior: 'smooth' })
+                carouselRef.current?.scrollBy({
+                  left: getMobileScrollStep(),
+                  behavior: 'smooth'
+                })
               }
               className="absolute right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-white/80"
               aria-label="Scroll right"
@@ -156,12 +141,12 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
             </button>
             <div
               ref={carouselRef}
-              onScroll={handleScroll}
               className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 px-6"
             >
-            {tripledItems.map((item, index) => (
+            {displayItems.map((item, index) => (
               <div
                 key={`${item.key}-${index}`}
+                data-carousel-item
                 className={`group relative flex min-w-[80%] flex-col overflow-hidden rounded-[6px] snap-center ${
                   item.phantom ? 'border border-dashed border-white/30 bg-white/5' : 'glass-card'
                 }`}
