@@ -41,7 +41,7 @@ export function Footer() {
           <p>
             MORE THAN BEATBOX
             <br />
-            Copyright © 2025 MOM. All rights reserved.
+            Copyright © 2026 MOM. All rights reserved.
           </p>
           <div className="flex items-center justify-center gap-4">
             <a

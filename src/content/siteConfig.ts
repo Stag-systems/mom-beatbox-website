@@ -175,7 +175,7 @@ export const siteConfig = {
     },
     {
       year: "2018",
-      city: "Austria",
+      city: "Vienna",
       title: {
         en: "Austrian Beatbox Champions",
         de: "Austrian Beatbox Champions"
