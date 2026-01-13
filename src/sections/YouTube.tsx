@@ -63,12 +63,14 @@ export function YouTube({ language }: YouTubeProps) {
   const desktopCarouselRef = useRef<HTMLDivElement | null>(null);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState<'all' | 'musicvideos' | 'battle' | 'concert'>('all');
+  type VideoCategory = 'musicvideos' | 'battle' | 'concert';
   const filteredVideos =
     activeFilter === 'all'
       ? siteConfig.youtube.videos
       : siteConfig.youtube.videos.filter((video) => {
           const categories = 'categories' in video ? video.categories : undefined;
-          return (categories ?? [video.category]).includes(activeFilter);
+          const categoryList = (categories ?? [video.category]) as VideoCategory[];
+          return categoryList.includes(activeFilter as VideoCategory);
         });
   
   useEffect(() => {
