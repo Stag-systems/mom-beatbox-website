@@ -34,7 +34,7 @@ export const siteConfig = {
       en: "MOM Beatbox Crew",
       de: "MOM Beatbox Crew"
     },
-    imagePlaceholder: "/about.gif",
+    imagePlaceholder: "/MOM-GIF-FRIENDS.gif",
     membersLabel: { en: "Crew members", de: "Crew mitglieder" },
     members: [
       {

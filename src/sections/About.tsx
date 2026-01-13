@@ -43,11 +43,11 @@ export function About({ language }: AboutProps) {
         </div>
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-16 items-center">
           {/* Image */}
-          <div className="relative order-2 -mx-10 mt-0 aspect-square overflow-visible sm:-mx-8 sm:-mt-2 lg:order-1 lg:mx-0 lg:mt-0 lg:aspect-auto lg:h-[560px]">
+          <div className="relative order-2 -mx-10 mt-0 aspect-square overflow-visible pt-6 sm:pt-0 sm:-mx-8 sm:-mt-2 lg:order-1 lg:mx-0 lg:mt-0 lg:aspect-auto lg:h-[560px]">
             <img
               src={siteConfig.about.imagePlaceholder}
               alt={getLocalizedText(siteConfig.about.imageAlt, language)}
-              className="h-full w-full object-cover grayscale contrast-125"
+              className="h-full w-full object-contain grayscale contrast-125"
               loading="lazy"
             />
           </div>
