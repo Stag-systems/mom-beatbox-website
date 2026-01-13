@@ -82,6 +82,12 @@ function unescapeICSText(value: string): string {
     .replace(/\\\\/g, '\\');
 }
 
+function extractLinkFromDescription(description?: string): string | undefined {
+  if (!description) return undefined;
+  const match = description.match(/#link:\s*(\S+)/i);
+  return match?.[1];
+}
+
 function resolveCategoryKey(event: CalendarEvent): string {
   const description = (event.description ?? '').toLowerCase();
   const directTag = description.match(/(?:^|\s)(?:type:|category:|#)(kids|workshops|concerts|corporate)\b/);
@@ -107,7 +113,8 @@ function getCachedEvents(): CachedCalendarData | null {
       ...event,
       start: new Date(event.start),
       end: new Date(event.end),
-      categoryKey: event.categoryKey ?? resolveCategoryKey(event as CalendarEvent)
+      categoryKey: event.categoryKey ?? resolveCategoryKey(event as CalendarEvent),
+      infoLink: event.infoLink ?? extractLinkFromDescription(event.description)
     }));
     
     return data;
@@ -191,7 +198,8 @@ export function useCalendar() {
       const parsedEvents = parseICS(icsText);
       const categorizedEvents = parsedEvents.map((event) => ({
         ...event,
-        categoryKey: resolveCategoryKey(event)
+        categoryKey: resolveCategoryKey(event),
+        infoLink: extractLinkFromDescription(event.description)
       }));
       
       setEvents(categorizedEvents);

@@ -6,7 +6,6 @@ import { getLocalizedText, Language } from '../lib/i18n';
 function formatDate(date: Date, language: Language): string {
   const locale = language === 'de' ? 'de-DE' : 'en-US';
   return new Intl.DateTimeFormat(locale, {
-    weekday: 'short',
     year: 'numeric',
     month: 'short',
     day: 'numeric'
@@ -18,7 +17,7 @@ interface CalendarProps {
 }
 
 export function Calendar({ language }: CalendarProps) {
-  const { events, loading, error } = useCalendar();
+  const { events, loading, error, lastUpdated, refresh } = useCalendar();
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const categories = siteConfig.eventCategories;
 
@@ -31,10 +30,32 @@ export function Calendar({ language }: CalendarProps) {
   return (
     <section id="events" className="pt-12 pb-24 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-10 text-center">
+        <div className="mb-8 text-center">
           <h2 className="mb-4 text-[2.16rem] leading-[1.1] font-black tracking-[0.02em] text-white uppercase sm:text-6xl md:text-7xl">
             {getLocalizedText(siteConfig.eventsCopy.title, language)}
           </h2>
+          <div className="flex flex-wrap items-center justify-center gap-3 text-[10px] uppercase tracking-wide text-white/70">
+            <button
+              type="button"
+              onClick={refresh}
+              disabled={loading}
+              aria-label={getLocalizedText(siteConfig.eventsCopy.refreshLabel, language)}
+              className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-black transition hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              <img
+                src="/refresh-arrow.svg"
+                alt=""
+                aria-hidden="true"
+                className="h-3 w-3"
+              />
+            </button>
+            {lastUpdated && (
+              <span className="text-white/60">
+                {getLocalizedText(siteConfig.eventsCopy.updatedLabel, language)}{' '}
+                {lastUpdated.toLocaleDateString(language === 'de' ? 'de-DE' : 'en-US')}
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="mb-12 flex flex-wrap items-center justify-center gap-3 text-[10px] uppercase tracking-wide text-white/70">
@@ -103,6 +124,16 @@ export function Calendar({ language }: CalendarProps) {
                       <p className="text-xs uppercase tracking-wide text-white/60">
                         {event.location}
                       </p>
+                    )}
+                    {event.infoLink && (
+                      <a
+                        href={event.infoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex text-xs uppercase tracking-wide text-white/70 underline underline-offset-4 transition hover:text-white"
+                      >
+                        Info
+                      </a>
                     )}
                   </div>
                 </div>

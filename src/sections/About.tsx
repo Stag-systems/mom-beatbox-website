@@ -47,7 +47,7 @@ export function About({ language }: AboutProps) {
             <img
               src={siteConfig.about.imagePlaceholder}
               alt={getLocalizedText(siteConfig.about.imageAlt, language)}
-              className="h-full w-full object-cover grayscale"
+              className="h-full w-full object-cover grayscale contrast-125"
               loading="lazy"
             />
           </div>
@@ -60,7 +60,7 @@ export function About({ language }: AboutProps) {
             
             {/* Crew Members */}
             <div className="space-y-4 text-center lg:text-left">
-              <h3 className="text-xs font-medium tracking-[0.3em] uppercase text-white mb-6">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white mb-6">
                 {getLocalizedText(siteConfig.about.membersLabel, language)}
               </h3>
               <div className="divide-y divide-white/60">
@@ -114,7 +114,7 @@ export function About({ language }: AboutProps) {
               </div>
               <div className="mt-6">
                 <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white">
-                  Competitive achievements
+                  {language === 'de' ? 'AUSZEICHNUNGEN' : 'Competitive achievements'}
                 </h3>
                 <div className="mt-4 flex w-full max-w-full gap-3 overflow-x-auto pb-2 pr-4 no-scrollbar md:grid md:grid-cols-2 md:overflow-visible md:pr-0">
                   {siteConfig.achievements.map((achievement) => {
@@ -123,10 +123,18 @@ export function About({ language }: AboutProps) {
                         <p className="text-xs font-semibold uppercase tracking-wide text-white">
                           {getLocalizedText(achievement.title, language)
                             .split('\n')
-                            .map((line, index) => (
-                              <span key={`${achievement.city}-${achievement.year}-${index}`}>
+                            .map((line, index, array) => (
+                              <span
+                                key={`${achievement.city}-${achievement.year}-${index}`}
+                                className="block md:inline"
+                              >
                                 {line}
-                                {index === 0 && <br />}
+                                {index < array.length - 1 && (
+                                  <>
+                                    <span className="hidden md:inline"> </span>
+                                    <br className="md:hidden" />
+                                  </>
+                                )}
                               </span>
                             ))}
                         </p>
@@ -139,7 +147,11 @@ export function About({ language }: AboutProps) {
                     return (
                       <div
                         key={`${achievement.city}-${achievement.year}`}
-                        className="relative min-w-[220px] rounded-[6px] border border-white/10 border-hairline bg-white/5 p-3 text-center sm:text-left md:min-w-0"
+                        className={`relative min-w-[220px] rounded-[6px] border border-white/10 border-hairline p-3 text-center sm:text-left md:min-w-0 ${
+                          achievement.phantom
+                            ? 'border-dashed border-white/30 bg-white/5'
+                            : 'bg-white/5 transition-shadow duration-200 hover:shadow-[0_0_18px_rgba(255,255,255,0.18)]'
+                        }`}
                       >
                         {achievement.videoId && (
                           <button

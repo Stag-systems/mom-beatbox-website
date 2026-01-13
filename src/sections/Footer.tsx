@@ -1,10 +1,15 @@
 import { siteConfig } from '../content/siteConfig';
+import { getLocalizedText, Language } from '../lib/i18n';
 
-export function Footer() {
+interface FooterProps {
+  language: Language;
+}
+
+export function Footer({ language }: FooterProps) {
   return (
     <footer
       id="footer"
-      className="border-t border-white/10 border-hairline py-20 px-4 sm:px-6 lg:px-8"
+      className="py-20 px-4 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-2 md:items-center">
@@ -16,15 +21,23 @@ export function Footer() {
 
           <div id="downloads" className="text-center md:text-right">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-white/60">
-              Downloads
+              {getLocalizedText(siteConfig.footerCopy.downloads, language)}
             </p>
             <div className="mt-4 space-y-2">
               <a
-                href="https://drive.google.com/uc?export=download&id=1r9ixM3Y2ZjzYd09MSAVrqLFcYUWFf3oc"
+                href="https://drive.google.com/file/d/1K4iipNZEzgpJSeUfuoHYJmqYKxuWF1lX/view?usp=sharing"
                 download
                 className="block text-sm uppercase tracking-wide text-white/70 underline underline-offset-4 transition hover:text-white"
               >
-                Technical rider
+                {getLocalizedText(siteConfig.footerCopy.technicalRider, language)}
+              </a>
+              <a
+                href="https://drive.google.com/drive/folders/1T1xpEb6lD1m06eT9Tzio19_uSTuU3Mm2?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-sm uppercase tracking-wide text-white/70 underline underline-offset-4 transition hover:text-white"
+              >
+                {getLocalizedText(siteConfig.footerCopy.pressPhotos, language)}
               </a>
               <a
                 href="/imprint.html"
@@ -32,7 +45,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="block text-sm uppercase tracking-wide text-white/70 underline underline-offset-4 transition hover:text-white"
               >
-                Imprint
+                {getLocalizedText(siteConfig.footerCopy.imprint, language)}
               </a>
             </div>
           </div>

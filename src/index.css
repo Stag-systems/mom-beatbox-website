@@ -119,4 +119,21 @@
       transform-origin: center;
     }
   }
+
+  @keyframes pulse-bass {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.04);
+    }
+  }
+
+  @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    button:not(.no-bass):hover,
+    .button-link:hover {
+      animation: pulse-bass 900ms ease-in-out infinite;
+    }
+  }
 }

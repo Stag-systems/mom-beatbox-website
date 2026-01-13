@@ -4,19 +4,21 @@ import { getLocalizedText, Language } from '../lib/i18n';
 
 interface VideoPlayerProps {
   videoId: string;
+  thumbnailUrl?: string;
   language: Language;
   onOpen: (videoId: string) => void;
 }
 
-function VideoPlayer({ videoId, language, onOpen }: VideoPlayerProps) {
+function VideoPlayer({ videoId, thumbnailUrl, language, onOpen }: VideoPlayerProps) {
   const thumbnailOptions = [
+    ...(thumbnailUrl ? [thumbnailUrl] : []),
     `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
     `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
     `https://img.youtube.com/vi/${videoId}/sddefault.jpg`,
     `https://img.youtube.com/vi/${videoId}/default.jpg`
   ];
   const [thumbIndex, setThumbIndex] = useState(0);
-  const thumbnailUrl = thumbnailOptions[thumbIndex] ?? thumbnailOptions[0];
+  const activeThumbnailUrl = thumbnailOptions[thumbIndex] ?? thumbnailOptions[0];
 
   return (
     <button
@@ -25,7 +27,7 @@ function VideoPlayer({ videoId, language, onOpen }: VideoPlayerProps) {
     >
       {/* Thumbnail */}
       <img
-        src={thumbnailUrl}
+        src={activeThumbnailUrl}
         alt={getLocalizedText(siteConfig.accessibility.videoThumbnail, language)}
         className="h-full w-full object-cover transition-transform group-hover:scale-105"
         loading="lazy"
@@ -64,7 +66,9 @@ export function YouTube({ language }: YouTubeProps) {
   const filteredVideos =
     activeFilter === 'all'
       ? siteConfig.youtube.videos
-      : siteConfig.youtube.videos.filter((video) => video.category === activeFilter);
+      : siteConfig.youtube.videos.filter((video) =>
+          (video.categories ?? [video.category]).includes(activeFilter)
+        );
   
   useEffect(() => {
     if (!activeVideoId) return;
@@ -103,7 +107,9 @@ export function YouTube({ language }: YouTubeProps) {
             {getLocalizedText(siteConfig.youtube.title, language)}
           </h2>
           <p className="mt-4 text-sm text-gray-300">
-            Built on human voice. Best experienced live!
+            {language === 'de'
+              ? 'Als Vorgeschmack geeignet. Für optimale Wirkung wird der Live-Genuss von MOM empfohlen.'
+              : 'Enjoy as a preview. For optimal effect, experiencing MOM live is recommended.'}
           </p>
         </div>
 
@@ -117,9 +123,15 @@ export function YouTube({ language }: YouTubeProps) {
                 activeFilter === filter
                   ? 'bg-white/5 text-white'
                   : 'text-white/80'
-              }`}
-            >
-              {filter === 'all' ? 'ALL' : filter.toUpperCase()}
+            }`}
+          >
+              {filter === 'all'
+                ? 'ALL'
+                : filter === 'battle'
+                  ? 'COMPETITION'
+                  : filter === 'musicvideos'
+                    ? 'MUSIC VIDEOS'
+                    : filter.toUpperCase()}
             </button>
           ))}
         </div>
@@ -127,7 +139,7 @@ export function YouTube({ language }: YouTubeProps) {
         <div className="mt-14 md:hidden">
             <div
               ref={carouselRef}
-              className="flex gap-6 overflow-x-auto overflow-y-visible pb-6 pt-2 px-0"
+              className="flex gap-6 overflow-x-auto overflow-y-visible pb-6 pt-8 px-0"
             >
             {filteredVideos.map((video, index) => (
               <div
@@ -139,6 +151,7 @@ export function YouTube({ language }: YouTubeProps) {
             >
               <VideoPlayer
                 videoId={video.id}
+                thumbnailUrl={video.thumbnailUrl}
                 language={language}
                 onOpen={setActiveVideoId}
               />
@@ -195,10 +208,11 @@ export function YouTube({ language }: YouTubeProps) {
                   <div
                     key={`${video.id}-${index}`}
                     data-carousel-item
-                    className="glass-card w-[calc((100%-3rem)/3)] flex-shrink-0 rounded-[6px] p-4"
+                    className="glass-card w-[calc((100%-3rem)/3)] flex-shrink-0 rounded-[6px] p-4 transition-shadow md:hover:shadow-[0_0_18px_rgba(255,255,255,0.18)]"
                   >
                     <VideoPlayer
                       videoId={video.id}
+                      thumbnailUrl={video.thumbnailUrl}
                       language={language}
                       onOpen={setActiveVideoId}
                     />
@@ -213,9 +227,13 @@ export function YouTube({ language }: YouTubeProps) {
         ) : (
           <div className="mt-14 hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-3">
             {filteredVideos.map((video, index) => (
-              <div key={`${video.id}-${index}`} className="glass-card rounded-[6px] p-4">
+              <div
+                key={`${video.id}-${index}`}
+                className="glass-card rounded-[6px] p-4 transition-shadow md:hover:shadow-[0_0_18px_rgba(255,255,255,0.18)]"
+              >
                 <VideoPlayer
                   videoId={video.id}
+                  thumbnailUrl={video.thumbnailUrl}
                   language={language}
                   onOpen={setActiveVideoId}
                 />

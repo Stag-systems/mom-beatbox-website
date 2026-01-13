@@ -66,7 +66,7 @@ export function Hero({ language }: HeroProps) {
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
         <h1 className="sr-only">{siteConfig.hero.title}</h1>
         <img
-          src="/MOM-LOGOMASTER-v3.svg"
+          src="/LOGOTYPE-MOM-WHITE.svg"
           alt=""
           aria-hidden="true"
           className="mb-4 w-[min(85vw,540px)] sm:w-[min(48vw,600px)] md:w-[min(45vw,660px)]"

@@ -3,11 +3,11 @@ export const siteConfig = {
     title: "MOM",
     tagline: "MORE THAN BEATBOX",
     bookingEmail: "contact@mombeatbox.com",
-    videoUrl: "/HERO-VIDEO-NEW.mp4",
+    videoUrl: "/HEROVIDEO-MOM-TEASER.mp4",
     fallbackImage: "/hero-fallback.jpg"
   },
   language: {
-    default: "en",
+    default: "de",
     toggleLabel: {
       en: "Switch to German",
       de: "Wechsel zu Englisch"
@@ -75,6 +75,7 @@ export const siteConfig = {
     { name: "Audio", image: "/PARTNER/Slider2/Audio.png" },
     { name: "Dschungel", image: "/PARTNER/Slider2/Dschungel.png" },
     { name: "GBB", image: "/PARTNER/Slider2/GBB.png" },
+    { name: "SBX", image: "/PARTNER/Slider2/SBX.png" },
     { name: "Gorilla", image: "/PARTNER/Slider2/Gorilla.png" },
     { name: "Pflasterspektakel", image: "/PARTNER/Slider2/Pflasterspektakel.png" },
     { name: "TAS", image: "/PARTNER/Slider2/TAS.png" },
@@ -101,7 +102,7 @@ export const siteConfig = {
     },
     {
       key: "kids",
-      title: { en: "Kids show", de: "Kinderkonzert" },
+      title: { en: "Kids show", de: "Kinder- und Schulkonzert" },
       description: {
         en: "Interactive and engaging beatbox performances designed for young audiences.",
         de: "Platzhalter fur interaktive Shows fur junge Zielgruppen."
@@ -134,6 +135,10 @@ export const siteConfig = {
     eyebrow: {
       en: "OUR PROGRAM",
       de: "UNSER PROGRAMM"
+    },
+    schoolsBadge: {
+      en: "FOR SCHOOLS (VIENNA)",
+      de: "FÜR SCHULEN (WIEN)"
     },
     title: {
       en: "WHAT WE OFFER",
@@ -186,6 +191,13 @@ export const siteConfig = {
       city: "Brussels",
       title: { en: "European Beatbox Champions", de: "European Beatbox Champions" },
       videoId: ""
+    },
+    {
+      year: "SOON",
+      city: "",
+      title: { en: "TO BE CONTINUED", de: "TO BE CONTINUED" },
+      videoId: "",
+      phantom: true
     }
   ],
   youtube: {
@@ -199,7 +211,18 @@ export const siteConfig = {
       },
       {
         id: "4dZ6_iwkxK0",
-        title: { en: "MOM - Right Now", de: "MOM - Right Now" },
+        title: { en: "M.O.M - Right Now", de: "M.O.M - Right Now" },
+        category: "musicvideos"
+      },
+      {
+        id: "d_K0Cv9xo60",
+        title: { en: "M.O.M - All at once", de: "M.O.M - All at once" },
+        thumbnailUrl: "/thumbnails/all-at-once.png",
+        category: "musicvideos"
+      },
+      {
+        id: "gaDcYhYSIVQ",
+        title: { en: "M.O.M - MOVEMENT", de: "M.O.M - MOVEMENT" },
         category: "musicvideos"
       },
       {
@@ -208,7 +231,8 @@ export const siteConfig = {
           en: "M.O.M. | GRAND BEATBOX BATTLE 2021: WORLD LEAGUE | Crew Showcase",
           de: "M.O.M. | GRAND BEATBOX BATTLE 2021: WORLD LEAGUE | Crew Showcase"
         },
-        category: "battle"
+        category: "concert",
+        categories: ["concert", "battle"]
       },
       {
         id: "HepOPUJy3cA",
@@ -216,14 +240,20 @@ export const siteConfig = {
           en: "M.O.M. | Truly Original | Grand Beatbox Battle 2021",
           de: "M.O.M. | Truly Original | Grand Beatbox Battle 2021"
         },
-        category: "battle"
+        category: "all"
       },
       {
         id: "dStOHHg2Zts",
         title: {
-          en: "MOM - GBB20: World League Crew Wildcard for YOU",
-          de: "MOM - GBB20: World League Crew Wildcard for YOU"
+          en: "M.O.M - GBB20: World League Crew Wildcard for YOU",
+          de: "M.O.M - GBB20: World League Crew Wildcard for YOU"
         },
+        thumbnailUrl: "https://img.youtube.com/vi/dStOHHg2Zts/hqdefault.jpg",
+        category: "battle"
+      },
+      {
+        id: "e0NaP7RE6zE",
+        title: { en: "GOLDEN BUZZER - DGC 2024", de: "GOLDEN BUZZER - DGC 2024" },
         category: "battle"
       }
     ]
@@ -234,7 +264,7 @@ export const siteConfig = {
   eventsCopy: {
     title: { en: "Events", de: "Events" },
     updatedLabel: { en: "Last updated", de: "Zuletzt aktualisiert" },
-    filterAll: { en: "All", de: "Alle" },
+    filterAll: { en: "ALL", de: "ALLE" },
     refreshLabel: { en: "Refresh", de: "Aktualisieren" },
     empty: {
       en: "No upcoming shows scheduled at the moment. Check back soon!",
@@ -256,7 +286,7 @@ export const siteConfig = {
     closeModal: { en: "Close video", de: "Video schliessen" }
   },
   calendar: {
-    publicIcsUrl: "https://calendar.google.com/calendar/ical/cda01c823c486eeb726bcd338a34505325596023116fc1e83714de282b711350%40group.calendar.google.com/private-38bf8979efc488d1af689817e25fd48a/basic.ics",
+    publicIcsUrl: "https://calendar.google.com/calendar/ical/68bbe8049bd1fc48c4bfd5809f0ba697ce52a3cf21e21f93f70427e5f9a6ccb9%40group.calendar.google.com/private-890f2485f9a71f50ec38a60562b94bb3/basic.ics",
     corsProxyUrl: [
       "https://r.jina.ai/http://",
       "https://api.allorigins.win/raw?url="
@@ -265,15 +295,20 @@ export const siteConfig = {
   },
   eventCategories: [
     {
-      key: "kids",
-      label: { en: "Kids show", de: "Kidsshow" },
-      keywords: ["kids", "children", "school", "family", "kinder", "schule"]
+      key: "concerts",
+      label: { en: "CONCERTS", de: "KONZERTE" },
+      keywords: ["#konzert"]
     },
     {
-      key: "concerts",
-      label: { en: "Concerts", de: "Konzerte" },
-      keywords: ["concert", "show", "gig", "live", "festival", "konzert"]
+      key: "workshops",
+      label: { en: "WORKSHOPS", de: "WORKSHOPS" },
+      keywords: ["#workshop"]
     },
+    {
+      key: "kids",
+      label: { en: "KIDS SHOWS", de: "KINDERKONZERTE" },
+      keywords: ["#kinderkonzert"]
+    }
   ],
   contactCopy: {
     eyebrow: { en: "LET’S DO THIS", de: "LET’S DO THIS" },
@@ -289,7 +324,12 @@ export const siteConfig = {
     youtube: "https://www.youtube.com/@M.O.M_beatbox",
     spotify:
       "https://open.spotify.com/artist/4yesxrFzLKBMyKcQLc3ZKD?si=fypbVKgKRa-SD6VEOjkYqg",
-    facebook: "https://facebook.com/mom_crew"
+  },
+  footerCopy: {
+    downloads: { en: "Downloads", de: "Downloads" },
+    technicalRider: { en: "Technical rider", de: "Technical rider" },
+    pressPhotos: { en: "Press photos", de: "Pressefotos" },
+    imprint: { en: "Imprint", de: "Imprint" }
   }
 } as const;
 

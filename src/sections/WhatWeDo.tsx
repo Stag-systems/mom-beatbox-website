@@ -103,7 +103,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                   behavior: 'smooth'
                 })
               }
-              className="absolute left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-white/80"
+              className="no-bass absolute left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-white/80"
               aria-label="Scroll left"
             >
               <svg
@@ -125,7 +125,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                   behavior: 'smooth'
                 })
               }
-              className="absolute right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-white/80"
+              className="no-bass absolute right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-white/80"
               aria-label="Scroll right"
             >
               <svg
@@ -161,7 +161,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                   <button
                     type="button"
                     onClick={() => setActiveCategoryKey(item.key)}
-                    className="relative flex min-h-[360px] w-full items-end justify-start px-5 py-5 text-left"
+                    className="no-bass relative flex min-h-[360px] w-full items-end justify-start px-5 py-5 text-left"
                   >
                     <img
                       src={item.image}
@@ -195,7 +195,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
           <button
             type="button"
             onClick={() => scrollDesktop('left')}
-            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
+            className="no-bass absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
             aria-label="Scroll left"
           >
             <svg
@@ -212,7 +212,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
           <button
             type="button"
             onClick={() => scrollDesktop('right')}
-            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
+            className="no-bass absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
             aria-label="Scroll right"
           >
             <svg
@@ -249,7 +249,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                     <button
                       type="button"
                       onClick={() => setActiveCategoryKey(item.key)}
-                      className="relative flex min-h-[360px] w-full items-end justify-start px-5 py-5 text-left"
+                      className="no-bass relative flex min-h-[360px] w-full items-end justify-start px-5 py-5 text-left"
                     >
                       <img
                         src={item.image}
@@ -324,31 +324,52 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                     </p>
                     <a
                       href={`mailto:${siteConfig.hero.bookingEmail}`}
-                      className="button-link glass-button inline-flex items-center rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
+                      className="button-link glass-button inline-flex items-center rounded-[6px] px-6 py-2 text-[11px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
                     >
                       {getLocalizedText(siteConfig.whatWeDoCopy.requestLabel, language)}
                     </a>
                   </div>
                 )}
                 {!loading && nextEvent && (
-                  <div className="mt-4 space-y-4">
-                    <h3 className="text-2xl font-black text-white">
-                      {nextEvent.title}
-                    </h3>
-                    {nextEvent.location && (
-                      <p className="text-xs uppercase tracking-wide text-white/60">
-                        {nextEvent.location}
-                      </p>
-                    )}
-                    <time className="text-sm font-semibold text-gray-300">
-                      {formatDate(nextEvent.start)}
-                    </time>
+                  <div className="mt-4">
+                    <div className="space-y-2">
+                      <h3 className="text-2xl font-black text-white">
+                        {nextEvent.title}
+                      </h3>
+                      {nextEvent.location && (
+                        <p className="text-xs uppercase tracking-wide text-white/60">
+                          {nextEvent.location}
+                        </p>
+                      )}
+                      <time className="text-sm font-semibold text-gray-300">
+                        {formatDate(nextEvent.start)}
+                      </time>
+                    </div>
+                    <div className="mt-4 flex flex-col gap-3">
                     <a
                       href="#events"
-                      className="button-link glass-button inline-flex items-center rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
+                      className="button-link glass-button inline-flex items-center rounded-[6px] px-6 py-2 text-[11px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
                     >
-                      {getLocalizedText(siteConfig.whatWeDoCopy.calendarLabel, language)}
-                    </a>
+                        {getLocalizedText(siteConfig.whatWeDoCopy.calendarLabel, language)}
+                      </a>
+                      {activeCategoryKey === 'kids' && (
+                        <a
+                          href="https://bildungschancen.wien/angebot/2749/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="button-link inline-flex items-center gap-2 rounded-[6px] bg-red-600 px-6 py-2 text-[11px] font-semibold tracking-wider uppercase text-white transition hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400/60 focus:ring-offset-2 focus:ring-offset-black"
+                        >
+                          <img
+                            src="/PARTNER/Slider2/WienXtra.png"
+                            alt=""
+                            aria-hidden="true"
+                            className="h-4 w-auto"
+                            loading="lazy"
+                          />
+                          {getLocalizedText(siteConfig.whatWeDoCopy.schoolsBadge, language)}
+                        </a>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
