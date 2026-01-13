@@ -66,9 +66,10 @@ export function YouTube({ language }: YouTubeProps) {
   const filteredVideos =
     activeFilter === 'all'
       ? siteConfig.youtube.videos
-      : siteConfig.youtube.videos.filter((video) =>
-          (video.categories ?? [video.category]).includes(activeFilter)
-        );
+      : siteConfig.youtube.videos.filter((video) => {
+          const categories = 'categories' in video ? video.categories : undefined;
+          return (categories ?? [video.category]).includes(activeFilter);
+        });
   
   useEffect(() => {
     if (!activeVideoId) return;
@@ -151,7 +152,7 @@ export function YouTube({ language }: YouTubeProps) {
             >
               <VideoPlayer
                 videoId={video.id}
-                thumbnailUrl={video.thumbnailUrl}
+                thumbnailUrl={'thumbnailUrl' in video ? video.thumbnailUrl : undefined}
                 language={language}
                 onOpen={setActiveVideoId}
               />
@@ -212,7 +213,7 @@ export function YouTube({ language }: YouTubeProps) {
                   >
                     <VideoPlayer
                       videoId={video.id}
-                      thumbnailUrl={video.thumbnailUrl}
+                      thumbnailUrl={'thumbnailUrl' in video ? video.thumbnailUrl : undefined}
                       language={language}
                       onOpen={setActiveVideoId}
                     />
@@ -233,7 +234,7 @@ export function YouTube({ language }: YouTubeProps) {
               >
                 <VideoPlayer
                   videoId={video.id}
-                  thumbnailUrl={video.thumbnailUrl}
+                  thumbnailUrl={'thumbnailUrl' in video ? video.thumbnailUrl : undefined}
                   language={language}
                   onOpen={setActiveVideoId}
                 />

@@ -148,7 +148,7 @@ export function About({ language }: AboutProps) {
                       <div
                         key={`${achievement.city}-${achievement.year}`}
                         className={`relative min-w-[220px] rounded-[6px] border border-white/10 border-hairline p-3 text-center sm:text-left md:min-w-0 ${
-                          achievement.phantom
+                          'phantom' in achievement && achievement.phantom
                             ? 'border-dashed border-white/30 bg-white/5'
                             : 'bg-white/5 transition-shadow duration-200 hover:shadow-[0_0_18px_rgba(255,255,255,0.18)]'
                         }`}
