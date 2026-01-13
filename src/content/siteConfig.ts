@@ -70,18 +70,17 @@ export const siteConfig = {
     ],
     ctaLabel: { en: "OUR PROGRAM", de: "UNSER PROGRAMM" }
   },
-  logos: [
-    { name: "DW Logo", image: "/PARTNER/DW_Logo.jpg" },
-    { name: "Austrian Event Award", image: "/PARTNER/Illu_Austrian-Event-Award-2020-810x447.png" },
-    { name: "Monsterfreunde", image: "/PARTNER/Logo_Monsterfreunde.png" },
-    { name: "Images", image: "/PARTNER/images.png" },
-    { name: "Pflasterspektakel", image: "/PARTNER/Pflasterspektakel.png" },
-    { name: "AKM", image: "/PARTNER/AKM-NEW.png" },
-    { name: "SBX", image: "/PARTNER/SBX.png" },
-    { name: "Xtra", image: "/PARTNER/Xtra.png" },
-    { name: "Logo Main", image: "/PARTNER/logo-main.png" },
-    { name: "TAS Logo", image: "/PARTNER/tas_logo_rot.jpg" },
-    { name: "Vokal Total", image: "/PARTNER/vokal.total_white.png" }
+  logosSecondary: [
+    { name: "AKM", image: "/PARTNER/Slider2/AKM.png" },
+    { name: "Audio", image: "/PARTNER/Slider2/Audio.png" },
+    { name: "Dschungel", image: "/PARTNER/Slider2/Dschungel.png" },
+    { name: "GBB", image: "/PARTNER/Slider2/GBB.png" },
+    { name: "Gorilla", image: "/PARTNER/Slider2/Gorilla.png" },
+    { name: "Pflasterspektakel", image: "/PARTNER/Slider2/Pflasterspektakel.png" },
+    { name: "TAS", image: "/PARTNER/Slider2/TAS.png" },
+    { name: "Vokaltotal", image: "/PARTNER/Slider2/Vokaltotal.png" },
+    { name: "Wien Xtra", image: "/PARTNER/Slider2/WienXtra.png" },
+    { name: "Monsterfreunde", image: "/PARTNER/Slider2/monsterfreunde.png" }
   ],
   logosCopy: {
     eyebrow: {

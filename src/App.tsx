@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './sections/Hero';
 import { About } from './sections/About';
-import { LogoSlider } from './sections/LogoSlider';
+import { LogoSliderSecondary } from './sections/LogoSliderSecondary';
 import { WhatWeDo } from './sections/WhatWeDo';
 import { YouTube } from './sections/YouTube';
 import { Calendar } from './sections/Calendar';
@@ -36,7 +36,7 @@ function App() {
       <div className="relative z-10 bg-[#060a12]">
         <About language={language} />
         <WhatWeDo language={language} />
-        <LogoSlider language={language} />
+        <LogoSliderSecondary language={language} />
         <YouTube language={language} />
         <Calendar language={language} />
         <Contact language={language} />
