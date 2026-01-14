@@ -105,6 +105,29 @@ export function Footer({ language }: FooterProps) {
                 <path d="M23.5 6.2a2.9 2.9 0 0 0-2-2.1C19.7 3.5 12 3.5 12 3.5s-7.7 0-9.5.6a2.9 2.9 0 0 0-2 2.1A30.7 30.7 0 0 0 0 12a30.7 30.7 0 0 0 .5 5.8 2.9 2.9 0 0 0 2 2.1c1.8.6 9.5.6 9.5.6s7.7 0 9.5-.6a2.9 2.9 0 0 0 2-2.1A30.7 30.7 0 0 0 24 12a30.7 30.7 0 0 0-.5-5.8ZM9.7 15.5V8.5l6.2 3.5-6.2 3.5Z" />
               </svg>
             </a>
+            <a
+              href="#hero"
+              className="text-white/70 hover:text-white transition"
+              aria-label="Back to top"
+              onClick={(event) => {
+                event.preventDefault();
+                if (typeof window !== 'undefined') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+            >
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden="true"
+              >
+                <path d="M12 19V5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M5 12l7-7 7 7" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
           </div>
         </div>
       </div>

@@ -195,7 +195,7 @@ export const siteConfig = {
     {
       year: "SOON",
       city: "",
-      title: { en: "TO BE CONTINUED", de: "TO BE CONTINUED" },
+      title: { en: "TO BE\nCONTINUED", de: "TO BE\nCONTINUED" },
       videoId: "",
       phantom: true
     }
