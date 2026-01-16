@@ -10,7 +10,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
-      includeAssets: ['Logo.svg', 'LOGOTYPE-MOM-WHITE.svg', 'vite.svg'],
+      includeAssets: ['favicon.png', 'Logo.svg', 'LOGOTYPE-MOM-WHITE.svg', 'vite.svg'],
       manifest: {
         name: 'MOM Beatbox Crew',
         short_name: 'MOM',
@@ -21,9 +21,10 @@ export default defineConfig({
         start_url: '/',
         icons: [
           {
-            src: 'Logo.svg',
-            sizes: 'any',
-            type: 'image/svg+xml'
+            src: 'favicon.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
           }
         ]
       },
