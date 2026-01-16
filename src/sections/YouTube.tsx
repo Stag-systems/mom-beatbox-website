@@ -111,7 +111,7 @@ export function YouTube({ language }: YouTubeProps) {
           </h2>
           <p className="mt-4 text-sm text-gray-300">
             {language === 'de'
-              ? 'Als Vorgeschmack geeignet. Für optimale Wirkung wird der Live-Genuss von MOM empfohlen.'
+              ? 'M.O.M ist eine Erfahrung. Am Besten live erleben!'
               : 'Enjoy as a preview. For optimal effect, experiencing MOM live is recommended.'}
           </p>
         </div>

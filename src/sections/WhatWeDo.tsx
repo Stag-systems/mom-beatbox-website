@@ -15,6 +15,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
   const desktopCarouselRef = useRef<HTMLDivElement | null>(null);
   const { events, loading } = useCalendar();
   const [activeCategoryKey, setActiveCategoryKey] = useState<string | null>(null);
+  const corporateCard = siteConfig.whatWeDo.find((item) => item.key === 'corporate');
   const displayItems: Array<{
     key: string;
     title: LocalizedString;
@@ -308,20 +309,23 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
               >
                 X
               </button>
-              <div className="glass-panel rounded-[6px] border border-white/10 border-hairline p-6">
-                <p className="text-xs uppercase tracking-[0.3em] text-gray-300">
-                  {getLocalizedText(siteConfig.whatWeDoCopy.nextEventLabel, language)}
-                </p>
-                {loading && (
-                  <p className="mt-3 text-sm text-white/70">
-                    {getLocalizedText(siteConfig.whatWeDoCopy.loadingLabel, language)}
-                  </p>
-                )}
-                {!loading && !nextEvent && (
-                  <div className="mt-3 space-y-4">
-                    <p className="text-sm text-white/70">
-                      {getLocalizedText(siteConfig.whatWeDoCopy.noUpcomingLabel, language)}
-                    </p>
+              {activeCategoryKey === 'corporate' ? (
+                <div className="glass-panel max-h-[70vh] rounded-[6px] border border-white/10 border-hairline p-5 overflow-y-auto">
+                  <h3 className="text-2xl font-black text-white">
+                    {getLocalizedText(
+                      corporateCard?.title ?? { en: 'Corporate events', de: 'Firmenfeiern' },
+                      language
+                    )}
+                  </h3>
+                  <div className="mt-4">
+                    <video
+                      className="w-full max-h-[42vh] rounded-[6px] object-contain"
+                      src="/CORPORATE-PARTY.mp4"
+                      controls
+                      playsInline
+                    />
+                  </div>
+                  <div className="mt-5 flex justify-center">
                     <a
                       href={`mailto:${siteConfig.hero.bookingEmail}`}
                       className="button-link glass-button inline-flex items-center rounded-[6px] px-6 py-2 text-[11px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
@@ -329,50 +333,74 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                       {getLocalizedText(siteConfig.whatWeDoCopy.requestLabel, language)}
                     </a>
                   </div>
-                )}
-                {!loading && nextEvent && (
-                  <div className="mt-4">
-                    <div className="space-y-2">
-                      <h3 className="text-2xl font-black text-white">
-                        {nextEvent.title}
-                      </h3>
-                      {nextEvent.location && (
-                        <p className="text-xs uppercase tracking-wide text-white/60">
-                          {nextEvent.location}
-                        </p>
-                      )}
-                      <time className="text-sm font-semibold text-gray-300">
-                        {formatDate(nextEvent.start)}
-                      </time>
-                    </div>
-                    <div className="mt-4 flex flex-col gap-3">
-                    <a
-                      href="#events"
-                      className="button-link glass-button inline-flex items-center rounded-[6px] px-6 py-2 text-[11px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
-                    >
-                        {getLocalizedText(siteConfig.whatWeDoCopy.calendarLabel, language)}
+                </div>
+              ) : (
+                <div className="glass-panel rounded-[6px] border border-white/10 border-hairline p-6">
+                  <p className="text-xs uppercase tracking-[0.3em] text-gray-300">
+                    {getLocalizedText(siteConfig.whatWeDoCopy.nextEventLabel, language)}
+                  </p>
+                  {loading && (
+                    <p className="mt-3 text-sm text-white/70">
+                      {getLocalizedText(siteConfig.whatWeDoCopy.loadingLabel, language)}
+                    </p>
+                  )}
+                  {!loading && !nextEvent && (
+                    <div className="mt-3 space-y-4">
+                      <p className="text-sm text-white/70">
+                        {getLocalizedText(siteConfig.whatWeDoCopy.noUpcomingLabel, language)}
+                      </p>
+                      <a
+                        href={`mailto:${siteConfig.hero.bookingEmail}`}
+                        className="button-link glass-button inline-flex items-center rounded-[6px] px-6 py-2 text-[11px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
+                      >
+                        {getLocalizedText(siteConfig.whatWeDoCopy.requestLabel, language)}
                       </a>
-                      {activeCategoryKey === 'kids' && (
-                        <a
-                          href="https://bildungschancen.wien/angebot/2749/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="button-link inline-flex items-center gap-2 rounded-[6px] bg-red-600 px-6 py-2 text-[11px] font-semibold tracking-wider uppercase text-white transition hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400/60 focus:ring-offset-2 focus:ring-offset-black"
-                        >
-                          <img
-                            src="/PARTNER/Slider2/WienXtra.png"
-                            alt=""
-                            aria-hidden="true"
-                            className="h-4 w-auto"
-                            loading="lazy"
-                          />
-                          {getLocalizedText(siteConfig.whatWeDoCopy.schoolsBadge, language)}
-                        </a>
-                      )}
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                  {!loading && nextEvent && (
+                    <div className="mt-4">
+                      <div className="space-y-2">
+                        <h3 className="text-2xl font-black text-white">
+                          {nextEvent.title}
+                        </h3>
+                        {nextEvent.location && (
+                          <p className="text-xs uppercase tracking-wide text-white/60">
+                            {nextEvent.location}
+                          </p>
+                        )}
+                        <time className="text-sm font-semibold text-gray-300">
+                          {formatDate(nextEvent.start)}
+                        </time>
+                      </div>
+                      <div className="mt-4 flex flex-col gap-3">
+                      <a
+                        href="#events"
+                        className="button-link glass-button inline-flex items-center rounded-[6px] px-6 py-2 text-[11px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
+                      >
+                          {getLocalizedText(siteConfig.whatWeDoCopy.calendarLabel, language)}
+                        </a>
+                        {activeCategoryKey === 'kids' && (
+                          <a
+                            href="https://bildungschancen.wien/angebot/2749/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="button-link inline-flex items-center gap-2 rounded-[6px] bg-red-600 px-6 py-2 text-[11px] font-semibold tracking-wider uppercase text-white transition hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400/60 focus:ring-offset-2 focus:ring-offset-black"
+                          >
+                            <img
+                              src="/PARTNER/Slider2/WienXtra.png"
+                              alt=""
+                              aria-hidden="true"
+                              className="h-4 w-auto"
+                              loading="lazy"
+                            />
+                            {getLocalizedText(siteConfig.whatWeDoCopy.schoolsBadge, language)}
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         )}

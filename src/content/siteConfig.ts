@@ -102,7 +102,7 @@ export const siteConfig = {
     },
     {
       key: "kids",
-      title: { en: "Kids show", de: "Kinder- und Schulkonzert" },
+      title: { en: "Kids shows", de: "Kinder- und Schulkonzerte" },
       description: {
         en: "Interactive and engaging beatbox performances designed for young audiences.",
         de: "Platzhalter fur interaktive Shows fur junge Zielgruppen."
@@ -112,7 +112,7 @@ export const siteConfig = {
     },
     {
       key: "corporate",
-      title: { en: "Corporate event", de: "Firmenfeier" },
+      title: { en: "Corporate events", de: "Firmenfeiern" },
       description: {
         en: "Placeholder for corporate celebrations note and format.",
         de: "Platzhalter fur Firmenfeiern und Corporate Events."
