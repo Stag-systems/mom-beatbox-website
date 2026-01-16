@@ -205,6 +205,22 @@ export const siteConfig = {
     title: { en: "Sound archive", de: "SOUND ARCHIV" },
     videos: [
       {
+        id: "W-yZ1_YTH0M",
+        title: {
+          en: "M.O.M | GRAND BEATBOX BATTLE 2024: WORLD LEAGUE | Crew Showcase",
+          de: "M.O.M | GRAND BEATBOX BATTLE 2024: WORLD LEAGUE | Crew Showcase"
+        },
+        category: "concert"
+      },
+      {
+        id: "Pkk9F0YPlK8",
+        title: {
+          en: "SARUKANI vs M.O.M | GRAND BEATBOX BATTLE 2023: WORLD LEAGUE | Crew Final",
+          de: "SARUKANI vs M.O.M | GRAND BEATBOX BATTLE 2023: WORLD LEAGUE | Crew Final"
+        },
+        category: "battle"
+      },
+      {
         id: "3Z9opE8zByU",
         title: { en: "M.O.M - live in Vietnam", de: "M.O.M - live in Vietnam" },
         category: "concert"
