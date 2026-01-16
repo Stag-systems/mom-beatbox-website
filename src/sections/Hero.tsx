@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { siteConfig } from '../content/siteConfig';
 import { getLocalizedText, Language } from '../lib/i18n';
 
@@ -6,15 +7,52 @@ interface HeroProps {
 }
 
 export function Hero({ language }: HeroProps) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const tryPlay = () => {
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute('muted', 'true');
+      video.setAttribute('playsinline', 'true');
+      video.setAttribute('webkit-playsinline', 'true');
+      const result = video.play();
+      if (result && typeof result.catch === 'function') {
+        result.catch(() => {});
+      }
+    };
+
+    tryPlay();
+    video.addEventListener('canplay', tryPlay);
+    const handleFirstInteraction = () => {
+      tryPlay();
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('click', handleFirstInteraction);
+    };
+    window.addEventListener('touchstart', handleFirstInteraction, { passive: true });
+    window.addEventListener('click', handleFirstInteraction);
+    return () => {
+      video.removeEventListener('canplay', tryPlay);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('click', handleFirstInteraction);
+    };
+  }, []);
+
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
+          webkit-playsinline="true"
+          preload="auto"
           className="h-full w-full object-cover"
           poster={siteConfig.hero.fallbackImage}
         >
@@ -28,7 +66,7 @@ export function Hero({ language }: HeroProps) {
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
         <h1 className="sr-only">{siteConfig.hero.title}</h1>
         <img
-          src="/MOM-LOGOMASTER.svg"
+          src="/LOGOTYPE-MOM-WHITE.svg"
           alt=""
           aria-hidden="true"
           className="mb-4 w-[min(85vw,540px)] sm:w-[min(48vw,600px)] md:w-[min(45vw,660px)]"

@@ -50,6 +50,8 @@ function parseICS(icsText: string): CalendarEvent[] {
         currentEvent.location = value;
       } else if (propertyName === 'DESCRIPTION') {
         currentEvent.description = value;
+      } else if (propertyName === 'URL') {
+        currentEvent.infoLink = normalizeUrl(value);
       }
     }
   }
@@ -82,6 +84,39 @@ function unescapeICSText(value: string): string {
     .replace(/\\\\/g, '\\');
 }
 
+function decodeHtmlEntities(value: string): string {
+  return value
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, '&');
+}
+
+function normalizeUrl(raw?: string): string | undefined {
+  if (!raw) return undefined;
+  const trimmed = raw.trim();
+  const match = trimmed.match(/https?:\/\/[^\s"<>]+/i);
+  const candidate = match ? match[0] : trimmed;
+  const cleaned = candidate.replace(/[).,]+$/g, '');
+  return /^https?:\/\//i.test(cleaned) ? cleaned : undefined;
+}
+
+function extractLinkFromDescription(description?: string): string | undefined {
+  if (!description) return undefined;
+  const decoded = decodeHtmlEntities(description);
+
+  const hrefMatch = decoded.match(/href=["']([^"']+)["']/i);
+  const hrefUrl = normalizeUrl(hrefMatch?.[1]);
+  if (hrefUrl) return hrefUrl;
+
+  const taggedMatch = decoded.match(/#link:\s*(.+)/i);
+  const taggedUrl = normalizeUrl(taggedMatch?.[1]);
+  if (taggedUrl) return taggedUrl;
+
+  return normalizeUrl(decoded);
+}
+
 function resolveCategoryKey(event: CalendarEvent): string {
   const description = (event.description ?? '').toLowerCase();
   const directTag = description.match(/(?:^|\s)(?:type:|category:|#)(kids|workshops|concerts|corporate)\b/);
@@ -107,7 +142,8 @@ function getCachedEvents(): CachedCalendarData | null {
       ...event,
       start: new Date(event.start),
       end: new Date(event.end),
-      categoryKey: event.categoryKey ?? resolveCategoryKey(event as CalendarEvent)
+      categoryKey: event.categoryKey ?? resolveCategoryKey(event as CalendarEvent),
+      infoLink: normalizeUrl(event.infoLink) ?? extractLinkFromDescription(event.description)
     }));
     
     return data;
@@ -191,7 +227,8 @@ export function useCalendar() {
       const parsedEvents = parseICS(icsText);
       const categorizedEvents = parsedEvents.map((event) => ({
         ...event,
-        categoryKey: resolveCategoryKey(event)
+        categoryKey: resolveCategoryKey(event),
+        infoLink: normalizeUrl(event.infoLink) ?? extractLinkFromDescription(event.description)
       }));
       
       setEvents(categorizedEvents);

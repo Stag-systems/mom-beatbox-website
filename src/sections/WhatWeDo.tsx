@@ -13,9 +13,9 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
   const titleLines = title.split('\n');
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const desktopCarouselRef = useRef<HTMLDivElement | null>(null);
-  const isAdjusting = useRef(false);
   const { events, loading } = useCalendar();
   const [activeCategoryKey, setActiveCategoryKey] = useState<string | null>(null);
+  const corporateCard = siteConfig.whatWeDo.find((item) => item.key === 'corporate');
   const displayItems: Array<{
     key: string;
     title: LocalizedString;
@@ -29,41 +29,21 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
       phantom: true
     }
   ];
-  const tripledItems = [
-    ...displayItems,
-    ...displayItems,
-    ...displayItems
-  ];
-
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
-    const setWidth = carousel.scrollWidth / 3;
-    carousel.scrollLeft = setWidth;
-  }, []);
+    carousel.scrollLeft = 0;
+  }, [displayItems.length]);
 
-  const handleScroll = () => {
+  const getMobileScrollStep = () => {
     const carousel = carouselRef.current;
-    if (!carousel || isAdjusting.current) return;
-
-    const setWidth = carousel.scrollWidth / 3;
-    const left = carousel.scrollLeft;
-    const min = setWidth * 0.25;
-    const max = setWidth * 1.75;
-
-    if (left < min) {
-      isAdjusting.current = true;
-      carousel.scrollLeft = left + setWidth;
-      requestAnimationFrame(() => {
-        isAdjusting.current = false;
-      });
-    } else if (left > max) {
-      isAdjusting.current = true;
-      carousel.scrollLeft = left - setWidth;
-      requestAnimationFrame(() => {
-        isAdjusting.current = false;
-      });
+    if (!carousel) return 0;
+    const items = carousel.querySelectorAll<HTMLElement>('[data-carousel-item]');
+    if (items.length < 2) {
+      const first = items[0];
+      return first ? first.offsetWidth + 24 : carousel.clientWidth;
     }
+    return items[1].offsetLeft - items[0].offsetLeft;
   };
 
   const nextEvent = useMemo<CalendarEvent | null>(() => {
@@ -108,9 +88,9 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
             ))}
           </h2>
           <p className="mt-4 text-sm text-gray-300">
-            Performances, workshops, and custom collaborations.
-            <br />
-            Flexible in format, open in mindset, and experienced in working across disciplines.
+            {language === 'de'
+              ? 'Flexibel im Format, offen in der Haltung und erfahren in der Zusammenarbeit.'
+              : 'Flexible in format, open in mindset, and experienced in working across disciplines.'}
           </p>
         </div>
 
@@ -119,9 +99,12 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
             <button
               type="button"
               onClick={() =>
-                carouselRef.current?.scrollBy({ left: -280, behavior: 'smooth' })
+                carouselRef.current?.scrollBy({
+                  left: -getMobileScrollStep(),
+                  behavior: 'smooth'
+                })
               }
-              className="absolute left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-white/80"
+              className="no-bass absolute left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-white/80"
               aria-label="Scroll left"
             >
               <svg
@@ -138,9 +121,12 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
             <button
               type="button"
               onClick={() =>
-                carouselRef.current?.scrollBy({ left: 280, behavior: 'smooth' })
+                carouselRef.current?.scrollBy({
+                  left: getMobileScrollStep(),
+                  behavior: 'smooth'
+                })
               }
-              className="absolute right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-white/80"
+              className="no-bass absolute right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center text-white/80"
               aria-label="Scroll right"
             >
               <svg
@@ -156,12 +142,12 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
             </button>
             <div
               ref={carouselRef}
-              onScroll={handleScroll}
               className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 px-6"
             >
-            {tripledItems.map((item, index) => (
+            {displayItems.map((item, index) => (
               <div
                 key={`${item.key}-${index}`}
+                data-carousel-item
                 className={`group relative flex min-w-[80%] flex-col overflow-hidden rounded-[6px] snap-center ${
                   item.phantom ? 'border border-dashed border-white/30 bg-white/5' : 'glass-card'
                 }`}
@@ -176,7 +162,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                   <button
                     type="button"
                     onClick={() => setActiveCategoryKey(item.key)}
-                    className="relative flex min-h-[360px] w-full items-end justify-start px-5 py-5 text-left"
+                    className="no-bass relative flex min-h-[360px] w-full items-end justify-start px-5 py-5 text-left"
                   >
                     <img
                       src={item.image}
@@ -210,7 +196,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
           <button
             type="button"
             onClick={() => scrollDesktop('left')}
-            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
+            className="no-bass absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
             aria-label="Scroll left"
           >
             <svg
@@ -227,7 +213,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
           <button
             type="button"
             onClick={() => scrollDesktop('right')}
-            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
+            className="no-bass absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white transition hover:bg-white/20"
             aria-label="Scroll right"
           >
             <svg
@@ -264,7 +250,7 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
                     <button
                       type="button"
                       onClick={() => setActiveCategoryKey(item.key)}
-                      className="relative flex min-h-[360px] w-full items-end justify-start px-5 py-5 text-left"
+                      className="no-bass relative flex min-h-[360px] w-full items-end justify-start px-5 py-5 text-left"
                     >
                       <img
                         src={item.image}
@@ -323,50 +309,98 @@ export function WhatWeDo({ language }: WhatWeDoProps) {
               >
                 X
               </button>
-              <div className="glass-panel rounded-[6px] border border-white/10 border-hairline p-6">
-                <p className="text-xs uppercase tracking-[0.3em] text-gray-300">
-                  {getLocalizedText(siteConfig.whatWeDoCopy.nextEventLabel, language)}
-                </p>
-                {loading && (
-                  <p className="mt-3 text-sm text-white/70">
-                    {getLocalizedText(siteConfig.whatWeDoCopy.loadingLabel, language)}
-                  </p>
-                )}
-                {!loading && !nextEvent && (
-                  <div className="mt-3 space-y-4">
-                    <p className="text-sm text-white/70">
-                      {getLocalizedText(siteConfig.whatWeDoCopy.noUpcomingLabel, language)}
-                    </p>
+              {activeCategoryKey === 'corporate' ? (
+                <div className="glass-panel max-h-[70vh] rounded-[6px] border border-white/10 border-hairline p-5 overflow-y-auto">
+                  <h3 className="text-2xl font-black text-white">
+                    {getLocalizedText(
+                      corporateCard?.title ?? { en: 'Corporate events', de: 'Firmenfeiern' },
+                      language
+                    )}
+                  </h3>
+                  <div className="mt-4">
+                    <video
+                      className="w-full max-h-[42vh] rounded-[6px] object-contain"
+                      src="/CORPORATE-PARTY.mp4"
+                      controls
+                      playsInline
+                    />
+                  </div>
+                  <div className="mt-5 flex justify-center">
                     <a
                       href={`mailto:${siteConfig.hero.bookingEmail}`}
-                      className="button-link glass-button inline-flex items-center rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
+                      className="button-link glass-button inline-flex items-center rounded-[6px] px-6 py-2 text-[11px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
                     >
                       {getLocalizedText(siteConfig.whatWeDoCopy.requestLabel, language)}
                     </a>
                   </div>
-                )}
-                {!loading && nextEvent && (
-                  <div className="mt-4 space-y-4">
-                    <h3 className="text-2xl font-black text-white">
-                      {nextEvent.title}
-                    </h3>
-                    {nextEvent.location && (
-                      <p className="text-xs uppercase tracking-wide text-white/60">
-                        {nextEvent.location}
+                </div>
+              ) : (
+                <div className="glass-panel rounded-[6px] border border-white/10 border-hairline p-6">
+                  <p className="text-xs uppercase tracking-[0.3em] text-gray-300">
+                    {getLocalizedText(siteConfig.whatWeDoCopy.nextEventLabel, language)}
+                  </p>
+                  {loading && (
+                    <p className="mt-3 text-sm text-white/70">
+                      {getLocalizedText(siteConfig.whatWeDoCopy.loadingLabel, language)}
+                    </p>
+                  )}
+                  {!loading && !nextEvent && (
+                    <div className="mt-3 space-y-4">
+                      <p className="text-sm text-white/70">
+                        {getLocalizedText(siteConfig.whatWeDoCopy.noUpcomingLabel, language)}
                       </p>
-                    )}
-                    <time className="text-sm font-semibold text-gray-300">
-                      {formatDate(nextEvent.start)}
-                    </time>
-                    <a
-                      href="#events"
-                      className="button-link glass-button inline-flex items-center rounded-[6px] px-12 py-2.5 text-sm font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
-                    >
-                      {getLocalizedText(siteConfig.whatWeDoCopy.calendarLabel, language)}
-                    </a>
-                  </div>
-                )}
-              </div>
+                      <a
+                        href={`mailto:${siteConfig.hero.bookingEmail}`}
+                        className="button-link glass-button inline-flex items-center rounded-[6px] px-6 py-2 text-[11px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
+                      >
+                        {getLocalizedText(siteConfig.whatWeDoCopy.requestLabel, language)}
+                      </a>
+                    </div>
+                  )}
+                  {!loading && nextEvent && (
+                    <div className="mt-4">
+                      <div className="space-y-2">
+                        <h3 className="text-2xl font-black text-white">
+                          {nextEvent.title}
+                        </h3>
+                        {nextEvent.location && (
+                          <p className="text-xs uppercase tracking-wide text-white/60">
+                            {nextEvent.location}
+                          </p>
+                        )}
+                        <time className="text-sm font-semibold text-gray-300">
+                          {formatDate(nextEvent.start)}
+                        </time>
+                      </div>
+                      <div className="mt-4 flex flex-col gap-3">
+                      <a
+                        href="#events"
+                        className="button-link glass-button inline-flex items-center rounded-[6px] px-6 py-2 text-[11px] font-medium tracking-wider uppercase text-white transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-black"
+                      >
+                          {getLocalizedText(siteConfig.whatWeDoCopy.calendarLabel, language)}
+                        </a>
+                        {activeCategoryKey === 'kids' && (
+                          <a
+                            href="https://bildungschancen.wien/angebot/2749/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="button-link inline-flex items-center gap-2 rounded-[6px] bg-red-600 px-6 py-2 text-[11px] font-semibold tracking-wider uppercase text-white transition hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-400/60 focus:ring-offset-2 focus:ring-offset-black"
+                          >
+                            <img
+                              src="/PARTNER/Slider2/WienXtra.png"
+                              alt=""
+                              aria-hidden="true"
+                              className="h-4 w-auto"
+                              loading="lazy"
+                            />
+                            {getLocalizedText(siteConfig.whatWeDoCopy.schoolsBadge, language)}
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         )}

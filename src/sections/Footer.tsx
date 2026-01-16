@@ -1,10 +1,15 @@
 import { siteConfig } from '../content/siteConfig';
+import { getLocalizedText, Language } from '../lib/i18n';
 
-export function Footer() {
+interface FooterProps {
+  language: Language;
+}
+
+export function Footer({ language }: FooterProps) {
   return (
     <footer
       id="footer"
-      className="border-t border-white/10 border-hairline py-20 px-4 sm:px-6 lg:px-8"
+      className="py-20 px-4 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 md:grid-cols-2 md:items-center">
@@ -16,22 +21,23 @@ export function Footer() {
 
           <div id="downloads" className="text-center md:text-right">
             <p className="text-xs font-medium uppercase tracking-[0.3em] text-white/60">
-              Downloads
+              {getLocalizedText(siteConfig.footerCopy.downloads, language)}
             </p>
             <div className="mt-4 space-y-2">
               <a
-                href="/press-kit.pdf"
+                href="https://drive.google.com/file/d/1K4iipNZEzgpJSeUfuoHYJmqYKxuWF1lX/view?usp=sharing"
                 download
                 className="block text-sm uppercase tracking-wide text-white/70 underline underline-offset-4 transition hover:text-white"
               >
-                Press kit
+                {getLocalizedText(siteConfig.footerCopy.technicalRider, language)}
               </a>
               <a
-                href="/technical-rider.pdf"
-                download
+                href="https://drive.google.com/drive/folders/1T1xpEb6lD1m06eT9Tzio19_uSTuU3Mm2?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-sm uppercase tracking-wide text-white/70 underline underline-offset-4 transition hover:text-white"
               >
-                Technical rider
+                {getLocalizedText(siteConfig.footerCopy.pressPhotos, language)}
               </a>
               <a
                 href="/imprint.html"
@@ -39,16 +45,16 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="block text-sm uppercase tracking-wide text-white/70 underline underline-offset-4 transition hover:text-white"
               >
-                Imprint
+                {getLocalizedText(siteConfig.footerCopy.imprint, language)}
               </a>
             </div>
           </div>
         </div>
-        <div className="mt-10 flex flex-col items-center gap-4 border-t border-white/10 border-hairline pt-6 text-center text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between sm:text-left">
+        <div className="mt-10 flex flex-col items-center gap-4 pt-6 text-center text-xs text-white/60 sm:flex-row sm:items-center sm:justify-between sm:text-left">
           <p>
             MORE THAN BEATBOX
             <br />
-            Copyright © 2025 MOM. All rights reserved.
+            Copyright © 2026 MOM. All rights reserved.
           </p>
           <div className="flex items-center justify-center gap-4">
             <a
@@ -68,6 +74,22 @@ export function Footer() {
               </svg>
             </a>
             <a
+              href={siteConfig.social.spotify}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/70 hover:text-white transition"
+              aria-label="Spotify"
+            >
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path d="M12 0C5.371 0 0 5.371 0 12s5.371 12 12 12 12-5.371 12-12S18.629 0 12 0zm5.438 17.273a.748.748 0 0 1-1.03.248c-2.824-1.726-6.382-2.117-10.575-1.163a.75.75 0 0 1-.333-1.463c4.553-1.037 8.436-.59 11.563 1.324a.75.75 0 0 1 .375 1.054zm1.473-3.285a.937.937 0 0 1-1.289.31c-3.233-1.986-8.163-2.561-11.986-1.401a.937.937 0 0 1-.543-1.793c4.373-1.327 9.803-.684 13.498 1.566a.937.937 0 0 1 .32 1.318zm.126-3.422c-3.876-2.304-10.297-2.514-13.979-1.397a1.125 1.125 0 0 1-.653-2.153c4.213-1.279 11.219-1.032 15.659 1.616a1.125 1.125 0 0 1-1.151 1.934z" />
+              </svg>
+            </a>
+            <a
               href={siteConfig.social.youtube}
               target="_blank"
               rel="noopener noreferrer"
@@ -81,6 +103,29 @@ export function Footer() {
                 aria-hidden="true"
               >
                 <path d="M23.5 6.2a2.9 2.9 0 0 0-2-2.1C19.7 3.5 12 3.5 12 3.5s-7.7 0-9.5.6a2.9 2.9 0 0 0-2 2.1A30.7 30.7 0 0 0 0 12a30.7 30.7 0 0 0 .5 5.8 2.9 2.9 0 0 0 2 2.1c1.8.6 9.5.6 9.5.6s7.7 0 9.5-.6a2.9 2.9 0 0 0 2-2.1A30.7 30.7 0 0 0 24 12a30.7 30.7 0 0 0-.5-5.8ZM9.7 15.5V8.5l6.2 3.5-6.2 3.5Z" />
+              </svg>
+            </a>
+            <a
+              href="#hero"
+              className="text-white/70 hover:text-white transition"
+              aria-label="Back to top"
+              onClick={(event) => {
+                event.preventDefault();
+                if (typeof window !== 'undefined') {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+            >
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden="true"
+              >
+                <path d="M12 19V5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M5 12l7-7 7 7" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </a>
           </div>

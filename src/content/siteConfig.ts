@@ -3,28 +3,28 @@ export const siteConfig = {
     title: "MOM",
     tagline: "MORE THAN BEATBOX",
     bookingEmail: "contact@mombeatbox.com",
-    videoUrl: "/hero-video.mp4",
+    videoUrl: "/HEROVIDEO-MOM-TEASER.mp4",
     fallbackImage: "/hero-fallback.jpg"
   },
   language: {
-    default: "en",
+    default: "de",
     toggleLabel: {
       en: "Switch to German",
       de: "Wechsel zu Englisch"
     }
   },
   navigation: {
-    about: { en: "About", de: "Uber uns" },
-    service: { en: "Service", de: "Service" },
+    about: { en: "About", de: "ÜBER UNS" },
+    service: { en: "Programs", de: "Programme" },
     music: { en: "Music", de: "Musik" },
     events: { en: "Events", de: "Events" },
     downloads: { en: "Downloads", de: "Downloads" }
   },
   about: {
-    eyebrow: { en: "About us", de: "Uber uns" },
+    eyebrow: { en: "About us", de: "ÜBER UNS" },
     title: {
       en: "WORLD CHAMPION\nBEATBOX CREW",
-      de: "PLATZHALTER\nBEATBOX CREW"
+      de: "WORLD CHAMPION\nBEATBOX CREW"
     },
     text: {
       en: "We are M.O.M, a beatbox trio from Vienna. Since 2018, we have been performing on international stages – from major festivals to exclusive private events. From the beatbox scene and street performances, to popular stages around the world. We adapt to different settings, turning each show – from festivals to children’s concerts and corporate events – into a genuine highlight. At our concerts, refined beats meet authentic humor, creating a unique atmosphere that appeals across generations. We combine danceable, genre-bending sound with direct audience interaction, resulting in show experiences that leave a lasting impression. With only three microphones, two world championship titles, and one shared goal – to get the place bouncing. M.O.M – more than beatbox",
@@ -34,7 +34,7 @@ export const siteConfig = {
       en: "MOM Beatbox Crew",
       de: "MOM Beatbox Crew"
     },
-    imagePlaceholder: "/about.gif",
+    imagePlaceholder: "/MOM-GIF-FRIENDS.gif",
     membersLabel: { en: "Crew members", de: "Crew mitglieder" },
     members: [
       {
@@ -68,15 +68,20 @@ export const siteConfig = {
         website: ""
       }
     ],
-    ctaLabel: { en: "OUR PROGRAM", de: "OUR PROGRAM" }
+    ctaLabel: { en: "OUR PROGRAM", de: "UNSER PROGRAMM" }
   },
-  logos: [
-    { name: "DW Logo", image: "/PARTNER/DW_Logo.jpg" },
-    { name: "Austrian Event Award", image: "/PARTNER/Illu_Austrian-Event-Award-2020-810x447.png" },
-    { name: "Monsterfreunde", image: "/PARTNER/Logo_Monsterfreunde.png" },
-    { name: "Images", image: "/PARTNER/images.png" },
-    { name: "Logo Main", image: "/PARTNER/logo-main.png" },
-    { name: "TAS Logo", image: "/PARTNER/tas_logo_rot.jpg" }
+  logosSecondary: [
+    { name: "AKM", image: "/PARTNER/Slider2/AKM.png" },
+    { name: "Audio", image: "/PARTNER/Slider2/Audio.png" },
+    { name: "Dschungel", image: "/PARTNER/Slider2/Dschungel.png" },
+    { name: "GBB", image: "/PARTNER/Slider2/GBB.png" },
+    { name: "SBX", image: "/PARTNER/Slider2/SBX.png" },
+    { name: "Gorilla", image: "/PARTNER/Slider2/Gorilla.png" },
+    { name: "Pflasterspektakel", image: "/PARTNER/Slider2/Pflasterspektakel.png" },
+    { name: "TAS", image: "/PARTNER/Slider2/TAS.png" },
+    { name: "Vokaltotal", image: "/PARTNER/Slider2/Vokaltotal.png" },
+    { name: "Wien Xtra", image: "/PARTNER/Slider2/WienXtra.png" },
+    { name: "Monsterfreunde", image: "/PARTNER/Slider2/monsterfreunde.png" }
   ],
   logosCopy: {
     eyebrow: {
@@ -85,26 +90,6 @@ export const siteConfig = {
     }
   },
   whatWeDo: [
-    {
-      key: "kids",
-      title: { en: "Kids show", de: "Kidsshow" },
-      description: {
-        en: "Interactive and engaging beatbox performances designed for young audiences.",
-        de: "Platzhalter fur interaktive Shows fur junge Zielgruppen."
-      },
-      icon: "🎪",
-      image: "/4-KATEGORIEN/Kidsshow.jpg"
-    },
-    {
-      key: "workshops",
-      title: { en: "Workshops", de: "Workshops" },
-      description: {
-        en: "Hands-on beatbox workshops with rhythm patterns and performance techniques.",
-        de: "Platzhalter fur Workshops und Grundlagen des Beatboxen."
-      },
-      icon: "🎓",
-      image: "/4-KATEGORIEN/Workshop.jpg"
-    },
     {
       key: "concerts",
       title: { en: "Concerts", de: "Konzerte" },
@@ -116,26 +101,50 @@ export const siteConfig = {
       image: "/4-KATEGORIEN/Konzert.png"
     },
     {
+      key: "kids",
+      title: { en: "Kids shows", de: "Kinder- und Schulkonzerte" },
+      description: {
+        en: "Interactive and engaging beatbox performances designed for young audiences.",
+        de: "Platzhalter fur interaktive Shows fur junge Zielgruppen."
+      },
+      icon: "🎪",
+      image: "/4-KATEGORIEN/Kidsshow.jpg"
+    },
+    {
       key: "corporate",
-      title: { en: "Corporate party", de: "Firmenfeier" },
+      title: { en: "Corporate events", de: "Firmenfeiern" },
       description: {
         en: "Placeholder for corporate celebrations note and format.",
         de: "Platzhalter fur Firmenfeiern und Corporate Events."
       },
       icon: "🥂",
       image: "/4-KATEGORIEN/Firmenfeier.png"
+    },
+    {
+      key: "workshops",
+      title: { en: "Workshops", de: "Workshops" },
+      description: {
+        en: "Hands-on beatbox workshops with rhythm patterns and performance techniques.",
+        de: "Platzhalter fur Workshops und Grundlagen des Beatboxen."
+      },
+      icon: "🎓",
+      image: "/4-KATEGORIEN/Workshop.jpg"
     }
   ],
   whatWeDoCopy: {
     eyebrow: {
       en: "OUR PROGRAM",
-      de: "OUR PROGRAM"
+      de: "UNSER PROGRAMM"
+    },
+    schoolsBadge: {
+      en: "FOR SCHOOLS (VIENNA)",
+      de: "FÜR SCHULEN (WIEN)"
     },
     title: {
       en: "WHAT WE OFFER",
       de: "WHAT WE OFFER"
     },
-    ctaLabel: { en: "BOOK US", de: "BOOK US" },
+    ctaLabel: { en: "BOOK US", de: "Jetzt anfragen" },
     nextEventLabel: { en: "Next event", de: "Nächstes Event" },
     loadingLabel: { en: "Loading events...", de: "Events werden geladen..." },
     noUpcomingLabel: {
@@ -151,29 +160,49 @@ export const siteConfig = {
   },
   achievements: [
     {
-      year: "2016",
-      city: "Brussels",
-      title: { en: "European Beatbox Champions", de: "European Beatbox Champions" }
-    },
-    {
-      year: "2021",
-      city: "Warsaw",
-      title: { en: "GBB Crew World Champions", de: "GBB Crew World Champions" }
+      year: "2023",
+      city: "Tokyo",
+      title: { en: "GBB\nFinalists", de: "GBB\nFinalists" },
+      videoId: "G2b86_ETglw"
     },
     {
       year: "2023",
       city: "Berlin",
-      title: { en: "Beatbox World Champions", de: "Beatbox World Champions" }
+      title: { en: "Beatbox World Champions", de: "Beatbox World Champions" },
+      videoId: "al6ERfrWLaM"
     },
     {
-      year: "2023",
-      city: "Tokyo",
-      title: { en: "GBB Finalists", de: "GBB Finalists" }
+      year: "2021",
+      city: "Warsaw",
+      title: { en: "GBB Crew World Champions", de: "GBB Crew World Champions" },
+      videoId: "zIsQGDuCmQ0"
+    },
+    {
+      year: "2018",
+      city: "Vienna",
+      title: {
+        en: "Austrian Beatbox Champions",
+        de: "Austrian Beatbox Champions"
+      },
+      videoId: ""
+    },
+    {
+      year: "2016",
+      city: "Brussels",
+      title: { en: "European Beatbox Champions", de: "European Beatbox Champions" },
+      videoId: ""
+    },
+    {
+      year: "SOON",
+      city: "",
+      title: { en: "TO BE\nCONTINUED", de: "TO BE\nCONTINUED" },
+      videoId: "",
+      phantom: true
     }
   ],
   youtube: {
     eyebrow: { en: "Music and videos", de: "Musik und videos" },
-    title: { en: "Sound archive", de: "Sound archive" },
+    title: { en: "Sound archive", de: "SOUND ARCHIV" },
     videos: [
       {
         id: "3Z9opE8zByU",
@@ -182,7 +211,18 @@ export const siteConfig = {
       },
       {
         id: "4dZ6_iwkxK0",
-        title: { en: "MOM - Right Now", de: "MOM - Right Now" },
+        title: { en: "M.O.M - Right Now", de: "M.O.M - Right Now" },
+        category: "musicvideos"
+      },
+      {
+        id: "d_K0Cv9xo60",
+        title: { en: "M.O.M - All at once", de: "M.O.M - All at once" },
+        thumbnailUrl: "/thumbnails/all-at-once.png",
+        category: "musicvideos"
+      },
+      {
+        id: "gaDcYhYSIVQ",
+        title: { en: "M.O.M - MOVEMENT", de: "M.O.M - MOVEMENT" },
         category: "musicvideos"
       },
       {
@@ -191,7 +231,8 @@ export const siteConfig = {
           en: "M.O.M. | GRAND BEATBOX BATTLE 2021: WORLD LEAGUE | Crew Showcase",
           de: "M.O.M. | GRAND BEATBOX BATTLE 2021: WORLD LEAGUE | Crew Showcase"
         },
-        category: "battle"
+        category: "concert",
+        categories: ["concert", "battle"]
       },
       {
         id: "HepOPUJy3cA",
@@ -199,14 +240,20 @@ export const siteConfig = {
           en: "M.O.M. | Truly Original | Grand Beatbox Battle 2021",
           de: "M.O.M. | Truly Original | Grand Beatbox Battle 2021"
         },
-        category: "battle"
+        category: "all"
       },
       {
         id: "dStOHHg2Zts",
         title: {
-          en: "MOM - GBB20: World League Crew Wildcard for YOU",
-          de: "MOM - GBB20: World League Crew Wildcard for YOU"
+          en: "M.O.M - GBB20: World League Crew Wildcard for YOU",
+          de: "M.O.M - GBB20: World League Crew Wildcard for YOU"
         },
+        thumbnailUrl: "https://img.youtube.com/vi/dStOHHg2Zts/hqdefault.jpg",
+        category: "battle"
+      },
+      {
+        id: "e0NaP7RE6zE",
+        title: { en: "GOLDEN BUZZER - DGC 2024", de: "GOLDEN BUZZER - DGC 2024" },
         category: "battle"
       }
     ]
@@ -217,7 +264,7 @@ export const siteConfig = {
   eventsCopy: {
     title: { en: "Events", de: "Events" },
     updatedLabel: { en: "Last updated", de: "Zuletzt aktualisiert" },
-    filterAll: { en: "All", de: "Alle" },
+    filterAll: { en: "ALL", de: "ALLE" },
     refreshLabel: { en: "Refresh", de: "Aktualisieren" },
     empty: {
       en: "No upcoming shows scheduled at the moment. Check back soon!",
@@ -239,7 +286,7 @@ export const siteConfig = {
     closeModal: { en: "Close video", de: "Video schliessen" }
   },
   calendar: {
-    publicIcsUrl: "https://calendar.google.com/calendar/ical/cda01c823c486eeb726bcd338a34505325596023116fc1e83714de282b711350%40group.calendar.google.com/private-38bf8979efc488d1af689817e25fd48a/basic.ics",
+    publicIcsUrl: "https://calendar.google.com/calendar/ical/68bbe8049bd1fc48c4bfd5809f0ba697ce52a3cf21e21f93f70427e5f9a6ccb9%40group.calendar.google.com/private-890f2485f9a71f50ec38a60562b94bb3/basic.ics",
     corsProxyUrl: [
       "https://r.jina.ai/http://",
       "https://api.allorigins.win/raw?url="
@@ -248,36 +295,41 @@ export const siteConfig = {
   },
   eventCategories: [
     {
-      key: "kids",
-      label: { en: "Kids show", de: "Kidsshow" },
-      keywords: ["kids", "children", "school", "family", "kinder", "schule"]
+      key: "concerts",
+      label: { en: "CONCERTS", de: "KONZERTE" },
+      keywords: ["#konzert"]
     },
     {
-      key: "concerts",
-      label: { en: "Concerts", de: "Konzerte" },
-      keywords: ["concert", "show", "gig", "live", "festival", "konzert"]
+      key: "workshops",
+      label: { en: "WORKSHOPS", de: "WORKSHOPS" },
+      keywords: ["#workshop"]
     },
+    {
+      key: "kids",
+      label: { en: "KIDS SHOWS", de: "KINDERKONZERTE" },
+      keywords: ["#kinderkonzert"]
+    }
   ],
   contactCopy: {
-    eyebrow: { en: "Booking", de: "Booking" },
+    eyebrow: { en: "LET’S DO THIS", de: "LET’S DO THIS" },
     title: { en: "CONTACT", de: "KONTAKT" },
     description: {
-      en: "dont hesitate to reach out for bookings or questions.",
-      de: "Schreib uns gern wegen Buchungen oder Fragen."
+      en: "Any questions about booking or special requests? Don’t hesitate to reach out.",
+      de: "Fragen zum Booking oder spezielle Wünsche? Melde dich gerne."
     },
-    fields: {
-      to: { en: "To", de: "An" },
-      name: { en: "Name", de: "Name" },
-      email: { en: "Email", de: "Email" },
-      subject: { en: "Subject", de: "Betreff" },
-      message: { en: "Message", de: "Nachricht" },
-      send: { en: "Send", de: "Senden" }
-    }
+    ctaLabel: { en: "GET IN TOUCH", de: "JETZT ANFRAGEN" }
   },
   social: {
-    instagram: "https://instagram.com/mom_crew",
-    youtube: "https://youtube.com/@mom_crew",
-    facebook: "https://facebook.com/mom_crew"
+    instagram: "https://www.instagram.com/mom.beatbox/?hl=de",
+    youtube: "https://www.youtube.com/@M.O.M_beatbox",
+    spotify:
+      "https://open.spotify.com/artist/4yesxrFzLKBMyKcQLc3ZKD?si=fypbVKgKRa-SD6VEOjkYqg",
+  },
+  footerCopy: {
+    downloads: { en: "Downloads", de: "Downloads" },
+    technicalRider: { en: "Technical rider", de: "Technical rider" },
+    pressPhotos: { en: "Press photos", de: "Pressefotos" },
+    imprint: { en: "Imprint", de: "Imprint" }
   }
 } as const;
 

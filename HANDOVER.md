@@ -50,6 +50,7 @@ If you add logos, place them in `public/PARTNER` and update `logos[]`.
   - Hard reload (Cmd/Ctrl+Shift+R).
   - Unregister Service Worker in DevTools > Application > Service Workers.
   - Clear site data (DevTools > Application > Storage).
+- PWA precache includes large assets; Workbox limit raised to 25MB in `vite.config.ts`.
 - Some logo sets in other folders were tested; current working config uses `public/PARTNER`.
 
 ## Recent Changes Summary
@@ -61,6 +62,9 @@ If you add logos, place them in `public/PARTNER` and update `logos[]`.
 - Added mobile carousel arrows in MOM MENU.
 - Updated logo slider entries and sizing.
 - Background set to dark blue/gray diffuse gradient.
+- Fixed calendar link extraction (supports `URL:` field, HTML hrefs, and plain links).
+- Added corporate popup video for the corporate card (`public/CORPORATE-PARTY.mp4`).
+- Added PWA support via `vite-plugin-pwa`.
 
 ## Testing
 No automated tests. Manual spot-check:
